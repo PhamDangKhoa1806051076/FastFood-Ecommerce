@@ -47,3 +47,13 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Kiểm tra tính tương thích đa ngôn ngữ trên mọi trang.
 - [x] Chuẩn bị dữ liệu mẫu (Seed Data) phong phú cho báo cáo.
 - [x] Tổng kết dự án và đẩy bản phát hành cuối cùng lên GitHub.
+
+## 🚀 Giai đoạn 7: Nâng cao Trải nghiệm Khách hàng (Mới)
+- [x] Xây dựng trang Lịch sử đơn hàng và Theo dõi trạng thái đơn hàng.
+- [x] Tích hợp hệ thống Đánh giá & Xếp hạng (Star Rating) cho sản phẩm.
+- [x] Tối ưu hóa bộ lọc món ăn và trải nghiệm đặt hàng nhanh.
+
+## 📊 Giai đoạn 8: Phân tích Dữ liệu & Báo cáo Thông minh (Mới)
+- [x] Tích hợp biểu đồ doanh thu (Chart.js) vào Admin Dashboard.
+- [x] Thống kê sản phẩm bán chạy và xu hướng đặt hàng theo tuần.
+- [x] Hoàn tất bộ mã nguồn mở rộng phục vụ báo cáo chuyên sâu.

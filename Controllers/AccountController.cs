@@ -96,5 +96,18 @@ namespace FastFoodEcommerce.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Orders()
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email)) return RedirectToAction("Login");
+
+            var orders = await _context.Orders
+                .Where(o => o.CustomerEmail == email)
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            return View(orders);
+        }
     }
 }

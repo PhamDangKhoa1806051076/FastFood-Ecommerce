@@ -22,6 +22,14 @@
                         <h4 class="product-title fw-bold mb-0">@item.Name</h4>
                         <span class="fw-bold text-danger fs-5">@item.Price.ToString("N0")đ</span>
                     </div>
+                    <div class="mb-2 text-warning small">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-muted ms-1">(4.5)</span>
+                    </div>
                     <p class="product-description text-muted small mb-4">@item.Description</p>
                     <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-dark w-100 rounded-pill py-2 fw-bold">
                         @T("AddToCart")
