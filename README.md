@@ -1,35 +1,36 @@
-# FastFood Ecommerce - Lập Trình Web
+# FastFood Ecommerce
 
-Dự án Thương mại điện tử FastFood được xây dựng theo lộ trình học tập "Lập trình Web" với ASP.NET Core MVC.
-
-## Lộ trình học tập (Curriculum)
-
-Repository này được tổ chức thành các bài học tương ứng với 10 module chính:
-
-1.  **01-HTML-CSS-JS**: Thiết kế website cơ bản với HTML, CSS và JavaScript.
-2.  **02-Intro-ASPNetCore-MVC**: Giới thiệu và tạo ứng dụng web với ASP.NET Core MVC.
-3.  **03-Controller-Action**: Xây dựng Controller và các Action xử lý yêu cầu.
-4.  **04-View-Layout**: Thiết kế giao diện với View và Layout (Razor).
-5.  **05-Model-EFCore**: Quản lý dữ liệu với Model và Entity Framework Core.
-6.  **06-Form-Validation**: Xử lý Form và kiểm tra dữ liệu (Validation).
-7.  **07-Routing**: Cấu hình điều hướng (Routing) trong ứng dụng.
-8.  **08-Authentication-Authorization**: Hệ thống đăng nhập và phân quyền.
-9.  **09-Dependency-Injection**: Áp dụng Dependency Injection trong .NET.
-10. **10-Testing-Deployment**: Kiểm thử ứng dụng và triển khai (Deployment).
-
-## Cấu trúc thư mục
-
-*   `Docs/`: Tài liệu tham khảo và hình ảnh bài học.
-*   `Lessons/`: Chứa mã nguồn thực hành cho từng bài học.
-*   `Src/`: Mã nguồn chính dự án theo mô hình 3 lớp (3-Layer Architecture):
-    *   `GUI/`: Lớp giao diện (Presentation Layer) - ASP.NET Core MVC.
-    *   `BUS/`: Lớp xử lý nghiệp vụ (Business Logic Layer).
-    *   `DAL/`: Lớp truy cập dữ liệu (Data Access Layer).
-    *   `DTO/`: Lớp chứa các đối tượng chuyển đổi dữ liệu và Models dùng chung.
+Dự án Thương mại điện tử FastFood (Bài tập/Báo cáo).
 
 ## Công nghệ sử dụng
 
-*   **Front-End**: HTML, CSS, TypeScript, React (optional).
+*   **Front-End**: HTML, CSS, JavaScript (React/Vue/Angular - optional).
 *   **Back-End**: C#, ASP.NET Core MVC.
 *   **Database**: SQL Server.
 *   **ORM**: Entity Framework Core.
+
+## Cấu trúc thư mục
+
+Dự án được tổ chức theo mô hình 3 lớp (3-Layer Architecture):
+
+*   `Docs/`: Tài liệu tham khảo, báo cáo và thiết kế.
+*   `Src/`: Mã nguồn chính của dự án:
+    *   `GUI/`: Lớp giao diện (Presentation Layer) - ASP.NET Core MVC.
+    *   `BUS/`: Lớp xử lý nghiệp vụ (Business Logic Layer).
+    *   `DAL/`: Lớp truy cập dữ liệu (Data Access Layer).
+    *   `DTO/`: Lớp chứa các đối tượng chuyển đổi dữ liệu và Models.
+
+## Các bước tiến hành (Implementation Steps)
+
+Quá trình phát triển dự án được chia thành các giai đoạn sau:
+
+1.  **Thiết kế Front-End**: Thiết kế giao diện website với HTML, CSS và JavaScript.
+2.  **Khởi tạo Backend**: Tạo ứng dụng web với cấu trúc ASP.NET Core MVC.
+3.  **Xây dựng Controller & Action**: Xử lý logic điều hướng và các yêu cầu từ phía người dùng.
+4.  **Tích hợp View & Layout**: Kết nối giao diện (Front-End) với ứng dụng thông qua Razor.
+5.  **Thiết kế Database (Model & EF Core)**: Xây dựng cơ sở dữ liệu và ánh xạ bằng Entity Framework Core.
+6.  **Xử lý Form & Validation**: Xác thực dữ liệu đầu vào.
+7.  **Cấu hình Routing**: Xây dựng URL thân thiện và điều hướng người dùng.
+8.  **Authentication & Authorization**: Hệ thống đăng nhập, đăng ký và phân quyền người dùng (Admin/Khách hàng).
+9.  **Dependency Injection**: Cấu hình các services, kết nối các layer (BUS, DAL).
+10. **Kiểm thử & Triển khai**: Thực hiện testing và deploy (triển khai) ứng dụng.
