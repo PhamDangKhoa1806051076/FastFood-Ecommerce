@@ -1,12 +1,14 @@
 @{
     ViewData["Title"] = "Xác nhận số điện thoại";
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-5 text-center">
-            <h2 class="fw-bold mb-4 text-uppercase">Xác nhận số điện thoại</h2>
-            <p class="text-muted mb-5">Vui lòng cung cấp số điện thoại của bạn để nhận mã xác thực (OTP).</p>
+            <h2 class="fw-bold mb-4 text-uppercase">@T("VerifyPhone")</h2>
+            <p class="text-muted mb-5">@T("OTPDescription")</p>
             
             <form asp-action="VerifyPhone" method="post">
                 <div class="mb-4">
@@ -16,7 +18,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold text-uppercase shadow">Gửi mã OTP</button>
+                <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold text-uppercase shadow">@T("ResendOTP")</button>
             </form>
         </div>
     </div>

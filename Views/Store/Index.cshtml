@@ -1,10 +1,12 @@
 @model IEnumerable<FastFoodEcommerce.Models.Store>
 @{
     ViewData["Title"] = "Hệ thống cửa hàng";
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
 <div class="container-fluid px-5 py-5">
-    <h2 class="section-title mb-5">Hệ Thống Cửa Hàng</h2>
+    <h2 class="section-title mb-5">@T("Stores")</h2>
 
     <div class="row">
         <div class="col-lg-4">
@@ -14,8 +16,8 @@
                     <button type="button" class="list-group-item list-group-item-action p-4 border-0 store-item" 
                             data-map="@store.MapUrl" data-name="@store.Name">
                         <h5 class="fw-bold mb-1 text-danger">@store.Name</h5>
-                        <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>@store.Address</p>
-                        <p class="mb-0 small"><i class="fas fa-phone me-2"></i>@store.Phone</p>
+                        <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>@T("Address"): @store.Address</p>
+                        <p class="mb-0 small"><i class="fas fa-phone me-2"></i>@T("Phone"): @store.Phone</p>
                     </button>
                 }
             </div>

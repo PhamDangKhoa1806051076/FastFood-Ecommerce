@@ -30,7 +30,23 @@ namespace FastFoodEcommerce.Helpers
                 ["Address"] = "Địa chỉ",
                 ["Phone"] = "Số điện thoại",
                 ["ConfirmOTP"] = "Xác nhận OTP",
-                ["VerifyPhone"] = "Xác nhận số điện thoại"
+                ["VerifyPhone"] = "Xác nhận số điện thoại",
+                ["EmailAddress"] = "Địa chỉ email của bạn",
+                ["Password"] = "Mật khẩu",
+                ["ForgotPassword"] = "Bạn quên mật khẩu?",
+                ["NoAccount"] = "Bạn chưa có tài khoản?",
+                ["Logout"] = "Đăng xuất",
+                ["AboutUs"] = "Về chúng tôi",
+                ["OurStory"] = "Câu chuyện của chúng tôi",
+                ["News"] = "Tin tức FastFood",
+                ["Jobs"] = "Tuyển dụng",
+                ["EnterOTP"] = "Nhập mã xác thực",
+                ["OTPDescription"] = "Một mã OTP đã được gửi đến số điện thoại của bạn.",
+                ["ConfirmLogin"] = "Xác nhận & Đăng nhập",
+                ["ResendOTP"] = "Gửi lại mã",
+                ["FullName"] = "Họ và tên",
+                ["ConfirmPassword"] = "Xác nhận mật khẩu",
+                ["CreateAccount"] = "Tạo tài khoản"
             },
             ["en"] = new()
             {
@@ -56,7 +72,23 @@ namespace FastFoodEcommerce.Helpers
                 ["Address"] = "Address",
                 ["Phone"] = "Phone Number",
                 ["ConfirmOTP"] = "Confirm OTP",
-                ["VerifyPhone"] = "Verify Phone"
+                ["VerifyPhone"] = "Verify Phone",
+                ["EmailAddress"] = "Your email address",
+                ["Password"] = "Password",
+                ["ForgotPassword"] = "Forgot your password?",
+                ["NoAccount"] = "Don't have an account?",
+                ["Logout"] = "Logout",
+                ["AboutUs"] = "About Us",
+                ["OurStory"] = "Our Story",
+                ["News"] = "FastFood News",
+                ["Jobs"] = "Jobs",
+                ["EnterOTP"] = "Enter verification code",
+                ["OTPDescription"] = "An OTP code has been sent to your phone number.",
+                ["ConfirmLogin"] = "Confirm & Login",
+                ["ResendOTP"] = "Resend code",
+                ["FullName"] = "Full Name",
+                ["ConfirmPassword"] = "Confirm Password",
+                ["CreateAccount"] = "Create Account"
             },
             ["ko"] = new()
             {
@@ -82,7 +114,23 @@ namespace FastFoodEcommerce.Helpers
                 ["Address"] = "주소",
                 ["Phone"] = "전화번호",
                 ["ConfirmOTP"] = "OTP 확인",
-                ["VerifyPhone"] = "전화번호 확인"
+                ["VerifyPhone"] = "전화번호 확인",
+                ["EmailAddress"] = "이메일 주소",
+                ["Password"] = "비밀번호",
+                ["ForgotPassword"] = "비밀번호를 잊으셨나요?",
+                ["NoAccount"] = "계정이 없으신가요?",
+                ["Logout"] = "로그아웃",
+                ["AboutUs"] = "회사 소개",
+                ["OurStory"] = "우리의 이야기",
+                ["News"] = "패스트푸드 뉴스",
+                ["Jobs"] = "채용 정보",
+                ["EnterOTP"] = "인증 코드 입력",
+                ["OTPDescription"] = "OTP 코드가 귀하의 전화번호로 전송되었습니다.",
+                ["ConfirmLogin"] = "확인 및 로그인",
+                ["ResendOTP"] = "코드 재전송",
+                ["FullName"] = "성명",
+                ["ConfirmPassword"] = "비밀번호 확인",
+                ["CreateAccount"] = "계정 생성"
             }
         };
 

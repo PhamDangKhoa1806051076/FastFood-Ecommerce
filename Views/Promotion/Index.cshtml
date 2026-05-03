@@ -1,10 +1,12 @@
 @model IEnumerable<FastFoodEcommerce.Models.Voucher>
 @{
     ViewData["Title"] = "Khuyến mãi";
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
 <div class="container py-5">
-    <h2 class="section-title text-center mb-5">Mã Giảm Giá & Ưu Đãi</h2>
+    <h2 class="section-title text-center mb-5">@T("Promotion")</h2>
     
     <div class="row g-4">
         @foreach (var v in Model)
@@ -17,22 +19,22 @@
                             <span class="small">OFF</span>
                         </div>
                         <div class="flex-grow-1">
-                            <h5 class="fw-bold mb-1">Code: <span class="text-danger">@v.Code</span></h5>
+                            <h5 class="fw-bold mb-1">@T("VoucherCode"): <span class="text-danger">@v.Code</span></h5>
                             <p class="text-muted small mb-2">@v.Description</p>
                             <div class="d-flex align-items-center text-secondary small">
                                 <i class="far fa-clock me-1"></i>
-                                <span>Hạn dùng: @v.EndDate.ToString("dd/MM/yyyy")</span>
+                                <span>@T("Expired"): @v.EndDate.ToString("dd/MM/yyyy")</span>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer bg-light border-0 p-3 text-center">
                         @if (v.IsActive)
                         {
-                            <button class="btn btn-dark btn-sm rounded-pill px-4 copy-btn" data-code="@v.Code">Sao chép mã</button>
+                            <button class="btn btn-dark btn-sm rounded-pill px-4 copy-btn" data-code="@v.Code">@T("CopyCode")</button>
                         }
                         else
                         {
-                            <span class="badge bg-secondary">Đã hết hạn</span>
+                            <span class="badge bg-secondary">@T("Expired")</span>
                         }
                     </div>
                 </div>

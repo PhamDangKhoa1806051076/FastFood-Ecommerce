@@ -1,6 +1,8 @@
 @{
     ViewData["Title"] = "Đăng nhập";
     Layout = "_Layout";
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
 <div class="container-fluid p-0">
@@ -9,7 +11,9 @@
         <div class="col-lg-6 d-none d-lg-flex bg-danger text-white align-items-center justify-content-center p-5 position-relative overflow-hidden">
             <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200') center/cover; opacity: 0.2;"></div>
             <div class="text-center position-relative z-1">
-                <h1 class="display-3 fw-bold text-uppercase mb-4 animate__animated animate__fadeInDown">Đặt món ngon <br> Ship tận nơi <br> Niềm vui trọn vẹn</h1>
+                <h1 class="display-3 fw-bold text-uppercase mb-4 animate__animated animate__fadeInDown">
+                    @T("Slogan").Split('-')[0] <br> @T("Slogan").Split('-')[1] <br> @T("Slogan").Split('-')[2]
+                </h1>
                 <div class="mt-5">
                     <i class="fas fa-hamburger fa-5x mb-3"></i>
                 </div>
@@ -19,30 +23,32 @@
         <!-- Cột bên phải: Form Đăng nhập -->
         <div class="col-lg-6 d-flex align-items-center justify-content-center p-5 bg-white">
             <div class="w-100" style="max-width: 450px;">
-                <h2 class="fw-bold mb-4 text-uppercase">Đăng nhập</h2>
+                <h2 class="fw-bold mb-4 text-uppercase">@T("Login")</h2>
                 
                 <form asp-action="Login" method="post">
                     <div class="mb-4">
-                        <label class="form-label small fw-bold text-muted text-uppercase">Địa chỉ email của bạn *</label>
+                        <label class="form-label small fw-bold text-muted text-uppercase">@T("EmailAddress") *</label>
                         <input type="email" name="email" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
                     </div>
                     
                     <div class="mb-4">
-                        <label class="form-label small fw-bold text-muted text-uppercase">Mật khẩu *</label>
+                        <label class="form-label small fw-bold text-muted text-uppercase">@T("Password") *</label>
                         <div class="input-group border-bottom">
-                            <input type="password" name="password" class="form-control border-0 rounded-0 px-0 focus-none" required>
-                            <span class="input-group-text bg-transparent border-0"><i class="far fa-eye-slash"></i></span>
+                            <input type="password" name="password" id="password" class="form-control border-0 rounded-0 px-0 focus-none" required>
+                            <span class="input-group-text bg-transparent border-0 cursor-pointer" id="togglePassword">
+                                <i class="far fa-eye" id="eyeIcon"></i>
+                            </span>
                         </div>
                     </div>
                     
                     <div class="text-end mb-4">
-                        <a href="#" class="text-dark small text-decoration-none fw-bold">Bạn quên mật khẩu?</a>
+                        <a href="#" class="text-dark small text-decoration-none fw-bold">@T("ForgotPassword")</a>
                     </div>
                     
-                    <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase mb-4 shadow-sm">Đăng nhập</button>
+                    <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase mb-4 shadow-sm">@T("Login")</button>
                     
                     <div class="text-center">
-                        <p class="small text-muted">Bạn chưa có tài khoản? <a asp-action="Register" class="text-dark fw-bold text-decoration-none underline">Đăng ký</a></p>
+                        <p class="small text-muted">@T("NoAccount") <a asp-action="Register" class="text-dark fw-bold text-decoration-none underline">@T("Register")</a></p>
                     </div>
                 </form>
             </div>
@@ -62,4 +68,17 @@
     .underline {
         border-bottom: 2px solid #000;
     }
+    .cursor-pointer { cursor: pointer; }
 </style>
+
+@section Scripts {
+    <script>
+        $('#togglePassword').click(function() {
+            const passwordField = $('#password');
+            const eyeIcon = $('#eyeIcon');
+            const type = passwordField.attr('type') === 'password' ? 'text' : 'password';
+            passwordField.attr('type', type);
+            eyeIcon.toggleClass('fa-eye fa-eye-slash');
+        });
+    </script>
+}

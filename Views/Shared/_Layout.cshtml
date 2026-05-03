@@ -60,13 +60,13 @@
                     
                     <div class="d-flex align-items-center gap-4">
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle fw-bold small text-dark p-0" href="#" role="button" data-bs-toggle="dropdown">
-                                @T("Language")
+                            <a class="nav-link dropdown-toggle fw-bold small text-dark p-0 d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
+                                @(currentCulture == "vi" ? "🇻🇳" : currentCulture == "ko" ? "🇰🇷" : "🇺🇸") @T("Language")
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-2">
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en">@T("English")</a></li>
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="vi">@T("Vietnamese")</a></li>
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ko">@T("Korean")</a></li>
+                                <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en"><span>🇺🇸</span> @T("English")</a></li>
+                                <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="vi"><span>🇻🇳</span> @T("Vietnamese")</a></li>
+                                <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ko"><span>🇰🇷</span> @T("Korean")</a></li>
                             </ul>
                         </div>
 
@@ -78,13 +78,13 @@
                                 @if (string.IsNullOrEmpty(userEmail))
                                 {
                                     <li><a class="dropdown-item py-2" asp-controller="Account" asp-action="Login">@T("Login")</a></li>
-                                    <li><a class="dropdown-item py-2" href="#">@T("Register")</a></li>
+                                    <li><a class="dropdown-item py-2" asp-controller="Account" asp-action="Register">@T("Register")</a></li>
                                 }
                                 else
                                 {
                                     <li><span class="dropdown-item-text small text-muted">@userEmail</span></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item py-2 text-danger" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item py-2 text-danger" asp-controller="Account" asp-action="Logout">@T("Logout")</a></li>
                                 }
                             </ul>
                         </div>
@@ -109,39 +109,42 @@
         @RenderBody()
     </main>
 
-    <footer>
-        <div class="container">
-            &copy; 2026 - FastFood Store - <a href="#">Liên hệ</a>
+    <footer class="bg-white border-top py-5 mt-5">
+        <div class="container text-center">
+            <p class="text-muted small mb-0">
+                &copy; 2026 - FastFood Store - <a href="#" class="text-dark">@T("AboutUs")</a>
+            </p>
         </div>
     </footer>
+
     <!-- Offcanvas Sidebar Menu -->
     <div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="sidebarMenu" style="width: 350px;">
         <div class="offcanvas-header border-bottom py-4">
-            <h5 class="offcanvas-title fw-bold text-uppercase" id="sidebarMenuLabel">Danh mục món ăn</h5>
+            <h5 class="offcanvas-title fw-bold text-uppercase" id="sidebarMenuLabel">@T("Menu")</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body p-0">
             <div class="list-group list-group-flush">
                 <a href="/Home/Index#menu-section" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex justify-content-between align-items-center">
-                    <span>Thực đơn chính</span>
+                    <span>@T("Menu")</span>
                     <i class="fas fa-chevron-right small text-muted"></i>
                 </a>
                 <a asp-controller="Promotion" asp-action="Index" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex justify-content-between align-items-center">
-                    <span>Khuyến mãi mới nhất</span>
+                    <span>@T("Promotion")</span>
                     <i class="fas fa-chevron-right small text-muted"></i>
                 </a>
                 <a asp-controller="Store" asp-action="Index" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex justify-content-between align-items-center">
-                    <span>Tìm cửa hàng gần đây</span>
+                    <span>@T("FindStore")</span>
                     <i class="fas fa-chevron-right small text-muted"></i>
                 </a>
             </div>
             
             <div class="p-4 mt-4">
-                <h6 class="fw-bold text-uppercase small text-muted mb-3">Về chúng tôi</h6>
+                <h6 class="fw-bold text-uppercase small text-muted mb-3">@T("AboutUs")</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">Câu chuyện của chúng tôi</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">Tin tức FastFood</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">Tuyển dụng</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">@T("OurStory")</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">@T("News")</a></li>
+                    <li class="mb-2"><a href="#" class="text-decoration-none text-dark small">@T("Jobs")</a></li>
                 </ul>
             </div>
         </div>
