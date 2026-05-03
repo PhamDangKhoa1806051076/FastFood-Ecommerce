@@ -144,7 +144,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\rjsmcshtml.dswa.cache
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\bundle\FastFoodEcommerce.styles.css
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\projectbundle\FastFoodEcommerce.bundle.scp.css
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-b9sayid5wm.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\luzt35r5sl-61n19gt1b8.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3xpstqimjb-xtxxf3hu2r.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\xj91dai7jg-bqjiyaj88i.gz
@@ -206,8 +205,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\xc366k4s85
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\lv9xwxi6s7-muycvpuwrr.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\32e0ea6f1f-87fc7y1x7t.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\lhez8ynhd4-mlv21k5csn.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-mh2unfqj2k.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-mh2unfqj2k.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.development.json
@@ -218,3 +215,7 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\refint\FastFoodEcomme
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\FastFoodEcommerce.pdb
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\FastFoodEcommerce.genruntimeconfig.cache
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\ref\FastFoodEcommerce.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-8hdccw22co.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-srwl9jjswf.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-srwl9jjswf.gz
