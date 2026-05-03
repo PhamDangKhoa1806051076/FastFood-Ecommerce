@@ -33,7 +33,7 @@
                     </div>
                     <div class="product-footer">
                         <span class="product-price">@item.Price.ToString("N0")đ</span>
-                        <a href="#" class="btn-add-cart" title="Thêm vào giỏ hàng">
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn-add-cart" title="Thêm vào giỏ hàng">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>

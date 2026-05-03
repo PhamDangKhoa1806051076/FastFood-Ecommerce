@@ -215,7 +215,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\refint\FastFoodEcomme
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\FastFoodEcommerce.pdb
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\FastFoodEcommerce.genruntimeconfig.cache
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\ref\FastFoodEcommerce.dll
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-8hdccw22co.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-srwl9jjswf.gz

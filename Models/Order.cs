@@ -10,9 +10,21 @@ namespace FastFoodEcommerce.Models
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
-        // In the future, this could be a string linking to IdentityUser.Id
-        [Required]
-        public string UserId { get; set; } = string.Empty;
+        // Customer Info (for Guest Checkout)
+        [Required(ErrorMessage = "Họ tên là bắt buộc")]
+        [StringLength(100)]
+        public string CustomerName { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Địa chỉ giao hàng là bắt buộc")]
+        [StringLength(255)]
+        public string Address { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Số điện thoại là bắt buộc")]
+        [Phone]
+        public string Phone { get; set; } = string.Empty;
+
+        // Link to User (Optional for guest)
+        public string? UserId { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -20,7 +32,7 @@ namespace FastFoodEcommerce.Models
 
         [Required]
         [StringLength(50)]
-        public string Status { get; set; } = "Pending"; // Pending, Processing, Shipped, Delivered, Cancelled
+        public string Status { get; set; } = "Pending";
 
         // Navigation property
         public ICollection<OrderDetail>? OrderDetails { get; set; }

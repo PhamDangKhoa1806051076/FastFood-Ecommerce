@@ -1,3 +1,8 @@
+@using FastFoodEcommerce.Helpers
+@using FastFoodEcommerce.Models
+@{
+    var cartCount = Context.Session.GetObjectFromJson<List<CartItem>>("FastFoodCart")?.Sum(x => x.Quantity) ?? 0;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +37,8 @@
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-shopping-cart"></i> Giỏ hàng (0)
+                            <a class="nav-link" asp-controller="Cart" asp-action="Index">
+                                <i class="fas fa-shopping-cart"></i> Giỏ hàng (@cartCount)
                             </a>
                         </li>
                     </ul>

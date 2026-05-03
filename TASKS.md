@@ -20,12 +20,12 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Cấu hình nạp dữ liệu mẫu (Seed Data).
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 📅 Giai đoạn 3: Giỏ hàng & Đặt hàng
-- [ ] Xử lý logic Giỏ hàng (Session/Cookie).
-- [ ] Tạo `CartController`.
-- [ ] Xây dựng Form đặt hàng và kiểm tra dữ liệu (Validation).
-- [ ] Lưu đơn hàng vào cơ sở dữ liệu.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+## ✅ Giai đoạn 3: Giỏ hàng & Đặt hàng (Hoàn thành)
+- [x] Xử lý logic Giỏ hàng (Session/Cookie).
+- [x] Tạo `CartController`.
+- [x] Xây dựng Form đặt hàng và kiểm tra dữ liệu (Validation).
+- [x] Lưu đơn hàng vào cơ sở dữ liệu.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
 ## 🛡️ Giai đoạn 4: Bảo mật & Quản trị
 - [ ] Tích hợp Đăng nhập/Đăng ký.
