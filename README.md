@@ -20,17 +20,39 @@ Dự án được tổ chức theo mô hình 3 lớp (3-Layer Architecture):
     *   `DAL/`: Lớp truy cập dữ liệu (Data Access Layer).
     *   `DTO/`: Lớp chứa các đối tượng chuyển đổi dữ liệu và Models.
 
-## Các bước tiến hành (Implementation Steps)
+## Các bước tiến hành (Implementation Details)
 
-Quá trình phát triển dự án được chia thành các giai đoạn sau:
+Quá trình phát triển dự án được chia thành các giai đoạn chi tiết như sau:
 
-1.  **Thiết kế Front-End**: Thiết kế giao diện website với HTML, CSS và JavaScript.
-2.  **Khởi tạo Backend**: Tạo ứng dụng web với cấu trúc ASP.NET Core MVC.
-3.  **Xây dựng Controller & Action**: Xử lý logic điều hướng và các yêu cầu từ phía người dùng.
-4.  **Tích hợp View & Layout**: Kết nối giao diện (Front-End) với ứng dụng thông qua Razor.
-5.  **Thiết kế Database (Model & EF Core)**: Xây dựng cơ sở dữ liệu và ánh xạ bằng Entity Framework Core.
-6.  **Xử lý Form & Validation**: Xác thực dữ liệu đầu vào.
-7.  **Cấu hình Routing**: Xây dựng URL thân thiện và điều hướng người dùng.
-8.  **Authentication & Authorization**: Hệ thống đăng nhập, đăng ký và phân quyền người dùng (Admin/Khách hàng).
-9.  **Dependency Injection**: Cấu hình các services, kết nối các layer (BUS, DAL).
-10. **Kiểm thử & Triển khai**: Thực hiện testing và deploy (triển khai) ứng dụng.
+1.  **Thiết kế Front-End (Giao diện người dùng)**:
+    *   Thiết kế layout các trang: Trang chủ, Danh mục sản phẩm, Chi tiết sản phẩm, Giỏ hàng, Thanh toán.
+    *   Sử dụng HTML, CSS và JavaScript để xây dựng giao diện tương tác.
+2.  **Khởi tạo Backend (GUI Layer)**:
+    *   Tạo dự án ASP.NET Core MVC trong thư mục `GUI`.
+    *   Thiết lập cấu hình ban đầu (Middleware, appsettings.json).
+3.  **Xây dựng Controller & Action**:
+    *   Tạo các Controller cơ bản (`HomeController`, `ProductController`, `CartController`).
+    *   Định nghĩa các Action methods xử lý các HTTP Request (GET, POST).
+4.  **Tích hợp View & Layout (Razor)**:
+    *   Tạo `_Layout.cshtml` để tái sử dụng giao diện (Header, Footer, Navigation).
+    *   Chuyển đổi giao diện HTML thuần thành các Razor Views để hiển thị dữ liệu động.
+5.  **Thiết kế Database & Tích hợp SQL Server (DAL & DTO)**:
+    *   Phân tích và thiết kế cơ sở dữ liệu: Bảng `Products` (Sản phẩm), `Categories` (Danh mục), `Users` (Người dùng), `Orders` (Đơn hàng).
+    *   Cài đặt **Entity Framework Core** và Provider cho **SQL Server**.
+    *   Tạo các lớp Entity/Model trong thư mục `DTO`.
+    *   Sử dụng phương pháp **Code-First Migrations** để tạo tự động Database trên **SQL Server** từ các class C#.
+    *   Viết các hàm truy vấn dữ liệu (CRUD) trong lớp `DAL`.
+6.  **Xử lý Form & Validation**:
+    *   Xử lý dữ liệu từ các Form (Đăng nhập, Đăng ký, Cập nhật thông tin, Đặt hàng).
+    *   Áp dụng Data Annotations để Validation ở Server-side và JavaScript cho Client-side.
+7.  **Cấu hình Routing**:
+    *   Thiết lập URL thân thiện với SEO (vd: `/san-pham/burger-bo` thay vì `/Product/Detail/1`).
+8.  **Authentication & Authorization (Bảo mật)**:
+    *   Xây dựng chức năng Đăng nhập, Đăng ký, Đăng xuất sử dụng Cookie Authentication.
+    *   Phân quyền ứng dụng: Khu vực dành riêng cho Quản trị viên (Admin Area) và khu vực cho Khách hàng.
+9.  **Xử lý Nghiệp vụ & Dependency Injection (BUS Layer)**:
+    *   Chuyển logic nghiệp vụ (tính toán giỏ hàng, xử lý thanh toán, giảm giá) vào lớp `BUS`.
+    *   Cấu hình Dependency Injection (DI) để tiêm `DAL` vào `BUS` và `BUS` vào `GUI` (Controller), đảm bảo tính lỏng lẻo (loose coupling) của mô hình 3 lớp.
+10. **Kiểm thử & Báo cáo**:
+    *   Test toàn bộ luồng chức năng (User flow) từ xem hàng đến thanh toán.
+    *   Hoàn thiện mã nguồn và chuẩn bị tài liệu báo cáo.
