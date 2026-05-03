@@ -2,13 +2,8 @@
 @using FastFoodEcommerce.Models
 @{
     var cartCount = Context.Session.GetObjectFromJson<List<CartItem>>("FastFoodCart")?.Sum(x => x.Quantity) ?? 0;
-    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "en";
-    var langDisplay = currentCulture switch
-    {
-        "vi" => "Tiếng Việt",
-        "ko" => "한국어",
-        _ => "English"
-    };
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => LanguageHelper.Get(key, currentCulture);
 }
 <!DOCTYPE html>
 <html lang="@currentCulture">
@@ -41,34 +36,34 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-bold text-uppercase">
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                            <a class="nav-link px-3" asp-area="" asp-controller="Home" asp-action="Index">@T("Home")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" href="/Home/Index#menu-section">Thực đơn</a>
+                            <a class="nav-link px-3" href="/Home/Index#menu-section">@T("Menu")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-controller="Promotion" asp-action="Index">Khuyến mãi</a>
+                            <a class="nav-link px-3" asp-controller="Promotion" asp-action="Index">@T("Promotion")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3" asp-controller="Store" asp-action="Index">Hệ thống cửa hàng</a>
+                            <a class="nav-link px-3" asp-controller="Store" asp-action="Index">@T("Stores")</a>
                         </li>
                     </ul>
                     
                     <div class="d-flex align-items-center gap-4">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle fw-bold small text-dark p-0" href="#" role="button" data-bs-toggle="dropdown">
-                                @langDisplay
+                                @T("Language")
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-2">
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en">English</a></li>
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="vi">Tiếng Việt</a></li>
-                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ko">한국어</a></li>
+                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en">@T("English")</a></li>
+                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="vi">@T("Vietnamese")</a></li>
+                                <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ko">@T("Korean")</a></li>
                             </ul>
                         </div>
-                        <a asp-controller="Account" asp-action="Login" class="text-dark fs-5">
+                        <a asp-controller="Account" asp-action="Login" class="text-dark fs-5" title="@T("Login")">
                             <i class="far fa-user-circle"></i>
                         </a>
-                        <a asp-controller="Cart" asp-action="Index" class="text-dark fs-5 position-relative">
+                        <a asp-controller="Cart" asp-action="Index" class="text-dark fs-5 position-relative" title="@T("Cart")">
                             <i class="fas fa-shopping-basket"></i>
                             @if (cartCount > 0)
                             {

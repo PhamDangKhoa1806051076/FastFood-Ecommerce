@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Trang chủ";
     var categories = ViewBag.Categories as IEnumerable<FastFoodEcommerce.Models.Category>;
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
 <!-- Hero Section (Dàn trải toàn màn hình) -->
@@ -9,11 +11,11 @@
     <div class="container-fluid px-5">
         <div class="row align-items-center">
             <div class="col-lg-6 text-start">
-                <h1 class="display-2 fw-bold text-dark mb-4 animate__animated animate__fadeInLeft">Ngon Khó Cưỡng, <br><span class="text-danger">Giao Tận Nơi!</span></h1>
-                <p class="lead text-muted mb-5 fs-4">Thưởng thức hương vị ẩm thực đỉnh cao từ Burger, Pizza đến các món ăn kèm hấp dẫn chỉ trong 30 phút.</p>
+                <h1 class="display-2 fw-bold text-dark mb-4 animate__animated animate__fadeInLeft">@T("Slogan").Split('-')[0], <br><span class="text-danger">@T("Slogan").Split('-')[1]!</span></h1>
+                <p class="lead text-muted mb-5 fs-4">@T("Slogan")</p>
                 <div class="d-flex gap-3">
-                    <a href="#menu-section" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">Đặt hàng ngay</a>
-                    <a href="#" class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold py-3">Tìm cửa hàng</a>
+                    <a href="#menu-section" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">@T("OrderNow")</a>
+                    <a href="#" class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold py-3">@T("FindStore")</a>
                 </div>
             </div>
             <div class="col-lg-6 animate__animated animate__fadeInRight">
@@ -28,7 +30,7 @@
     <div class="container-fluid px-5">
         <ul class="nav nav-tabs border-0 flex-nowrap overflow-auto text-uppercase fw-bold" id="categoryTabs" role="tablist" style="scrollbar-width: none;">
             <li class="nav-item me-2" role="presentation">
-                <button class="nav-link active border-0 py-3 px-4 text-dark category-btn" data-category-id="0">TẤT CẢ</button>
+                <button class="nav-link active border-0 py-3 px-4 text-dark category-btn" data-category-id="0">@T("AllProducts")</button>
             </li>
             @if (categories != null)
             {
@@ -46,7 +48,7 @@
 <!-- Product List Area -->
 <div class="container-fluid px-5 py-5">
     <div class="mb-4 d-flex justify-content-between align-items-center">
-        <h2 class="fw-bold fs-1" id="current-category-name">Tất cả sản phẩm</h2>
+        <h2 class="fw-bold fs-1" id="current-category-name">@T("AllProducts")</h2>
         <div class="dropdown">
             <button class="btn btn-outline-secondary rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown">
                 Sắp xếp: Mới nhất
