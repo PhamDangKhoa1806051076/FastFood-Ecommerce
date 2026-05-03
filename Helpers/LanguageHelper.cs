@@ -25,7 +25,7 @@ namespace FastFoodEcommerce.Helpers
                 ["Vietnamese"] = "Tiếng Việt",
                 ["Korean"] = "Tiếng Hàn",
                 ["VoucherCode"] = "Mã giảm giá",
-                ["Expired"] = "Đã hết hạn",
+                ["Expired"] = "Hạn dùng",
                 ["CopyCode"] = "Sao chép mã",
                 ["Address"] = "Địa chỉ",
                 ["Phone"] = "Số điện thoại",
@@ -36,7 +36,7 @@ namespace FastFoodEcommerce.Helpers
                 ["ForgotPassword"] = "Bạn quên mật khẩu?",
                 ["NoAccount"] = "Bạn chưa có tài khoản?",
                 ["Logout"] = "Đăng xuất",
-                ["AboutUs"] = "Về chúng tôi",
+                ["AboutUs"] = "Về FastFood",
                 ["OurStory"] = "Câu chuyện của chúng tôi",
                 ["News"] = "Tin tức FastFood",
                 ["Jobs"] = "Tuyển dụng",
@@ -46,7 +46,19 @@ namespace FastFoodEcommerce.Helpers
                 ["ResendOTP"] = "Gửi lại mã",
                 ["FullName"] = "Họ và tên",
                 ["ConfirmPassword"] = "Xác nhận mật khẩu",
-                ["CreateAccount"] = "Tạo tài khoản"
+                ["CreateAccount"] = "Tạo tài khoản",
+                ["Categories"] = "Danh mục món ăn",
+                ["ContactUs"] = "Liên hệ FastFood",
+                ["Policy"] = "Chính sách",
+                ["OurPolicy"] = "Chính sách hoạt động",
+                ["Terms"] = "Chính sách và quy định",
+                ["PrivacyPolicy"] = "Chính sách bảo mật thông tin",
+                ["TrackOrder"] = "Theo dõi đơn hàng",
+                ["StoreSystem"] = "Hệ thống nhà hàng",
+                ["Support"] = "Hỗ trợ khách hàng",
+                ["NewsPromotion"] = "Tin khuyến mãi",
+                ["Recruitment"] = "Tuyển dụng",
+                ["BirthdayParty"] = "Đặt tiệc sinh nhật"
             },
             ["en"] = new()
             {
@@ -78,7 +90,7 @@ namespace FastFoodEcommerce.Helpers
                 ["ForgotPassword"] = "Forgot your password?",
                 ["NoAccount"] = "Don't have an account?",
                 ["Logout"] = "Logout",
-                ["AboutUs"] = "About Us",
+                ["AboutUs"] = "About FastFood",
                 ["OurStory"] = "Our Story",
                 ["News"] = "FastFood News",
                 ["Jobs"] = "Jobs",
@@ -88,7 +100,19 @@ namespace FastFoodEcommerce.Helpers
                 ["ResendOTP"] = "Resend code",
                 ["FullName"] = "Full Name",
                 ["ConfirmPassword"] = "Confirm Password",
-                ["CreateAccount"] = "Create Account"
+                ["CreateAccount"] = "Create Account",
+                ["Categories"] = "Categories",
+                ["ContactUs"] = "Contact FastFood",
+                ["Policy"] = "Policy",
+                ["OurPolicy"] = "Operating Policy",
+                ["Terms"] = "Terms and Conditions",
+                ["PrivacyPolicy"] = "Privacy Policy",
+                ["TrackOrder"] = "Track Order",
+                ["StoreSystem"] = "Store System",
+                ["Support"] = "Customer Support",
+                ["NewsPromotion"] = "Promotion News",
+                ["Recruitment"] = "Recruitment",
+                ["BirthdayParty"] = "Birthday Party"
             },
             ["ko"] = new()
             {
@@ -120,7 +144,7 @@ namespace FastFoodEcommerce.Helpers
                 ["ForgotPassword"] = "비밀번호를 잊으셨나요?",
                 ["NoAccount"] = "계정이 없으신가요?",
                 ["Logout"] = "로그아웃",
-                ["AboutUs"] = "회사 소개",
+                ["AboutUs"] = "FastFood 정보",
                 ["OurStory"] = "우리의 이야기",
                 ["News"] = "패스트푸드 뉴스",
                 ["Jobs"] = "채용 정보",
@@ -130,13 +154,25 @@ namespace FastFoodEcommerce.Helpers
                 ["ResendOTP"] = "코드 재전송",
                 ["FullName"] = "성명",
                 ["ConfirmPassword"] = "비밀번호 확인",
-                ["CreateAccount"] = "계정 생성"
+                ["CreateAccount"] = "계정 생성",
+                ["Categories"] = "카테고리",
+                ["ContactUs"] = "FastFood 연락처",
+                ["Policy"] = "정책",
+                ["OurPolicy"] = "운영 정책",
+                ["Terms"] = "약관 및 조건",
+                ["PrivacyPolicy"] = "개인정보 보호정책",
+                ["TrackOrder"] = "주문 추적",
+                ["StoreSystem"] = "매장 시스템",
+                ["Support"] = "고객 지원",
+                ["NewsPromotion"] = "프로모션 뉴스",
+                ["Recruitment"] = "채용",
+                ["BirthdayParty"] = "생일 파티"
             }
         };
 
         public static string Get(string key, string culture)
         {
-            if (!_translations.ContainsKey(culture)) culture = "en";
+            if (string.IsNullOrEmpty(culture) || !_translations.ContainsKey(culture)) culture = "vi";
             return _translations[culture].ContainsKey(key) ? _translations[culture][key] : key;
         }
     }

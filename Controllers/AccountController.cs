@@ -5,6 +5,28 @@ namespace FastFoodEcommerce.Controllers
     public class AccountController : Controller
     {
         [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(string email, string password, string name)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return View();
+            }
+
+            // Store registration info in session
+            HttpContext.Session.SetString("PendingEmail", email);
+            HttpContext.Session.SetString("PendingPassword", password);
+            HttpContext.Session.SetString("PendingName", name);
+
+            return RedirectToAction("VerifyPhone");
+        }
+
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
