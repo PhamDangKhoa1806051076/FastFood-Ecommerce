@@ -1,0 +1,109 @@
+@model IEnumerable<FastFoodEcommerce.Models.Order>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h1 class="fw-bold text-uppercase border-start border-danger border-5 ps-3">Hệ thống Quản trị</h1>
+            <p class="text-muted">Chào mừng trở lại, Quản trị viên.</p>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-primary text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase small fw-bold">Tổng đơn hàng</h6>
+                        <h2 class="fw-bold mb-0">@ViewBag.OrderCount</h2>
+                    </div>
+                    <i class="fas fa-shopping-cart fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-success text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase small fw-bold">Sản phẩm hiện có</h6>
+                        <h2 class="fw-bold mb-0">@ViewBag.ProductCount</h2>
+                    </div>
+                    <i class="fas fa-hamburger fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-warning text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase small fw-bold">Voucher đang chạy</h6>
+                        <h2 class="fw-bold mb-0">@ViewBag.VoucherCount</h2>
+                    </div>
+                    <i class="fas fa-ticket-alt fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quick Actions -->
+        <div class="col-lg-4 mb-4">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Thao tác nhanh</h5>
+                    <div class="d-grid gap-2">
+                        <a asp-action="Products" class="btn btn-outline-dark py-3 rounded-pill fw-bold">
+                            <i class="fas fa-box me-2"></i> Quản lý sản phẩm
+                        </a>
+                        <a asp-action="Orders" class="btn btn-outline-dark py-3 rounded-pill fw-bold">
+                            <i class="fas fa-file-invoice me-2"></i> Quản lý đơn hàng
+                        </a>
+                        <a asp-action="CreateProduct" class="btn btn-danger py-3 rounded-pill fw-bold">
+                            <i class="fas fa-plus me-2"></i> Thêm sản phẩm mới
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Đơn hàng gần đây</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Khách hàng</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        <td>#@order.Id</td>
+                                        <td>@order.CustomerName</td>
+                                        <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                        <td class="fw-bold">@order.TotalAmount.ToString("N0")đ</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-light rounded-circle"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
