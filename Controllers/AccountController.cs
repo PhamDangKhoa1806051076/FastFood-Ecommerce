@@ -13,14 +13,18 @@ namespace FastFoodEcommerce.Controllers
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            // Placeholder for login logic
-            return RedirectToAction("VerifyPhone");
-        }
+            // Dummy authentication logic
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin.");
+                return View();
+            }
 
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
+            // Store email in session to pass to next step
+            HttpContext.Session.SetString("PendingEmail", email);
+            HttpContext.Session.SetString("PendingPassword", password);
+
+            return RedirectToAction("VerifyPhone");
         }
 
         [HttpGet]
@@ -32,7 +36,8 @@ namespace FastFoodEcommerce.Controllers
         [HttpPost]
         public IActionResult VerifyPhone(string phone)
         {
-            // Placeholder for OTP logic
+            if (string.IsNullOrEmpty(phone)) return View();
+            HttpContext.Session.SetString("PendingPhone", phone);
             return RedirectToAction("VerifyOtp");
         }
 
@@ -45,7 +50,28 @@ namespace FastFoodEcommerce.Controllers
         [HttpPost]
         public IActionResult VerifyOtp(string otp)
         {
-            // Redirect to home after success
+            // Simulate OTP success
+            var email = HttpContext.Session.GetString("PendingEmail") ?? "";
+            
+            // Set User Session
+            HttpContext.Session.SetString("UserEmail", email);
+            
+            // Basic Role assignment
+            if (email.ToLower() == "admin@fastfood.com")
+            {
+                HttpContext.Session.SetString("UserRole", "Admin");
+            }
+            else
+            {
+                HttpContext.Session.SetString("UserRole", "Customer");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
     }

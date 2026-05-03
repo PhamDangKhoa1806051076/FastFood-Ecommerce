@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Xác nhận mã OTP";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+            <h2 class="fw-bold mb-4 text-uppercase">Nhập mã xác thực</h2>
+            <p class="text-muted mb-5">Một mã OTP đã được gửi đến số điện thoại của bạn. Vui lòng nhập mã để hoàn tất đăng nhập.</p>
+            
+            <form asp-action="VerifyOtp" method="post">
+                <div class="mb-4 d-flex justify-content-center gap-2">
+                    <input type="text" name="otp" class="form-control text-center fs-2 fw-bold border-0 border-bottom rounded-0 focus-none" maxlength="6" style="letter-spacing: 10px;" placeholder="000000" required>
+                </div>
+                
+                <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase shadow">Xác nhận & Đăng nhập</button>
+            </form>
+            
+            <div class="mt-4">
+                <p class="small text-muted">Không nhận được mã? <a href="#" class="text-dark fw-bold text-decoration-none">Gửi lại sau 60s</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .focus-none:focus { box-shadow: none; border-color: #28a745; }
+</style>

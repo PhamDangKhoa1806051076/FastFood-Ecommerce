@@ -4,6 +4,9 @@
     var cartCount = Context.Session.GetObjectFromJson<List<CartItem>>("FastFoodCart")?.Sum(x => x.Quantity) ?? 0;
     var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
     string T(string key) => LanguageHelper.Get(key, currentCulture);
+
+    var userEmail = Context.Session.GetString("UserEmail");
+    var userRole = Context.Session.GetString("UserRole");
 }
 <!DOCTYPE html>
 <html lang="@currentCulture">
@@ -47,6 +50,12 @@
                         <li class="nav-item">
                             <a class="nav-link px-3" asp-controller="Store" asp-action="Index">@T("Stores")</a>
                         </li>
+                        @if (userRole == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link px-3 text-primary" href="#">Admin Area</a>
+                            </li>
+                        }
                     </ul>
                     
                     <div class="d-flex align-items-center gap-4">
@@ -60,9 +69,25 @@
                                 <li><a class="dropdown-item py-2" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ko">@T("Korean")</a></li>
                             </ul>
                         </div>
-                        <a asp-controller="Account" asp-action="Login" class="text-dark fs-5" title="@T("Login")">
-                            <i class="far fa-user-circle"></i>
-                        </a>
+
+                        <div class="dropdown">
+                            <a class="text-dark fs-5" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="far fa-user-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-2">
+                                @if (string.IsNullOrEmpty(userEmail))
+                                {
+                                    <li><a class="dropdown-item py-2" asp-controller="Account" asp-action="Login">@T("Login")</a></li>
+                                    <li><a class="dropdown-item py-2" href="#">@T("Register")</a></li>
+                                }
+                                else
+                                {
+                                    <li><span class="dropdown-item-text small text-muted">@userEmail</span></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item py-2 text-danger" asp-controller="Account" asp-action="Logout">Đăng xuất</a></li>
+                                }
+                            </ul>
+                        </div>
                         <a asp-controller="Cart" asp-action="Index" class="text-dark fs-5 position-relative" title="@T("Cart")">
                             <i class="fas fa-shopping-basket"></i>
                             @if (cartCount > 0)
