@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Xác nhận số điện thoại";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 text-center">
+            <h2 class="fw-bold mb-4 text-uppercase">Xác nhận số điện thoại</h2>
+            <p class="text-muted mb-5">Vui lòng cung cấp số điện thoại của bạn để nhận mã xác thực (OTP).</p>
+            
+            <form asp-action="VerifyPhone" method="post">
+                <div class="mb-4">
+                    <div class="input-group input-group-lg border-bottom">
+                        <span class="input-group-text bg-transparent border-0 text-muted">+84</span>
+                        <input type="tel" name="phone" class="form-control border-0 rounded-0 focus-none" placeholder="09xxxxxxx" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold text-uppercase shadow">Gửi mã OTP</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .focus-none:focus { box-shadow: none; }
+</style>

@@ -19,8 +19,29 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+        var categories = await _context.Categories.ToListAsync();
         var products = await _context.Products.Include(p => p.Category).ToListAsync();
+        ViewBag.Categories = categories;
         return View(products);
+    }
+
+    public async Task<IActionResult> GetProductsByCategory(int? categoryId)
+    {
+        var products = categoryId == null || categoryId == 0
+            ? await _context.Products.Include(p => p.Category).ToListAsync()
+            : await _context.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).ToListAsync();
+        
+        return PartialView("_ProductList", products);
+    }
+
+    public IActionResult ChangeLanguage(string culture)
+    {
+        Response.Cookies.Append(
+            "FastFoodLanguage",
+            culture,
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+        );
+        return Redirect(Request.Headers["Referer"].ToString());
     }
 
     public IActionResult Privacy()

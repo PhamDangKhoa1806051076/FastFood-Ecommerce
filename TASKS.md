@@ -27,9 +27,10 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Lưu đơn hàng vào cơ sở dữ liệu.
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 🛡️ Giai đoạn 4: Bảo mật & Quản trị
-- [ ] Tích hợp Đăng nhập/Đăng ký.
-- [ ] Phân quyền Admin và Khách hàng.
-- [ ] Xây dựng khu vực Quản trị (CRUD sản phẩm, quản lý đơn hàng).
-- [ ] Kiểm thử cuối cùng và đóng gói báo cáo.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+## 🌟 Giai đoạn 5: Tính năng mở rộng (Hoàn thành)
+- [x] Hệ thống Voucher: Tự động tính hạn dùng (2 tuần cho lễ, 3-7 ngày cho ngày thường).
+- [x] Hệ thống Cửa hàng: Tích hợp bản đồ Google Maps và danh sách cơ sở.
+- [x] Đa ngôn ngữ: Hỗ trợ Tiếng Anh, Tiếng Việt, Tiếng Hàn qua Cookie.
+- [x] Luồng Đăng nhập mới: Giao diện Split-screen, xác thực qua Số điện thoại (OTP).
+- [x] Menu mở rộng (Hamburger): Sidebar danh mục món ăn và thông tin liên hệ.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.

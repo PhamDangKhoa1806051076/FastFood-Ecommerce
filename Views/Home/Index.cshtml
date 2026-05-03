@@ -1,44 +1,134 @@
 @model IEnumerable<FastFoodEcommerce.Models.Product>
 @{
     ViewData["Title"] = "Trang chủ";
+    var categories = ViewBag.Categories as IEnumerable<FastFoodEcommerce.Models.Category>;
 }
 
-<!-- Hero Section -->
-<section class="hero-section text-center">
-    <div class="container">
-        <h1 class="hero-title animate__animated animate__fadeInDown">Ngon Khó Cưỡng, Giao Tận Nơi!</h1>
-        <p class="hero-subtitle animate__animated animate__fadeInUp">Khám phá thực đơn đa dạng từ Burger, Pizza đến các món ăn kèm hấp dẫn.</p>
-        <a href="#menu" class="btn btn-primary btn-lg">Xem thực đơn ngay</a>
+<!-- Hero Section (Dàn trải toàn màn hình) -->
+<section class="hero-section text-center py-5 mb-0" style="background: #f8f9fa;">
+    <div class="container-fluid px-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-start">
+                <h1 class="display-2 fw-bold text-dark mb-4 animate__animated animate__fadeInLeft">Ngon Khó Cưỡng, <br><span class="text-danger">Giao Tận Nơi!</span></h1>
+                <p class="lead text-muted mb-5 fs-4">Thưởng thức hương vị ẩm thực đỉnh cao từ Burger, Pizza đến các món ăn kèm hấp dẫn chỉ trong 30 phút.</p>
+                <div class="d-flex gap-3">
+                    <a href="#menu-section" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">Đặt hàng ngay</a>
+                    <a href="#" class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold py-3">Tìm cửa hàng</a>
+                </div>
+            </div>
+            <div class="col-lg-6 animate__animated animate__fadeInRight">
+                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200" class="img-fluid rounded-5 shadow-lg" alt="Fast Food Hero">
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Menu Section -->
-<div class="container" id="menu">
-    <div class="text-center mb-5">
-        <h2 class="section-title">Thực Đơn Nổi Bật</h2>
-    </div>
-
-    <div class="row g-4">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-6 col-lg-4 col-xl-3">
-                <div class="product-card">
-                    <div class="product-img-wrapper">
-                        <img src="@item.ImageUrl" class="product-img" alt="@item.Name">
-                    </div>
-                    <div class="product-body">
-                        <span class="product-category">@item.Category?.Name</span>
-                        <h3 class="product-title">@item.Name</h3>
-                        <p class="product-description">@item.Description</p>
-                    </div>
-                    <div class="product-footer">
-                        <span class="product-price">@item.Price.ToString("N0")đ</span>
-                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn-add-cart" title="Thêm vào giỏ hàng">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        }
+<!-- Menu Category Tabs (KFC Style) -->
+<div id="menu-section" class="bg-white sticky-top shadow-sm py-2" style="top: 85px; z-index: 1020;">
+    <div class="container-fluid px-5">
+        <ul class="nav nav-tabs border-0 flex-nowrap overflow-auto text-uppercase fw-bold" id="categoryTabs" role="tablist" style="scrollbar-width: none;">
+            <li class="nav-item me-2" role="presentation">
+                <button class="nav-link active border-0 py-3 px-4 text-dark category-btn" data-category-id="0">TẤT CẢ</button>
+            </li>
+            @if (categories != null)
+            {
+                foreach (var cat in categories)
+                {
+                    <li class="nav-item me-2" role="presentation">
+                        <button class="nav-link border-0 py-3 px-4 text-dark category-btn" data-category-id="@cat.Id">@cat.Name</button>
+                    </li>
+                }
+            }
+        </ul>
     </div>
 </div>
+
+<!-- Product List Area -->
+<div class="container-fluid px-5 py-5">
+    <div class="mb-4 d-flex justify-content-between align-items-center">
+        <h2 class="fw-bold fs-1" id="current-category-name">Tất cả sản phẩm</h2>
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                Sắp xếp: Mới nhất
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-menu-item p-2" href="#">Giá: Thấp đến Cao</a></li>
+                <li><a class="dropdown-menu-item p-2" href="#">Giá: Cao đến Thấp</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="product-list-container" class="animate__animated animate__fadeIn">
+        @await Html.PartialAsync("_ProductList", Model)
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Xử lý click chuyển tab danh mục
+            $('.category-btn').click(function () {
+                var categoryId = $(this).data('category-id');
+                var categoryName = $(this).text();
+
+                // Cập nhật UI tab active
+                $('.category-btn').removeClass('active');
+                $(this).addClass('active');
+
+                // Cập nhật tên danh mục hiển thị
+                $('#current-category-name').text(categoryName);
+
+                // Hiệu ứng fade out
+                $('#product-list-container').fadeOut(200, function () {
+                    // Load sản phẩm mới qua AJAX
+                    $.ajax({
+                        url: '/Home/GetProductsByCategory',
+                        data: { categoryId: categoryId },
+                        success: function (data) {
+                            $('#product-list-container').html(data).fadeIn(300);
+                        },
+                        error: function () {
+                            alert('Có lỗi xảy ra khi tải dữ liệu.');
+                        }
+                    });
+                });
+            });
+
+            // Hiệu ứng cuộn mượt cho link "Thực đơn" trên navbar
+            $('#menu-link').click(function(e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $("#menu-section").offset().top - 80
+                }, 800);
+            });
+        });
+    </script>
+}
+
+<style>
+    .nav-tabs .nav-link {
+        border-radius: 0;
+        position: relative;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    .nav-tabs .nav-link.active {
+        color: #e63946 !important;
+        background: transparent !important;
+    }
+    .nav-tabs .nav-link.active:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: #e63946;
+    }
+    .nav-tabs .nav-link:hover {
+        color: #e63946 !important;
+    }
+    #categoryTabs::-webkit-scrollbar {
+        display: none;
+    }
+</style>
