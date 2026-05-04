@@ -218,3 +218,4 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\ref\FastFoodEcommerce
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-bsbnacr7g6.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
