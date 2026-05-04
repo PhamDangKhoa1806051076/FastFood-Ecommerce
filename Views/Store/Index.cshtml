@@ -20,7 +20,8 @@
         <div class="col-lg-4">
             <!-- Search Store -->
             <div class="mb-4">
-                <div class="input-group shadow-sm rounded-4 overflow-hidden">
+                <h5 class="fw-bold mb-3"><i class="fas fa-search me-2 text-danger"></i>Tìm kiếm</h5>
+                <div class="input-group shadow-sm rounded-4 overflow-hidden border">
                     <span class="input-group-text bg-white border-0 ps-3">
                         <i class="fas fa-search text-muted"></i>
                     </span>
@@ -28,7 +29,13 @@
                 </div>
             </div>
 
-            <div class="list-group rounded-4 shadow-sm overflow-hidden border-0" id="store-list" style="max-height: 600px; overflow-y: auto;">
+            <!-- Store List Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+                <h5 class="fw-bold mb-0"><i class="fas fa-list me-2 text-danger"></i>Danh sách chi nhánh</h5>
+                <span class="badge bg-danger rounded-pill">@Model.Count()</span>
+            </div>
+
+            <div class="list-group rounded-4 shadow-sm overflow-hidden border" id="store-list" style="max-height: 600px; overflow-y: auto; background: white;">
                 @foreach (var store in Model)
                 {
                     <button type="button" class="list-group-item list-group-item-action p-4 border-0 border-bottom store-item" 
@@ -36,14 +43,19 @@
                             data-name="@store.Name.ToLower()" 
                             data-address="@store.Address.ToLower()">
                         <div class="d-flex align-items-start">
-                            <div class="store-icon bg-danger text-white rounded-3 p-2 me-3">
+                            <div class="store-icon bg-danger bg-opacity-10 text-danger rounded-3 p-2 me-3">
                                 <i class="fas fa-store"></i>
                             </div>
-                            <div>
-                                <h5 class="fw-bold mb-1 text-dark store-name">@store.Name</h5>
-                                <p class="mb-1 text-muted small"><i class="fas fa-map-marker-alt me-2"></i>@store.Address</p>
-                                <p class="mb-1 text-muted small"><i class="fas fa-phone-alt me-2"></i>@store.Phone</p>
-                                <span class="badge bg-light text-dark distance-badge d-none mt-2"></span>
+                            <div class="flex-grow-1">
+                                <h6 class="fw-bold mb-1 text-dark store-name">@store.Name</h6>
+                                <p class="mb-1 text-muted extra-small"><i class="fas fa-map-marker-alt me-2"></i>@store.Address</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-0 text-muted extra-small"><i class="fas fa-phone-alt me-2"></i>@store.Phone</p>
+                                    <span class="badge bg-light text-danger distance-badge d-none"></span>
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fas fa-chevron-right text-muted opacity-50 small"></i>
                             </div>
                         </div>
                     </button>
@@ -253,11 +265,20 @@
             background: #e63946;
             border-radius: 10px;
         }
+        .extra-small {
+            font-size: 0.75rem;
+        }
         .store-item {
             transition: all 0.2s ease;
+            border-left: 4px solid transparent !important;
+        }
+        .store-item:hover {
+            background-color: #fff5f5 !important;
+            transform: translateX(5px);
         }
         .store-item.active {
-            border-left: 4px solid #e63946 !important;
+            background-color: #fff5f5 !important;
+            border-left-color: #e63946 !important;
         }
         .store-icon {
             width: 40px;
@@ -265,6 +286,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .store-item:hover .store-icon {
+            background-color: #e63946 !important;
+            color: white !important;
         }
         /* Leaflet popup customization */
         .leaflet-popup-content-wrapper {
