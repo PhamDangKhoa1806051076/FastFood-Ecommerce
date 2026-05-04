@@ -33,6 +33,12 @@ namespace FastFoodEcommerce.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal DiscountAmount { get; set; } = 0;
+
+        [StringLength(20)]
+        public string? VoucherCode { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Status { get; set; } = "Pending";

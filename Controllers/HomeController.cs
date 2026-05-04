@@ -25,7 +25,7 @@ public class HomeController : Controller
         return View(products);
     }
 
-    public async Task<IActionResult> GetProductsByCategory(int? categoryId, decimal? minPrice, decimal? maxPrice, int? minRating)
+    public async Task<IActionResult> GetProductsByCategory(int? categoryId, decimal? minPrice, decimal? maxPrice, int? minRating, string sort = "newest")
     {
         var query = _context.Products
             .Include(p => p.Category)
@@ -47,12 +47,20 @@ public class HomeController : Controller
             query = query.Where(p => p.Price <= maxPrice.Value);
         }
 
-        var products = await query.ToListAsync();
-
         if (minRating != null && minRating > 0)
         {
-            products = products.Where(p => (p.Reviews != null && p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0) >= minRating.Value).ToList();
+            query = query.Where(p => p.Reviews != null && p.Reviews.Any() && p.Reviews.Average(r => r.Rating) >= minRating.Value);
         }
+
+        // Sorting
+        query = sort switch
+        {
+            "price_asc" => query.OrderBy(p => p.Price),
+            "price_desc" => query.OrderByDescending(p => p.Price),
+            _ => query.OrderByDescending(p => p.Id) // newest
+        };
+
+        var products = await query.ToListAsync();
         
         return PartialView("_ProductList", products);
     }

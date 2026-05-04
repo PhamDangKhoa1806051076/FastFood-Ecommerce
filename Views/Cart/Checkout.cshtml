@@ -33,14 +33,37 @@
             </div>
         </div>
         <div class="col-lg-5 mt-4 mt-lg-0">
-            <div class="card bg-light border-0 rounded-4 p-4">
-                <h4 class="mb-3">Tổng cộng thanh toán</h4>
-                <div class="d-flex justify-content-between">
-                    <span class="h3 fw-bold text-danger">@Model.TotalAmount.ToString("N0")đ</span>
+            <div class="card bg-light border-0 rounded-4 p-4 shadow-sm">
+                <h4 class="mb-4 fw-bold">Tổng cộng thanh toán</h4>
+                
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Tạm tính:</span>
+                    <span class="fw-bold" id="subtotal">@((Model.TotalAmount + Model.DiscountAmount).ToString("N0"))đ</span>
                 </div>
-                <p class="text-muted small mt-2">Thanh toán bằng tiền mặt khi nhận hàng (COD).</p>
+                
+                <div class="d-flex justify-content-between mb-2 text-success @(Model.DiscountAmount > 0 ? "" : "d-none")" id="discount-row">
+                    <span>Giảm giá:</span>
+                    <span class="fw-bold">-<span id="discount-val">@Model.DiscountAmount.ToString("N0")</span>đ</span>
+                </div>
+
                 <hr>
-                <p class="small"><i class="fas fa-info-circle me-2"></i>Vui lòng kiểm tra lại thông tin trước khi xác nhận.</p>
+
+                <div class="d-flex justify-content-between mb-4">
+                    <span class="h5 fw-bold">Tổng cộng:</span>
+                    <span class="h3 fw-bold text-danger" id="total-amount">@Model.TotalAmount.ToString("N0")đ</span>
+                </div>
+
+                <!-- Voucher Section -->
+                <div class="mb-4">
+                    <label class="form-label small fw-bold text-uppercase text-muted">Mã giảm giá</label>
+                    <div class="input-group">
+                        <input type="text" id="voucher-input" class="form-control rounded-start-3" placeholder="Nhập mã..." value="@Model.VoucherCode">
+                        <button class="btn btn-dark rounded-end-3 px-3" type="button" id="apply-voucher">Sử dụng</button>
+                    </div>
+                    <div id="voucher-msg" class="small mt-1"></div>
+                </div>
+
+                <p class="text-muted small"><i class="fas fa-info-circle me-2"></i>Thanh toán bằng tiền mặt khi nhận hàng (COD).</p>
             </div>
         </div>
     </div>
@@ -48,4 +71,37 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            $('#apply-voucher').click(function() {
+                var code = $('#voucher-input').val();
+                if (!code) return;
+
+                $(this).prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span>');
+
+                $.ajax({
+                    url: '/Cart/ApplyVoucher',
+                    type: 'POST',
+                    data: { code: code },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#discount-row').removeClass('d-none');
+                            $('#discount-val').text(response.discount.toLocaleString('vi-VN'));
+                            $('#total-amount').text(response.total.toLocaleString('vi-VN') + 'đ');
+                            $('#voucher-msg').text('Áp dụng mã thành công!').removeClass('text-danger').addClass('text-success');
+                        } else {
+                            $('#voucher-msg').text(response.message).removeClass('text-success').addClass('text-danger');
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra');
+                    },
+                    complete: function() {
+                        $('#apply-voucher').prop('disabled', false).text('Sử dụng');
+                    }
+                });
+            });
+        });
+    </script>
 }

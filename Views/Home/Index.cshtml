@@ -49,14 +49,68 @@
 <div class="container-fluid px-5 py-5">
     <div class="mb-4 d-flex justify-content-between align-items-center">
         <h2 class="fw-bold fs-1" id="current-category-name">@T("AllProducts")</h2>
-        <div class="dropdown">
-            <button class="btn btn-outline-secondary rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                Sắp xếp: Mới nhất
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-dark rounded-pill px-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterSidebar">
+                <i class="fas fa-filter me-2"></i>Bộ lọc
             </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-menu-item p-2" href="#">Giá: Thấp đến Cao</a></li>
-                <li><a class="dropdown-menu-item p-2" href="#">Giá: Cao đến Thấp</a></li>
-            </ul>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="sort-label">
+                    Sắp xếp: Mới nhất
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item sort-option" data-sort="newest" href="#">Mới nhất</a></li>
+                    <li><a class="dropdown-item sort-option" data-sort="price_asc" href="#">Giá: Thấp đến Cao</a></li>
+                    <li><a class="dropdown-item sort-option" data-sort="price_desc" href="#">Giá: Cao đến Thấp</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Offcanvas -->
+    <div class="offcanvas offcanvas-end rounded-start-4" tabindex="-1" id="filterSidebar" aria-labelledby="filterSidebarLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="filterSidebarLabel">Bộ lọc món ăn</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-4">
+            <!-- Price Range -->
+            <div class="mb-5">
+                <label class="form-label fw-bold mb-3 text-uppercase small text-muted">Khoảng giá (VNĐ)</label>
+                <div class="d-flex align-items-center gap-2">
+                    <input type="number" id="minPrice" class="form-control rounded-3" placeholder="Từ" step="1000">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" class="form-control rounded-3" placeholder="Đến" step="1000">
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-5">
+                <label class="form-label fw-bold mb-3 text-uppercase small text-muted">Đánh giá tối thiểu</label>
+                <div class="d-flex flex-column gap-2">
+                    @for (int i = 5; i >= 1; i--)
+                    {
+                        <div class="form-check custom-rating-check">
+                            <input class="form-check-input rating-filter" type="radio" name="minRating" id="rating-@i" value="@i">
+                            <label class="form-check-label text-warning" for="rating-@i">
+                                @for (int s = 1; s <= 5; s++)
+                                {
+                                    <i class="@(s <= i ? "fas" : "far") fa-star"></i>
+                                }
+                                <span class="text-dark ms-2 small fw-bold">(@i sao trở lên)</span>
+                            </label>
+                        </div>
+                    }
+                    <div class="form-check custom-rating-check">
+                        <input class="form-check-input rating-filter" type="radio" name="minRating" id="rating-0" value="0" checked>
+                        <label class="form-check-label text-muted" for="rating-0">Tất cả đánh giá</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 mt-auto">
+                <button class="btn btn-danger py-3 rounded-pill fw-bold shadow" id="apply-filters" data-bs-dismiss="offcanvas">Áp dụng bộ lọc</button>
+                <button class="btn btn-link text-dark text-decoration-none" id="reset-filters">Xóa tất cả bộ lọc</button>
+            </div>
         </div>
     </div>
 
@@ -68,24 +122,24 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Xử lý click chuyển tab danh mục
-            $('.category-btn').click(function () {
-                var categoryId = $(this).data('category-id');
-                var categoryName = $(this).text();
+            let currentCategoryId = 0;
+            let currentSort = "newest";
 
-                // Cập nhật UI tab active
-                $('.category-btn').removeClass('active');
-                $(this).addClass('active');
+            function loadProducts() {
+                let minPrice = $('#minPrice').val();
+                let maxPrice = $('#maxPrice').val();
+                let minRating = $('input[name="minRating"]:checked').val();
 
-                // Cập nhật tên danh mục hiển thị
-                $('#current-category-name').text(categoryName);
-
-                // Hiệu ứng fade out
                 $('#product-list-container').fadeOut(200, function () {
-                    // Load sản phẩm mới qua AJAX
                     $.ajax({
                         url: '/Home/GetProductsByCategory',
-                        data: { categoryId: categoryId },
+                        data: { 
+                            categoryId: currentCategoryId,
+                            minPrice: minPrice,
+                            maxPrice: maxPrice,
+                            minRating: minRating,
+                            sort: currentSort
+                        },
                         success: function (data) {
                             $('#product-list-container').html(data).fadeIn(300);
                         },
@@ -94,9 +148,39 @@
                         }
                     });
                 });
+            }
+
+            // Category Tab Click
+            $('.category-btn').click(function () {
+                currentCategoryId = $(this).data('category-id');
+                $('.category-btn').removeClass('active');
+                $(this).addClass('active');
+                $('#current-category-name').text($(this).text());
+                loadProducts();
             });
 
-            // Hiệu ứng cuộn mượt cho link "Thực đơn" trên navbar
+            // Filter Apply
+            $('#apply-filters').click(function() {
+                loadProducts();
+            });
+
+            // Filter Reset
+            $('#reset-filters').click(function() {
+                $('#minPrice').val('');
+                $('#maxPrice').val('');
+                $('#rating-0').prop('checked', true);
+                loadProducts();
+            });
+
+            // Sort Click
+            $('.sort-option').click(function(e) {
+                e.preventDefault();
+                currentSort = $(this).data('sort');
+                $('#sort-label').text('Sắp xếp: ' + $(this).text());
+                loadProducts();
+            });
+
+            // Hero Smooth Scroll
             $('#menu-link').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({

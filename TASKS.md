@@ -56,4 +56,10 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 ## ✅ Giai đoạn 8: Phân tích Dữ liệu & Báo cáo Thông minh (Hoàn thành)
 - [x] Tích hợp biểu đồ doanh thu Chart.js (Hoàn thành UI & Dữ liệu thực tế).
 - [x] Thống kê sản phẩm bán chạy và xu hướng đặt hàng thực tế.
-- [x] Đồng bộ bộ mã nguồn lên GitHub.
+
+## ✅ Giai đoạn 9: Hoàn thiện Voucher & Bộ lọc (Hoàn thành)
+- [x] Tích hợp Voucher vào luồng Thanh toán (Áp dụng mã & Trừ tiền).
+- [x] Xây dựng giao diện Bộ lọc Nâng cao (Giá, Đánh giá) trên trang chủ.
+- [x] Tối ưu hóa logic sắp xếp sản phẩm (Mới nhất, Giá tăng/giảm).
+- [x] Cập nhật Database để lưu trữ thông tin giảm giá trong Đơn hàng.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
