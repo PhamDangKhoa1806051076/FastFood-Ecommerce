@@ -28,5 +28,7 @@ namespace FastFoodEcommerce.Models
         public string Address { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public string MapUrl { get; set; } = string.Empty;
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

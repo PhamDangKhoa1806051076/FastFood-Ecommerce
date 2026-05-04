@@ -5,8 +5,16 @@
     string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
 <div class="container-fluid px-5 py-5">
-    <h2 class="section-title mb-5">@T("Stores")</h2>
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="section-title mb-0">@T("Stores")</h2>
+        <button id="btn-nearest" class="btn btn-danger rounded-pill px-4 py-2">
+            <i class="fas fa-location-arrow me-2"></i>Tìm cửa hàng gần tôi
+        </button>
+    </div>
 
     <div class="row">
         <div class="col-lg-4">
@@ -24,7 +32,7 @@
                 @foreach (var store in Model)
                 {
                     <button type="button" class="list-group-item list-group-item-action p-4 border-0 border-bottom store-item" 
-                            data-map="@store.MapUrl" 
+                            data-id="@store.Id"
                             data-name="@store.Name.ToLower()" 
                             data-address="@store.Address.ToLower()">
                         <div class="d-flex align-items-start">
@@ -34,7 +42,8 @@
                             <div>
                                 <h5 class="fw-bold mb-1 text-dark store-name">@store.Name</h5>
                                 <p class="mb-1 text-muted small"><i class="fas fa-map-marker-alt me-2"></i>@store.Address</p>
-                                <p class="mb-0 text-muted small"><i class="fas fa-phone-alt me-2"></i>@store.Phone</p>
+                                <p class="mb-1 text-muted small"><i class="fas fa-phone-alt me-2"></i>@store.Phone</p>
+                                <span class="badge bg-light text-dark distance-badge d-none mt-2"></span>
                             </div>
                         </div>
                     </button>
@@ -42,30 +51,79 @@
             </div>
         </div>
         <div class="col-lg-8 mt-4 mt-lg-0">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="min-height: 500px;">
-                <iframe id="map-iframe" 
-                        src="@(Model.FirstOrDefault()?.MapUrl)" 
-                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100" style="min-height: 600px; z-index: 1;">
+                <div id="map" style="width: 100%; height: 100%;"></div>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts {
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <script>
         $(document).ready(function() {
-            // Click to switch map
+            // Initialize Map centered on HCMC
+            var map = L.map('map').setView([10.792, 106.660], 12);
+
+            // Add OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Custom icon for fast food stores
+            var storeIcon = L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            var userIcon = L.icon({
+                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+
+            // Parse stores from Model
+            var storesData = [
+                @foreach(var store in Model)
+                {
+                    <text>{ id: @store.Id, name: "@Html.Raw(store.Name.Replace("\"", "\\\""))", address: "@Html.Raw(store.Address.Replace("\"", "\\\""))", phone: "@Html.Raw(store.Phone)", lat: @store.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture), lng: @store.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture) },</text>
+                }
+            ];
+
+            var markers = {};
+            var userMarker = null;
+
+            // Add markers to map
+            storesData.forEach(function(store) {
+                var marker = L.marker([store.lat, store.lng], {icon: storeIcon}).addTo(map);
+                marker.bindPopup("<b>" + store.name + "</b><br>" + store.address + "<br><i class='fas fa-phone-alt'></i> " + store.phone);
+                markers[store.id] = marker;
+            });
+
+            // Click list item -> fly to map
             $('.store-item').click(function() {
-                var mapUrl = $(this).data('map');
+                var id = $(this).data('id');
+                var store = storesData.find(s => s.id == id);
+                
                 $('.store-item').removeClass('active bg-light');
                 $(this).addClass('active bg-light');
-                $('#map-iframe').attr('src', mapUrl);
+                
+                if (store) {
+                    map.flyTo([store.lat, store.lng], 16);
+                    markers[store.id].openPopup();
+                }
 
-                // Auto scroll to map on mobile
                 if ($(window).width() < 992) {
-                    $('html, body').animate({
-                        scrollTop: $("#map-iframe").offset().top - 100
-                    }, 500);
+                    $('html, body').animate({ scrollTop: $("#map").offset().top - 100 }, 500);
                 }
             });
 
@@ -77,16 +135,22 @@
                 $('.store-item').each(function() {
                     var name = $(this).data('name');
                     var address = $(this).data('address');
+                    var id = $(this).data('id');
 
                     if (name.indexOf(value) > -1 || address.indexOf(value) > -1) {
                         $(this).show();
+                        if (markers[id] && !map.hasLayer(markers[id])) {
+                            map.addLayer(markers[id]);
+                        }
                         count++;
                     } else {
                         $(this).hide();
+                        if (markers[id] && map.hasLayer(markers[id])) {
+                            map.removeLayer(markers[id]);
+                        }
                     }
                 });
 
-                // Show "No result" message if needed
                 if (count == 0) {
                     if ($('#no-result').length == 0) {
                         $('#store-list').append('<div id="no-result" class="p-5 text-center text-muted"><i class="fas fa-search fa-3x mb-3 opacity-25"></i><p>Không tìm thấy cửa hàng nào</p></div>');
@@ -96,8 +160,85 @@
                 }
             });
 
-            // Set first item active
-            $('.store-item').first().addClass('active bg-light');
+            // Nearest Store Logic
+            function calculateDistance(lat1, lon1, lat2, lon2) {
+                var R = 6371; // km
+                var dLat = (lat2 - lat1) * Math.PI / 180;
+                var dLon = (lon2 - lon1) * Math.PI / 180;
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                        Math.sin(dLon/2) * Math.sin(dLon/2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c;
+            }
+
+            $('#btn-nearest').click(function() {
+                var btn = $(this);
+                btn.html('<i class="fas fa-spinner fa-spin me-2"></i>Đang định vị...');
+                
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var userLat = position.coords.latitude;
+                        var userLng = position.coords.longitude;
+
+                        // Add/Move User Marker
+                        if (userMarker) {
+                            userMarker.setLatLng([userLat, userLng]);
+                        } else {
+                            userMarker = L.marker([userLat, userLng], {icon: userIcon, zIndexOffset: 1000}).addTo(map);
+                            userMarker.bindPopup("<b>Vị trí của bạn</b>").openPopup();
+                        }
+
+                        // Calculate distances
+                        var nearestStore = null;
+                        var minDistance = Infinity;
+
+                        storesData.forEach(function(store) {
+                            var distance = calculateDistance(userLat, userLng, store.lat, store.lng);
+                            store.distance = distance;
+                            if (distance < minDistance) {
+                                minDistance = distance;
+                                nearestStore = store;
+                            }
+                            
+                            // Update UI badge
+                            var item = $('.store-item[data-id="' + store.id + '"]');
+                            item.find('.distance-badge').html('<i class="fas fa-route me-1"></i>' + distance.toFixed(1) + ' km').removeClass('d-none');
+                        });
+
+                        // Sort list by distance
+                        var list = $('#store-list');
+                        var items = list.children('.store-item').get();
+                        items.sort(function(a, b) {
+                            var idA = $(a).data('id');
+                            var idB = $(b).data('id');
+                            var distA = storesData.find(s => s.id == idA).distance;
+                            var distB = storesData.find(s => s.id == idB).distance;
+                            return distA - distB;
+                        });
+                        $.each(items, function(idx, itm) { list.append(itm); });
+
+                        // Focus on nearest store
+                        if (nearestStore) {
+                            $('.store-item').removeClass('active bg-light');
+                            $('.store-item[data-id="' + nearestStore.id + '"]').addClass('active bg-light');
+                            
+                            // Fit bounds to show both user and nearest store
+                            var bounds = L.latLngBounds([[userLat, userLng], [nearestStore.lat, nearestStore.lng]]);
+                            map.fitBounds(bounds, {padding: [50, 50]});
+                            markers[nearestStore.id].openPopup();
+                        }
+
+                        btn.html('<i class="fas fa-location-arrow me-2"></i>Tìm cửa hàng gần tôi');
+                    }, function(error) {
+                        alert("Không thể lấy được vị trí của bạn. Vui lòng cho phép quyền truy cập vị trí.");
+                        btn.html('<i class="fas fa-location-arrow me-2"></i>Tìm cửa hàng gần tôi');
+                    });
+                } else {
+                    alert("Trình duyệt của bạn không hỗ trợ định vị (Geolocation).");
+                    btn.html('<i class="fas fa-location-arrow me-2"></i>Tìm cửa hàng gần tôi');
+                }
+            });
         });
     </script>
 
@@ -124,6 +265,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        /* Leaflet popup customization */
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-content {
+            font-family: inherit;
+            margin: 15px;
         }
     </style>
 }
