@@ -10,14 +10,33 @@
 
     <div class="row">
         <div class="col-lg-4">
-            <div class="list-group rounded-4 shadow-sm overflow-hidden" id="store-list">
+            <!-- Search Store -->
+            <div class="mb-4">
+                <div class="input-group shadow-sm rounded-4 overflow-hidden">
+                    <span class="input-group-text bg-white border-0 ps-3">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" id="store-search" class="form-control border-0 py-3 ps-2" placeholder="Tìm tên hoặc địa chỉ cửa hàng...">
+                </div>
+            </div>
+
+            <div class="list-group rounded-4 shadow-sm overflow-hidden border-0" id="store-list" style="max-height: 600px; overflow-y: auto;">
                 @foreach (var store in Model)
                 {
-                    <button type="button" class="list-group-item list-group-item-action p-4 border-0 store-item" 
-                            data-map="@store.MapUrl" data-name="@store.Name">
-                        <h5 class="fw-bold mb-1 text-danger">@store.Name</h5>
-                        <p class="mb-1 small"><i class="fas fa-map-marker-alt me-2"></i>@T("Address"): @store.Address</p>
-                        <p class="mb-0 small"><i class="fas fa-phone me-2"></i>@T("Phone"): @store.Phone</p>
+                    <button type="button" class="list-group-item list-group-item-action p-4 border-0 border-bottom store-item" 
+                            data-map="@store.MapUrl" 
+                            data-name="@store.Name.ToLower()" 
+                            data-address="@store.Address.ToLower()">
+                        <div class="d-flex align-items-start">
+                            <div class="store-icon bg-danger text-white rounded-3 p-2 me-3">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark store-name">@store.Name</h5>
+                                <p class="mb-1 text-muted small"><i class="fas fa-map-marker-alt me-2"></i>@store.Address</p>
+                                <p class="mb-0 text-muted small"><i class="fas fa-phone-alt me-2"></i>@store.Phone</p>
+                            </div>
+                        </div>
                     </button>
                 }
             </div>
@@ -34,14 +53,77 @@
 
 @section Scripts {
     <script>
-        $('.store-item').click(function() {
-            var mapUrl = $(this).data('map');
-            $('.store-item').removeClass('active bg-light');
-            $(this).addClass('active bg-light');
-            $('#map-iframe').attr('src', mapUrl);
-        });
+        $(document).ready(function() {
+            // Click to switch map
+            $('.store-item').click(function() {
+                var mapUrl = $(this).data('map');
+                $('.store-item').removeClass('active bg-light');
+                $(this).addClass('active bg-light');
+                $('#map-iframe').attr('src', mapUrl);
 
-        // Set first item active
-        $('.store-item').first().addClass('active bg-light');
+                // Auto scroll to map on mobile
+                if ($(window).width() < 992) {
+                    $('html, body').animate({
+                        scrollTop: $("#map-iframe").offset().top - 100
+                    }, 500);
+                }
+            });
+
+            // Live Search Logic
+            $('#store-search').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                var count = 0;
+
+                $('.store-item').each(function() {
+                    var name = $(this).data('name');
+                    var address = $(this).data('address');
+
+                    if (name.indexOf(value) > -1 || address.indexOf(value) > -1) {
+                        $(this).show();
+                        count++;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+                // Show "No result" message if needed
+                if (count == 0) {
+                    if ($('#no-result').length == 0) {
+                        $('#store-list').append('<div id="no-result" class="p-5 text-center text-muted"><i class="fas fa-search fa-3x mb-3 opacity-25"></i><p>Không tìm thấy cửa hàng nào</p></div>');
+                    }
+                } else {
+                    $('#no-result').remove();
+                }
+            });
+
+            // Set first item active
+            $('.store-item').first().addClass('active bg-light');
+        });
     </script>
+
+    <style>
+        #store-list::-webkit-scrollbar {
+            width: 5px;
+        }
+        #store-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        #store-list::-webkit-scrollbar-thumb {
+            background: #e63946;
+            border-radius: 10px;
+        }
+        .store-item {
+            transition: all 0.2s ease;
+        }
+        .store-item.active {
+            border-left: 4px solid #e63946 !important;
+        }
+        .store-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 }
