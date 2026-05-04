@@ -48,12 +48,12 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Chuẩn bị dữ liệu mẫu (Seed Data) phong phú cho báo cáo.
 - [x] Tổng kết dự án và đẩy bản phát hành cuối cùng lên GitHub.
 
-## 🚀 Giai đoạn 7: Nâng cao Trải nghiệm Khách hàng (Đang thực hiện)
+## ✅ Giai đoạn 7: Nâng cao Trải nghiệm Khách hàng (Hoàn thành)
 - [x] Xây dựng trang Lịch sử đơn hàng (Hoàn thành UI & Logic).
-- [/] Tích hợp hệ thống Đánh giá & Xếp hạng (Đã thêm UI Star Rating, chưa có Backend).
-- [ ] Tối ưu hóa bộ lọc món ăn nâng cao.
+- [x] Tích hợp hệ thống Đánh giá & Xếp hạng (Hoàn thành Backend & UI).
+- [x] Tối ưu hóa bộ lọc món ăn nâng cao (Giá, Đánh giá).
 
-## 📊 Giai đoạn 8: Phân tích Dữ liệu & Báo cáo Thông minh (Đang thực hiện)
-- [x] Tích hợp biểu đồ doanh thu Chart.js (Hoàn thành UI & Dummy Data).
-- [ ] Thống kê sản phẩm bán chạy và xu hướng đặt hàng thực tế.
+## ✅ Giai đoạn 8: Phân tích Dữ liệu & Báo cáo Thông minh (Hoàn thành)
+- [x] Tích hợp biểu đồ doanh thu Chart.js (Hoàn thành UI & Dữ liệu thực tế).
+- [x] Thống kê sản phẩm bán chạy và xu hướng đặt hàng thực tế.
 - [x] Đồng bộ bộ mã nguồn lên GitHub.

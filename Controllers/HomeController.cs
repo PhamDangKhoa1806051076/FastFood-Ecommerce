@@ -25,11 +25,34 @@ public class HomeController : Controller
         return View(products);
     }
 
-    public async Task<IActionResult> GetProductsByCategory(int? categoryId)
+    public async Task<IActionResult> GetProductsByCategory(int? categoryId, decimal? minPrice, decimal? maxPrice, int? minRating)
     {
-        var products = categoryId == null || categoryId == 0
-            ? await _context.Products.Include(p => p.Category).ToListAsync()
-            : await _context.Products.Where(p => p.CategoryId == categoryId).Include(p => p.Category).ToListAsync();
+        var query = _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Reviews)
+            .AsQueryable();
+
+        if (categoryId != null && categoryId > 0)
+        {
+            query = query.Where(p => p.CategoryId == categoryId);
+        }
+
+        if (minPrice != null)
+        {
+            query = query.Where(p => p.Price >= minPrice.Value);
+        }
+
+        if (maxPrice != null)
+        {
+            query = query.Where(p => p.Price <= maxPrice.Value);
+        }
+
+        var products = await query.ToListAsync();
+
+        if (minRating != null && minRating > 0)
+        {
+            products = products.Where(p => (p.Reviews != null && p.Reviews.Any() ? p.Reviews.Average(r => r.Rating) : 0) >= minRating.Value).ToList();
+        }
         
         return PartialView("_ProductList", products);
     }

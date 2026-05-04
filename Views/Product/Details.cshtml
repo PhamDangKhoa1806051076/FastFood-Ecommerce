@@ -1,0 +1,165 @@
+@model FastFoodEcommerce.Models.Product
+@{
+    var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
+    string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
+    ViewData["Title"] = Model.Name;
+    
+    var avgRating = Model.Reviews != null && Model.Reviews.Any() ? Model.Reviews.Average(r => r.Rating) : 0;
+    var reviewCount = Model.Reviews?.Count ?? 0;
+}
+
+<div class="container py-5">
+    <div class="row g-5">
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <div class="product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm">
+                <img src="@Model.ImageUrl" class="w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name">
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-md-6">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-decoration-none text-muted">@T("Home")</a></li>
+                    <li class="breadcrumb-item"><a href="/Home/Index#menu-section" class="text-decoration-none text-muted">@Model.Category?.Name</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
+                </ol>
+            </nav>
+
+            <h1 class="fw-bold display-5 mb-3">@Model.Name</h1>
+            
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="text-warning fs-5">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= Math.Round(avgRating))
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="far fa-star"></i>
+                        }
+                    }
+                </div>
+                <span class="text-muted fw-bold">(@avgRating.ToString("F1"))</span>
+                <span class="text-muted small">| @reviewCount @T("Reviews")</span>
+            </div>
+
+            <h2 class="text-danger fw-bold mb-4">@Model.Price.ToString("N0")đ</h2>
+            
+            <p class="text-muted fs-5 mb-5">@Model.Description</p>
+
+            <div class="d-grid gap-3 d-md-flex">
+                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-danger btn-lg rounded-pill px-5 fw-bold py-3 shadow-sm">
+                    <i class="fas fa-shopping-basket me-2"></i> @T("AddToCart")
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="row mt-5 pt-5">
+        <div class="col-lg-8">
+            <h3 class="fw-bold mb-4 border-start border-danger border-5 ps-3">@T("Reviews")</h3>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <!-- Review Form -->
+            <div class="card border-0 shadow-sm rounded-4 mb-5 bg-light">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">@T("WriteAReview")</h5>
+                    <form asp-action="SubmitReview" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="productId" value="@Model.Id" />
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">@T("Rating")</label>
+                            <div class="rating-input d-flex gap-2 fs-4 text-warning">
+                                <input type="radio" name="rating" value="5" id="star5" class="d-none" checked />
+                                <label for="star5" class="cursor-pointer"><i class="fas fa-star" id="lstar5"></i></label>
+                                <input type="radio" name="rating" value="4" id="star4" class="d-none" />
+                                <label for="star4" class="cursor-pointer"><i class="fas fa-star" id="lstar4"></i></label>
+                                <input type="radio" name="rating" value="3" id="star3" class="d-none" />
+                                <label for="star3" class="cursor-pointer"><i class="fas fa-star" id="lstar3"></i></label>
+                                <input type="radio" name="rating" value="2" id="star2" class="d-none" />
+                                <label for="star2" class="cursor-pointer"><i class="fas fa-star" id="lstar2"></i></label>
+                                <input type="radio" name="rating" value="1" id="star1" class="d-none" />
+                                <label for="star1" class="cursor-pointer"><i class="fas fa-star" id="lstar1"></i></label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">@T("YourComment")</label>
+                            <textarea name="comment" class="form-control rounded-3" rows="3" placeholder="@T("CommentPlaceholder")"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark rounded-pill px-4 fw-bold">@T("SubmitReview")</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review List -->
+            <div class="review-list">
+                @if (Model.Reviews != null && Model.Reviews.Any())
+                {
+                    @foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+                    {
+                        <div class="review-item pb-4 mb-4 border-bottom">
+                            <div class="d-flex justify-content-between mb-2">
+                                <div class="fw-bold">@review.UserName</div>
+                                <div class="text-muted small">@review.CreatedAt.ToString("dd/MM/yyyy HH:mm")</div>
+                            </div>
+                            <div class="text-warning mb-2 small">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="@(i <= review.Rating ? "fas" : "far") fa-star"></i>
+                                }
+                            </div>
+                            <p class="mb-0 text-muted">@review.Comment</p>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <i class="far fa-comment-dots fa-3x text-light mb-3"></i>
+                        <p class="text-muted">@T("NoReviewsYet")</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        .cursor-pointer { cursor: pointer; }
+        .rating-input i:hover, .rating-input i.active {
+            color: #ffc107;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $('.rating-input label').click(function() {
+                var rating = $(this).prev('input').val();
+                $('.rating-input i').removeClass('fas').addClass('far');
+                for(var i=1; i<=rating; i++) {
+                    $('#lstar'+i).removeClass('far').addClass('fas');
+                }
+            });
+        });
+    </script>
+}

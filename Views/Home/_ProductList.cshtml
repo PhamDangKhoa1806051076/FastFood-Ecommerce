@@ -23,17 +23,25 @@
                         <span class="fw-bold text-danger fs-5">@item.Price.ToString("N0")đ</span>
                     </div>
                     <div class="mb-2 text-warning small">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span class="text-muted ms-1">(4.5)</span>
+                        @{
+                            var avgRating = item.Reviews != null && item.Reviews.Any() ? item.Reviews.Average(r => r.Rating) : 0;
+                            var roundedRating = (int)Math.Round(avgRating);
+                        }
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <i class="@(i <= roundedRating ? "fas" : "far") fa-star"></i>
+                        }
+                        <span class="text-muted ms-1">(@avgRating.ToString("F1"))</span>
                     </div>
-                    <p class="product-description text-muted small mb-4">@item.Description</p>
-                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-dark w-100 rounded-pill py-2 fw-bold">
-                        @T("AddToCart")
-                    </a>
+                    <p class="product-description text-muted small mb-3">@item.Description</p>
+                    <div class="d-flex gap-2">
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark w-50 rounded-pill py-2 fw-bold small">
+                            @T("Details")
+                        </a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Id" class="btn btn-danger w-50 rounded-pill py-2 fw-bold small">
+                            @T("AddToCart")
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

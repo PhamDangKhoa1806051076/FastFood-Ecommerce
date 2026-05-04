@@ -58,7 +58,14 @@ namespace FastFoodEcommerce.Helpers
                 ["Support"] = "Hỗ trợ khách hàng",
                 ["NewsPromotion"] = "Tin khuyến mãi",
                 ["Recruitment"] = "Tuyển dụng",
-                ["BirthdayParty"] = "Đặt tiệc sinh nhật"
+                ["BirthdayParty"] = "Đặt tiệc sinh nhật",
+                ["Reviews"] = "Đánh giá",
+                ["WriteAReview"] = "Gửi đánh giá của bạn",
+                ["Rating"] = "Số sao",
+                ["YourComment"] = "Bình luận của bạn",
+                ["CommentPlaceholder"] = "Chia sẻ cảm nhận của bạn về món ăn này...",
+                ["SubmitReview"] = "Gửi đánh giá",
+                ["NoReviewsYet"] = "Chưa có đánh giá nào cho sản phẩm này."
             },
             ["en"] = new()
             {
@@ -112,7 +119,14 @@ namespace FastFoodEcommerce.Helpers
                 ["Support"] = "Customer Support",
                 ["NewsPromotion"] = "Promotion News",
                 ["Recruitment"] = "Recruitment",
-                ["BirthdayParty"] = "Birthday Party"
+                ["BirthdayParty"] = "Birthday Party",
+                ["Reviews"] = "Reviews",
+                ["WriteAReview"] = "Write a Review",
+                ["Rating"] = "Rating",
+                ["YourComment"] = "Your Comment",
+                ["CommentPlaceholder"] = "Share your thoughts about this food...",
+                ["SubmitReview"] = "Submit Review",
+                ["NoReviewsYet"] = "No reviews yet for this product."
             },
             ["ko"] = new()
             {
@@ -166,7 +180,14 @@ namespace FastFoodEcommerce.Helpers
                 ["Support"] = "고객 지원",
                 ["NewsPromotion"] = "프로모션 뉴스",
                 ["Recruitment"] = "채용",
-                ["BirthdayParty"] = "생일 파티"
+                ["BirthdayParty"] = "생일 파티",
+                ["Reviews"] = "리뷰",
+                ["WriteAReview"] = "리뷰 작성",
+                ["Rating"] = "등급",
+                ["YourComment"] = "당신의 의견",
+                ["CommentPlaceholder"] = "이 음식에 대한 당신의 생각을 공유하세요...",
+                ["SubmitReview"] = "리뷰 제출",
+                ["NoReviewsYet"] = "이 제품에 대한 리뷰가 아직 없습니다."
             }
         };
 

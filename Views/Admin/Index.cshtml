@@ -14,36 +14,47 @@
 
     <!-- Stats Cards -->
     <div class="row g-4 mb-5">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-primary text-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-uppercase small fw-bold">Tổng đơn hàng</h6>
-                        <h2 class="fw-bold mb-0">@ViewBag.OrderCount</h2>
+                        <h6 class="text-uppercase small fw-bold">Tổng doanh thu</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.TotalRevenue.ToString("N0")đ</h3>
                     </div>
-                    <i class="fas fa-shopping-cart fa-3x opacity-50"></i>
+                    <i class="fas fa-money-bill-wave fa-2x opacity-50"></i>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-success text-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-uppercase small fw-bold">Sản phẩm hiện có</h6>
-                        <h2 class="fw-bold mb-0">@ViewBag.ProductCount</h2>
+                        <h6 class="text-uppercase small fw-bold">Đơn hàng</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.OrderCount</h3>
                     </div>
-                    <i class="fas fa-hamburger fa-3x opacity-50"></i>
+                    <i class="fas fa-shopping-cart fa-2x opacity-50"></i>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4 bg-info text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-uppercase small fw-bold">Sản phẩm</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.ProductCount</h3>
+                    </div>
+                    <i class="fas fa-hamburger fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-warning text-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-uppercase small fw-bold">Voucher đang chạy</h6>
-                        <h2 class="fw-bold mb-0">@ViewBag.VoucherCount</h2>
+                        <h6 class="text-uppercase small fw-bold">Vouchers</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.VoucherCount</h3>
                     </div>
-                    <i class="fas fa-ticket-alt fa-3x opacity-50"></i>
+                    <i class="fas fa-ticket-alt fa-2x opacity-50"></i>
                 </div>
             </div>
         </div>
@@ -52,7 +63,7 @@
     <div class="row">
         <!-- Quick Actions -->
         <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm rounded-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body p-4">
                     <h5 class="fw-bold mb-4">Thao tác nhanh</h5>
                     <div class="d-grid gap-2">
@@ -66,16 +77,27 @@
                             <i class="fas fa-plus me-2"></i> Thêm sản phẩm mới
                         </a>
                     </div>
+
+                    <h5 class="fw-bold mt-5 mb-4">Sản phẩm bán chạy</h5>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var item in ViewBag.TopProducts)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                @item.Name
+                                <span class="badge bg-danger rounded-pill">@item.Count</span>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Recent Orders -->
+        <!-- Charts & Recent Orders -->
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-4 mb-4">
                 <div class="card-body p-4">
-                    <h5 class="fw-bold mb-4">Thống kê doanh thu (7 ngày qua)</h5>
-                    <canvas id="revenueChart" height="250"></canvas>
+                    <h5 class="fw-bold mb-4">Xu hướng bán hàng (Biểu đồ mẫu)</h5>
+                    <canvas id="revenueChart" height="200"></canvas>
                 </div>
             </div>
 
@@ -90,7 +112,7 @@
                                     <th>Khách hàng</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
-                                    <th>Thao tác</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,7 +124,7 @@
                                         <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
                                         <td class="fw-bold">@order.TotalAmount.ToString("N0")đ</td>
                                         <td>
-                                            <button class="btn btn-sm btn-light rounded-circle"><i class="fas fa-eye"></i></button>
+                                            <span class="badge @(order.Status == "Completed" ? "bg-success" : "bg-warning")">@order.Status</span>
                                         </td>
                                     </tr>
                                 }

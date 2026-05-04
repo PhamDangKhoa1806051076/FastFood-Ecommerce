@@ -28,6 +28,20 @@ namespace FastFoodEcommerce.Controllers
             ViewBag.ProductCount = await _context.Products.CountAsync();
             ViewBag.VoucherCount = await _context.Vouchers.CountAsync();
             
+            // Calculate real total revenue
+            ViewBag.TotalRevenue = await _context.Orders
+                .Where(o => o.Status == "Completed" || o.Status == "Pending") // Include pending for now to show something
+                .SumAsync(o => o.TotalAmount);
+
+            // Fetch best-selling products (top 5)
+            var topProducts = await _context.OrderDetails
+                .GroupBy(od => od.Product!.Name)
+                .Select(g => new { Name = g.Key, Count = g.Sum(od => od.Quantity) })
+                .OrderByDescending(x => x.Count)
+                .Take(5)
+                .ToListAsync();
+            ViewBag.TopProducts = topProducts;
+            
             var recentOrders = await _context.Orders.OrderByDescending(o => o.OrderDate).Take(5).ToListAsync();
             return View(recentOrders);
         }

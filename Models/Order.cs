@@ -26,6 +26,9 @@ namespace FastFoodEcommerce.Models
         // Link to User (Optional for guest)
         public string? UserId { get; set; }
 
+        // Email of the customer who placed the order
+        public string? CustomerEmail { get; set; }
+
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         public decimal TotalAmount { get; set; }

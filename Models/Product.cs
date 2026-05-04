@@ -27,5 +27,7 @@ namespace FastFoodEcommerce.Models
         // Navigation property
         [ForeignKey("CategoryId")]
         public Category? Category { get; set; }
+
+        public ICollection<Review>? Reviews { get; set; }
     }
 }
