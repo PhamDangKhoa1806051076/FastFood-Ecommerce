@@ -1,46 +1,56 @@
-# FastFood Ecommerce - Lập Trình Web
+# FastFood Ecommerce - ASP.NET Core MVC
 
-Dự án Thương mại điện tử FastFood (Bài tập báo cáo chuyên môn môn Lập trình Web).
+Dự án Thương mại điện tử FastFood (Bài tập báo cáo chuyên môn môn Lập trình Web). Đây là một ứng dụng Web hoàn chỉnh được xây dựng với kiến trúc 3 lớp hiện đại, giao diện Premium và đầy đủ các tính năng nghiệp vụ.
 
 ## 1. CÔNG NGHỆ SỬ DỤNG (TECH STACK)
-*   **Kiến trúc**: ASP.NET Core MVC.
-*   **Backend**: C#.
+*   **Framework**: ASP.NET Core 9.0 MVC.
+*   **Backend**: C# / .NET.
 *   **Database**: SQL Server.
-*   **ORM**: Entity Framework Core (Tiếp cận Code-First).
-*   **Frontend**: HTML5, CSS3, JavaScript/TypeScript.
+*   **ORM**: Entity Framework Core (Code-First approach).
+*   **Frontend**: HTML5, CSS3, JavaScript (AJAX, jQuery).
+*   **Aesthetics**: Vanilla CSS (Custom Premium Design), FontAwesome, Google Fonts, Animate.css.
+*   **Analytics**: Chart.js (Real-time data visualization).
 
-## 2. YÊU CẦU NỘI DUNG MÔN HỌC (10 MỤC BẮT BUỘC)
-*   **01.** Thiết kế website với HTML, CSS và JavaScript.
-*   **02.** Tạo ứng dụng web với ASP.NET Core MVC.
-*   **03.** Controller và Action xử lý logic nghiệp vụ.
-*   **04.** View và Layout (`_Layout.cshtml`) để đồng bộ giao diện.
-*   **05.** Model và Entity Framework Core để quản lý Database SQL Server.
-*   **06.** Form và Validation (kiểm tra dữ liệu đầu vào đơn hàng).
-*   **07.** Routing (định tuyến đường dẫn thân thiện).
-*   **08.** Authentication và Authorization (Đăng nhập & Phân quyền Admin/User).
-*   **09.** Dependency Injection (Cấu hình dịch vụ trong `Program.cs`).
-*   **10.** Kiểm thử và triển khai ứng dụng.
+## 2. TÍNH NĂNG NỔI BẬT (KEY FEATURES)
+
+### 🛒 Khách hàng (User Experience)
+*   **Trang chủ Dynamic**: Hiển thị món ăn theo danh mục với hiệu ứng AJAX mượt mà.
+*   **Bộ lọc nâng cao**: Tìm kiếm món ăn theo khoảng giá, mức đánh giá (số sao) và sắp xếp thông minh.
+*   **Giỏ hàng & Thanh toán**: Xử lý Session, tích hợp hệ thống **Voucher** giảm giá theo %.
+*   **Hệ thống Đánh giá**: Xem đánh giá trung bình và gửi nhận xét cá nhân cho từng món ăn.
+*   **Lịch sử đơn hàng**: Theo dõi các đơn hàng đã đặt kèm trạng thái chi tiết.
+*   **Đa ngôn ngữ**: Hỗ trợ toàn diện Tiếng Việt, Tiếng Anh, Tiếng Hàn.
+*   **Hệ thống cửa hàng**: Tích hợp Google Maps để tìm kiếm chi nhánh gần nhất.
+
+### 🛡️ Quản trị viên (Admin Dashboard)
+*   **Dashboard Thông minh**: Thống kê doanh thu thực tế, số lượng đơn hàng, sản phẩm và Voucher.
+*   **Biểu đồ Doanh thu**: Trực quan hóa dữ liệu bằng Chart.js (Sản phẩm bán chạy & Xu hướng).
+*   **Quản lý CRUD**: Quản lý danh mục, sản phẩm, Voucher và hệ thống cửa hàng.
+*   **Quản lý đơn hàng**: Theo dõi và cập nhật trạng thái đơn hàng của khách hàng.
 
 ## 3. CẤU TRÚC THƯ MỤC (PROJECT STRUCTURE)
-Cấu trúc dự án theo chuẩn ASP.NET Core MVC (Đơn giản, gọn gàng và chuyên nghiệp):
-*   `/Models`: Chứa các thực thể dữ liệu (`Product`, `Category`, `Order`, `OrderDetail`).
-*   `/Data`: Chứa `ApplicationDbContext` để kết nối SQL Server qua EF Core.
-*   `/Controllers`: Chứa các bộ điều khiển logic (`Home`, `Cart`, `Admin`).
-*   `/Views`: Chứa giao diện người dùng (Front-end) và trang quản trị (Admin).
-*   `/wwwroot`: Chứa tài nguyên tĩnh (`Images`, `CSS`, `JS`).
+*   `/Models`: Các thực thể dữ liệu (`Product`, `Review`, `Voucher`, `Order`, etc.).
+*   `/Data`: `ApplicationDbContext` và `DbInitializer` (Nạp dữ liệu mẫu).
+*   `/Controllers`: Điều hướng logic nghiệp vụ (`Home`, `Cart`, `Admin`, `Product`, etc.).
+*   `/Views`: Giao diện người dùng và trang quản trị Dashboard.
+*   `/Helpers`: Các tiện ích mở rộng (Session, Đa ngôn ngữ).
+*   `/wwwroot`: Tài nguyên tĩnh (CSS, JS, Hình ảnh).
 
-## 4. CÁC TÍNH NĂNG CHÍNH CỦA WEB BÁN THỨC ĂN NHANH
-*   **Khách hàng (User)**:
-    *   Xem danh mục món ăn, tìm kiếm.
-    *   Quản lý Giỏ hàng (sử dụng Session/Cookie).
-    *   Đặt hàng và theo dõi tình trạng đơn hàng.
-*   **Quản trị viên (Admin)**:
-    *   Dashboard thống kê cơ bản.
-    *   CRUD món ăn (Thêm/Sửa/Xóa sản phẩm, danh mục).
-    *   Quản lý trạng thái các đơn hàng.
+## 4. HƯỚNG DẪN CÀI ĐẶT (SETUP)
+1.  **Clone dự án**: `git clone [URL_GITHUB]`
+2.  **Cấu hình Database**: Cập nhật Connection String trong `appsettings.json`.
+3.  **Migration**: 
+    ```bash
+    dotnet ef database update
+    ```
+4.  **Chạy ứng dụng**: Nhấn `F5` hoặc `dotnet run`. Hệ thống sẽ tự động nạp dữ liệu mẫu (Seed Data) trong lần chạy đầu tiên.
 
-## 5. LỘ TRÌNH THỰC THI (ROADMAP)
-*   **Giai đoạn 1**: Thiết kế Model và cấu hình Database SQL Server bằng EF Core.
-*   **Giai đoạn 2**: Xây dựng giao diện Layout và trang danh sách món ăn (Frontend).
-*   **Giai đoạn 3**: Xử lý logic giỏ hàng và đặt hàng (Backend).
-*   **Giai đoạn 4**: Tích hợp bảo mật, phân quyền Admin và kiểm thử toàn bộ hệ thống.
+## 5. LỘ TRÌNH PHÁT TRIỂN (ROADMAP)
+*   ✅ **Giai đoạn 1-4**: Khởi tạo, Giao diện, Giỏ hàng & Bảo mật.
+*   ✅ **Giai đoạn 5**: Voucher, Store Locator & Đa ngôn ngữ.
+*   ✅ **Giai đoạn 6-7**: Lịch sử đơn hàng & Hệ thống Đánh giá (Rating).
+*   ✅ **Giai đoạn 8**: Dashboard Admin & Biểu đồ Chart.js.
+*   ✅ **Giai đoạn 9**: Hoàn thiện Bộ lọc nâng cao & Tối ưu hóa UI/UX.
+
+---
+*Dự án được thực hiện bởi Antigravity AI Assistant.*
