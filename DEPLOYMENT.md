@@ -15,13 +15,15 @@ Tài liệu này hướng dẫn cách đưa ứng dụng **FastFood Ecommerce** 
    dotnet ef database update --environment Production
    ```
 
-## 3. Thiết lập CI/CD (GitHub Actions)
-Ứng dụng đã được tích hợp sẵn file cấu hình tại `.github/workflows/main.yml`.
-1. Truy cập vào Repository trên GitHub.
-2. Vào mục **Settings > Secrets and variables > Actions**.
-3. Thêm một Secret mới tên là `AZUREAPPSERVICE_PUBLISHPROFILE`.
-4. Dán nội dung **Publish Profile** (tải về từ Azure App Service) vào đây.
-5. Mỗi khi bạn `push` code lên nhánh `main`, hệ thống sẽ tự động Build, Test và Deploy lên Azure.
+## 3. Triển khai thủ công (Manual Deployment)
+Nếu bạn không muốn sử dụng CI/CD tự động, bạn có thể triển khai thủ công qua các bước sau:
+1. Mở terminal tại thư mục gốc của dự án.
+2. Chạy lệnh Build và đóng gói ứng dụng:
+   ```bash
+   dotnet publish -c Release -o ./publish
+   ```
+3. Sau khi chạy lệnh trên, toàn bộ code đã được biên dịch sẽ nằm trong thư mục `./publish`.
+4. Bạn chỉ cần nén (Zip) thư mục này lại và tải lên host (Azure App Service, VPS, v.v.) qua giao diện web hoặc FTP.
 
 ## 4. Cấu hình Bảo mật & HTTPS
 * **SSL/TLS:** Azure App Service tự động cung cấp HTTPS cho domain `*.azurewebsites.net`.

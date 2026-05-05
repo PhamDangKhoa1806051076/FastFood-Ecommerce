@@ -121,7 +121,6 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 
 ## ✅ Giai đoạn 15: Triển khai thực tế (Production Deployment)
 > **Mục tiêu:** Đưa ứng dụng lên môi trường thật để người dùng bên ngoài có thể truy cập.
-- [x] Thiết lập **CI/CD tự động** qua GitHub Actions — đã tạo file `main.yml` để tự deploy khi push lên main.
 - [x] Viết **Tài liệu hướng dẫn triển khai & vận hành** đầy đủ (`DEPLOYMENT.md`).
 - [x] Cấu hình biến môi trường bảo mật & file `appsettings.Production.json`.
 - [ ] Đăng ký dịch vụ lưu trữ & SQL Server Production (Người dùng thực hiện theo tài liệu).
