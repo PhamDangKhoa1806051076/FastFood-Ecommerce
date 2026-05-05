@@ -98,16 +98,16 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Gửi **thông báo nội bộ** (In-App Notification) khi đạt hạng mới.
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 🔲 Giai đoạn 13: Tối ưu hóa Hiệu suất & SEO
+## ✅ Giai đoạn 13: Tối ưu hóa Hiệu suất & SEO
 > **Mục tiêu:** Đảm bảo ứng dụng nhanh, nhẹ và thân thiện với công cụ tìm kiếm như Google.
-- [ ] Tối ưu hóa ảnh sản phẩm: nén ảnh, hỗ trợ định dạng **WebP**, thêm thuộc tính `loading="lazy"`.
-- [ ] Cấu hình **Response Caching** và **Output Caching** cho các trang tĩnh nhiều lượt xem.
-- [ ] Thêm đầy đủ **Meta Tags SEO** (Title, Description, OG Image) cho từng trang sản phẩm.
-- [ ] Tạo file **`sitemap.xml`** tự động liệt kê toàn bộ URL sản phẩm để Google lập chỉ mục.
-- [ ] Thêm **Structured Data (Schema.org)** dạng JSON-LD cho sản phẩm (giá, đánh giá, tình trạng).
-- [ ] Tối ưu hóa **tốc độ tải trang** (Bundle & Minify CSS/JS với `bundleconfig.json`).
-- [ ] Kiểm tra và sửa **Mobile Responsiveness** trên các kích thước màn hình phổ biến.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+- [x] Tối ưu hóa ảnh sản phẩm: nén ảnh, hỗ trợ định dạng **WebP**, thêm thuộc tính `loading="lazy"`.
+- [x] Cấu hình **Response Caching** và **Output Caching** cho các trang tĩnh nhiều lượt xem.
+- [x] Thêm đầy đủ **Meta Tags SEO** (Title, Description, OG Image) cho từng trang sản phẩm.
+- [x] Tạo file **`sitemap.xml`** tự động liệt kê toàn bộ URL sản phẩm để Google lập chỉ mục.
+- [x] Thêm **Structured Data (Schema.org)** dạng JSON-LD cho sản phẩm (giá, đánh giá, tình trạng).
+- [x] Tối ưu hóa **tốc độ tải trang** (Bundle & Minify CSS/JS với `bundleconfig.json`).
+- [x] Kiểm tra và sửa **Mobile Responsiveness** trên các kích thước màn hình phổ biến.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
 ## 🔲 Giai đoạn 14: Quản lý Nâng cao cho Admin & Vận hành
 > **Mục tiêu:** Nâng cấp khu vực Admin lên ngang tầm các phần mềm quản lý bán hàng chuyên nghiệp.

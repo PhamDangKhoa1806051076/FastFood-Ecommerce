@@ -25,6 +25,7 @@ public class HomeController : Controller
         return View(products);
     }
 
+    [ResponseCache(Duration = 60, VaryByQueryKeys = new[] { "*" })]
     public async Task<IActionResult> GetProductsByCategory(int? categoryId, decimal? minPrice, decimal? maxPrice, int? minRating, string sort = "newest")
     {
         var query = _context.Products
@@ -73,6 +74,41 @@ public class HomeController : Controller
             new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
         );
         return Redirect(Request.Headers["Referer"].ToString());
+    }
+
+    [Route("sitemap.xml")]
+    [ResponseCache(Duration = 86400, Location = ResponseCacheLocation.Any)]
+    public async Task<IActionResult> Sitemap()
+    {
+        var products = await _context.Products.ToListAsync();
+        var domain = $"{Request.Scheme}://{Request.Host}";
+
+        var xml = new System.Text.StringBuilder();
+        xml.AppendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        xml.AppendLine("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+
+        // Home Page
+        xml.AppendLine("  <url>");
+        xml.AppendLine($"    <loc>{domain}/</loc>");
+        xml.AppendLine($"    <lastmod>{DateTime.UtcNow.ToString("yyyy-MM-dd")}</lastmod>");
+        xml.AppendLine("    <changefreq>daily</changefreq>");
+        xml.AppendLine("    <priority>1.0</priority>");
+        xml.AppendLine("  </url>");
+
+        // Products
+        foreach (var product in products)
+        {
+            xml.AppendLine("  <url>");
+            xml.AppendLine($"    <loc>{domain}/Product/Details/{product.Id}</loc>");
+            xml.AppendLine($"    <lastmod>{DateTime.UtcNow.ToString("yyyy-MM-dd")}</lastmod>");
+            xml.AppendLine("    <changefreq>weekly</changefreq>");
+            xml.AppendLine("    <priority>0.8</priority>");
+            xml.AppendLine("  </url>");
+        }
+
+        xml.AppendLine("</urlset>");
+
+        return Content(xml.ToString(), "application/xml", System.Text.Encoding.UTF8);
     }
 
     public IActionResult Privacy()
