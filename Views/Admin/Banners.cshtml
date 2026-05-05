@@ -1,0 +1,47 @@
+@model IEnumerable<FastFoodEcommerce.Models.Banner>
+@{
+    ViewData["Title"] = "Quản lý Banner";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold text-uppercase border-start border-danger border-5 ps-3">Quản lý Banner</h1>
+            <p class="text-muted">Cấu hình các chương trình khuyến mãi hiển thị ở trang chủ.</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a asp-action="Index" class="btn btn-outline-dark rounded-pill px-4">Dashboard</a>
+            <a asp-action="CreateBanner" class="btn btn-danger rounded-pill px-4">Thêm Banner mới</a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var banner in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                    <img src="@banner.ImageUrl" class="card-img-top" style="height: 180px; object-fit: cover;" alt="@banner.Title">
+                    <div class="card-body p-4">
+                        <h6 class="fw-bold mb-1">@banner.Title</h6>
+                        <p class="text-muted small mb-3">@banner.SubTitle</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge @(banner.IsActive ? "bg-success" : "bg-secondary")">
+                                @(banner.IsActive ? "Đang hiện" : "Đang ẩn")
+                            </span>
+                            <span class="text-muted small">Thứ tự: @banner.DisplayOrder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+        @if (!Model.Any())
+        {
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-images fa-4x text-light mb-3"></i>
+                <p class="text-muted">Chưa có banner nào. Hãy tạo cái đầu tiên!</p>
+            </div>
+        }
+    </div>
+</div>

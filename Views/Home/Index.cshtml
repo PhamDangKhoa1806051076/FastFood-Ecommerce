@@ -6,24 +6,65 @@
     string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
-<!-- Hero Section (Dàn trải toàn màn hình) -->
-<section class="hero-section text-center py-5 mb-0" style="background: #f8f9fa;">
-    <div class="container-fluid px-5">
-        <div class="row align-items-center">
-            <div class="col-lg-6 text-start">
-                <h1 class="display-2 fw-bold text-dark mb-4 animate__animated animate__fadeInLeft">@T("Slogan").Split('-')[0], <br><span class="text-danger">@T("Slogan").Split('-')[1]!</span></h1>
-                <p class="lead text-muted mb-5 fs-4">@T("Slogan")</p>
-                <div class="d-flex gap-3">
-                    <a href="#menu-section" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">@T("OrderNow")</a>
-                    <a href="#" class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold py-3">@T("FindStore")</a>
+<!-- Dynamic Banner Carousel -->
+@if (ViewBag.Banners != null && ((IEnumerable<FastFoodEcommerce.Models.Banner>)ViewBag.Banners).Any())
+{
+    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @{ var bi = 0; }
+            @foreach (var banner in ViewBag.Banners)
+            {
+                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="@bi" class="@(bi == 0 ? "active" : "")"></button>
+                bi++;
+            }
+        </div>
+        <div class="carousel-inner">
+            @{ var first = true; }
+            @foreach (var banner in ViewBag.Banners)
+            {
+                <div class="carousel-item @(first ? "active" : "")">
+                    <img src="@banner.ImageUrl" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="@banner.Title">
+                    <div class="carousel-caption d-none d-md-block text-start bg-dark bg-opacity-25 p-4 rounded-4" style="bottom: 10%; left: 10%;">
+                        <h2 class="display-4 fw-bold">@banner.Title</h2>
+                        <p class="fs-4">@banner.SubTitle</p>
+                        @if (!string.IsNullOrEmpty(banner.LinkUrl))
+                        {
+                            <a href="@banner.LinkUrl" class="btn btn-danger btn-lg rounded-pill px-5">Xem ngay</a>
+                        }
+                    </div>
+                </div>
+                first = false;
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+}
+else
+{
+    <!-- Default Hero Section -->
+    <section class="hero-section text-center py-5 mb-0" style="background: #f8f9fa;">
+        <div class="container-fluid px-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 text-start">
+                    <h1 class="display-2 fw-bold text-dark mb-4 animate__animated animate__fadeInLeft">@T("Slogan").Split('-')[0], <br><span class="text-danger">@T("Slogan").Split('-')[1]!</span></h1>
+                    <p class="lead text-muted mb-5 fs-4">@T("Slogan")</p>
+                    <div class="d-flex gap-3">
+                        <a href="#menu-section" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">@T("OrderNow")</a>
+                        <a href="#" class="btn btn-outline-dark btn-lg px-5 rounded-pill fw-bold py-3">@T("FindStore")</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200" class="img-fluid rounded-5 shadow-lg" alt="Fast Food Hero">
                 </div>
             </div>
-            <div class="col-lg-6 animate__animated animate__fadeInRight">
-                <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200" class="img-fluid rounded-5 shadow-lg" alt="Fast Food Hero">
-            </div>
         </div>
-    </div>
-</section>
+    </section>
+}
 
 <!-- Menu Category Tabs (KFC Style) -->
 <div id="menu-section" class="bg-white sticky-top shadow-sm py-2" style="top: 85px; z-index: 1020;">

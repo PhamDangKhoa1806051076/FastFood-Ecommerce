@@ -1,0 +1,52 @@
+@model FastFoodEcommerce.Models.Banner
+@{
+    ViewData["Title"] = "Thêm Banner";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold mb-4">Thêm Banner mới</h2>
+                    <form asp-action="CreateBanner" method="post">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">Tiêu đề</label>
+                            <input asp-for="Title" class="form-control rounded-3" placeholder="Ví dụ: Giảm giá 50%">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">Mô tả phụ</label>
+                            <input asp-for="SubTitle" class="form-control rounded-3" placeholder="Ví dụ: Áp dụng cho combo gà">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">Link ảnh (URL)</label>
+                            <input asp-for="ImageUrl" class="form-control rounded-3" placeholder="https://images.unsplash.com/..." required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small text-uppercase">Link đích khi click</label>
+                            <input asp-for="LinkUrl" class="form-control rounded-3" placeholder="/Home/Index#menu">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold small text-uppercase">Thứ tự hiển thị</label>
+                                <input asp-for="DisplayOrder" type="number" class="form-control rounded-3" value="0">
+                            </div>
+                            <div class="col-md-6 mb-3 d-flex align-items-end pb-2">
+                                <div class="form-check form-switch">
+                                    <input asp-for="IsActive" class="form-check-input" type="checkbox" checked>
+                                    <label class="form-check-label fw-bold small text-uppercase">Hiển thị ngay</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-danger py-3 rounded-pill fw-bold">Lưu Banner</button>
+                            <a asp-action="Banners" class="btn btn-link text-dark text-decoration-none text-center small">Hủy và quay lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

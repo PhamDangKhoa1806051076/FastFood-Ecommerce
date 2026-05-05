@@ -109,13 +109,13 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Kiểm tra và sửa **Mobile Responsiveness** trên các kích thước màn hình phổ biến.
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 🔲 Giai đoạn 14: Quản lý Nâng cao cho Admin & Vận hành
+## ✅ Giai đoạn 14: Quản lý Nâng cao cho Admin & Vận hành
 > **Mục tiêu:** Nâng cấp khu vực Admin lên ngang tầm các phần mềm quản lý bán hàng chuyên nghiệp.
-- [ ] Thêm tính năng **Quản lý Kho hàng** (Nhập hàng, Xuất hàng, Cảnh báo sắp hết).
-- [ ] Xây dựng **Bảng Dashboard thời gian thực** — tổng đơn hàng hôm nay, doanh thu hôm nay, đơn đang chờ.
-- [ ] Thêm tính năng **Xuất báo cáo ra file Excel** (doanh thu, đơn hàng, sản phẩm bán chạy).
-- [ ] Xây dựng **Quản lý Banner & Khuyến mãi** — Admin tự tạo/ẩn/hiện banner trang chủ.
-- [ ] Thêm **Hệ thống Thông báo đẩy (Push Notification)** cho Admin khi có đơn hàng mới.
+- [x] Thêm tính năng **Quản lý Kho hàng** (Cập nhật tồn kho nhanh, cảnh báo sắp hết).
+- [x] Xây dựng **Bảng Dashboard thời gian thực** — Tổng doanh thu, doanh thu hôm nay, biểu đồ xu hướng 7 ngày.
+- [x] Thêm tính năng **Xuất báo cáo ra file Excel** (Sử dụng ClosedXML để xuất dữ liệu đơn hàng).
+- [x] Xây dựng **Quản lý Banner & Khuyến mãi** — Admin có thể tạo và quản lý slider trang chủ.
+- [x] Thêm **Hệ thống Thông báo đẩy (Push Notification)** — Gửi thông báo nội bộ cho Admin khi có đơn hàng mới.
 - [ ] Tạo **Nhật ký hoạt động Admin (Audit Log)** — ghi lại ai sửa gì, lúc mấy giờ.
 - [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
 

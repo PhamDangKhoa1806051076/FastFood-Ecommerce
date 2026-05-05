@@ -185,6 +185,16 @@ namespace FastFoodEcommerce.Controllers
                     }
                 }
 
+                // Add notification for Admin
+                _context.Notifications.Add(new Notification
+                {
+                    UserId = "Admin", // Special ID for Admin notifications
+                    Title = "Đơn hàng mới! 🛒",
+                    Message = $"Đơn hàng #{order.Id} vừa được đặt bởi {order.CustomerName}. Tổng cộng: {order.TotalAmount:N0}đ",
+                    IsRead = false
+                });
+                await _context.SaveChangesAsync();
+
                 // Clear cart and voucher
                 HttpContext.Session.Remove(CART_KEY);
                 HttpContext.Session.Remove("CartDiscount");

@@ -221,3 +221,11 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\bundleconfig.json
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\8jpv3ukhnl-mux6zp3sza.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\sv3u5ur1uc-5ipweew5fc.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ClosedXML.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ClosedXML.Parser.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ExcelNumberFormat.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\RBush.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\SixLabors.Fonts.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\System.IO.Packaging.dll

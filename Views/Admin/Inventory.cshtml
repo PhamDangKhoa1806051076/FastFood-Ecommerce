@@ -1,0 +1,104 @@
+@model IEnumerable<FastFoodEcommerce.Models.Product>
+@{
+    ViewData["Title"] = "Quản lý Kho hàng";
+    Layout = "_Layout";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold text-uppercase border-start border-danger border-5 ps-3">Quản lý Kho hàng</h1>
+            <p class="text-muted">Theo dõi số lượng tồn kho và cập nhật nhanh.</p>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-dark rounded-pill px-4">Quay lại Dashboard</a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Danh mục</th>
+                            <th>Tồn kho</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.ImageUrl" class="rounded-3" style="width: 50px; height: 50px; object-fit: cover;" alt="@item.Name">
+                                </td>
+                                <td class="fw-bold">@item.Name</td>
+                                <td>@item.Category?.Name</td>
+                                <td>
+                                    <span id="stock-@item.Id" class="badge @(item.StockQuantity < 10 ? "bg-danger" : "bg-success") fs-6">
+                                        @item.StockQuantity
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (item.StockQuantity == 0)
+                                    {
+                                        <span class="text-danger small fw-bold">Hết hàng</span>
+                                    }
+                                    else if (item.StockQuantity < 10)
+                                    {
+                                        <span class="text-warning small fw-bold">Sắp hết</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success small fw-bold">Còn hàng</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="number" id="input-@item.Id" class="form-control" value="10" min="1">
+                                        <button class="btn btn-danger btn-update-stock" data-id="@item.Id">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.btn-update-stock').click(function() {
+                const productId = $(this).data('id');
+                const quantity = $('#input-' + productId).val();
+                const btn = $(this);
+                
+                btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span>');
+                
+                $.post('/Admin/UpdateStock', { productId: productId, quantity: quantity }, function(res) {
+                    if (res.success) {
+                        $('#stock-' + productId).text(res.newStock);
+                        if (res.newStock < 10) {
+                            $('#stock-' + productId).removeClass('bg-success').addClass('bg-danger');
+                        } else {
+                            $('#stock-' + productId).removeClass('bg-danger').addClass('bg-success');
+                        }
+                        // Refresh status text
+                        location.reload(); // Simple way to refresh status badges
+                    } else {
+                        alert(res.message);
+                    }
+                }).always(function() {
+                    btn.prop('disabled', false).html('<i class="fas fa-plus"></i>');
+                });
+            });
+        });
+    </script>
+}
