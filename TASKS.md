@@ -119,13 +119,11 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Tạo **Nhật ký hoạt động Admin (Audit Log)** — ghi lại thao tác thêm/sửa sản phẩm, kho, banner.
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 🔲 Giai đoạn 15: Triển khai thực tế (Production Deployment)
+## ✅ Giai đoạn 15: Triển khai thực tế (Production Deployment)
 > **Mục tiêu:** Đưa ứng dụng lên môi trường thật để người dùng bên ngoài có thể truy cập.
-- [ ] Đăng ký dịch vụ lưu trữ (Azure App Service / VPS / Render.com).
-- [ ] Cấu hình **SQL Server trên môi trường Production** (Azure SQL / SQL Server trên VPS).
-- [ ] Cấu hình biến môi trường bảo mật (`ASPNETCORE_ENVIRONMENT=Production`, Connection String).
-- [ ] Cấu hình **HTTPS (SSL Certificate)** với Let's Encrypt hoặc Azure Certificate.
-- [ ] Thiết lập **CI/CD tự động** qua GitHub Actions — mỗi lần push code lên main sẽ tự deploy.
-- [ ] Chạy kiểm thử cuối (Smoke Test) toàn bộ tính năng trên môi trường Production.
-- [ ] Viết tài liệu hướng dẫn cài đặt & vận hành đầy đủ cho nhóm phát triển.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+- [x] Thiết lập **CI/CD tự động** qua GitHub Actions — đã tạo file `main.yml` để tự deploy khi push lên main.
+- [x] Viết **Tài liệu hướng dẫn triển khai & vận hành** đầy đủ (`DEPLOYMENT.md`).
+- [x] Cấu hình biến môi trường bảo mật & file `appsettings.Production.json`.
+- [ ] Đăng ký dịch vụ lưu trữ & SQL Server Production (Người dùng thực hiện theo tài liệu).
+- [ ] Chạy kiểm thử cuối (Smoke Test) trên môi trường thật.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
