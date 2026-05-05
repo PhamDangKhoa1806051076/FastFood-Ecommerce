@@ -15,23 +15,37 @@
     <meta property="og:image" content="@Model.ImageUrl" />
     <meta property="og:type" content="product" />
     <script type="application/ld+json">
-    @Html.Raw($@"
-    {{
-      ""@context"": ""https://schema.org/"",
-      ""@type"": ""Product"",
-      ""name"": ""{Model.Name}"",
-      ""image"": [""{Model.ImageUrl}""],
-      ""description"": ""{Model.Description}"",
-      ""sku"": ""FFS-{Model.Id}"",
-      ""offers"": {{
-        ""@type"": ""Offer"",
-        ""priceCurrency"": ""VND"",
-        ""price"": ""{Model.Price}"",
-        ""availability"": ""https://schema.org/InStock""
-      }}
-      {(reviewCount > 0 ? $@", ""aggregateRating"": {{ ""@type"": ""AggregateRating"", ""ratingValue"": ""{avgRating.ToString("F1")}"", ""reviewCount"": ""{reviewCount}"" }}" : "")}
-    }}
-    ")
+        @{
+            var schema = new System.Collections.Generic.Dictionary<string, object>
+            {
+                ["@context"] = "https://schema.org/",
+                ["@type"] = "Product",
+                ["name"] = Model.Name ?? "",
+                ["image"] = new[] { Model.ImageUrl ?? "" },
+                ["description"] = Model.Description ?? "",
+                ["sku"] = $"FFS-{Model.Id}",
+                ["offers"] = new System.Collections.Generic.Dictionary<string, object>
+                {
+                    ["@type"] = "Offer",
+                    ["priceCurrency"] = "VND",
+                    ["price"] = Model.Price,
+                    ["availability"] = "https://schema.org/InStock"
+                }
+            };
+
+            if (reviewCount > 0)
+            {
+                schema["aggregateRating"] = new System.Collections.Generic.Dictionary<string, object>
+                {
+                    ["@type"] = "AggregateRating",
+                    ["ratingValue"] = avgRating.ToString("F1"),
+                    ["reviewCount"] = reviewCount
+                };
+            }
+            
+            var jsonLd = System.Text.Json.JsonSerializer.Serialize(schema);
+        }
+        @Html.Raw(jsonLd)
     </script>
 }
 
