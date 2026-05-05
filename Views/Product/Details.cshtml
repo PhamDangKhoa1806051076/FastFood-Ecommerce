@@ -56,7 +56,10 @@
             @if (!string.IsNullOrEmpty(Model.AdditionalImages))
             {
                 var images = Model.AdditionalImages.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
-                images.Insert(0, Model.ImageUrl);
+                if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    images.Insert(0, Model.ImageUrl);
+                }
 
                 <div id="productCarousel" class="carousel slide product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm" data-bs-ride="carousel">
                     <div class="carousel-inner">

@@ -12,3 +12,6 @@ appsettings.Development.json
 
 # Tooling
 .DS_Store
+.gemini/
+Bản Sao Lưu/
+publish/

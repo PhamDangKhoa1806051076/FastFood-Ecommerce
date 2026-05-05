@@ -16,4 +16,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Bản Sao Lưu\**" />
+    <Content Remove="Bản Sao Lưu\**" />
+    <EmbeddedResource Remove="Bản Sao Lưu\**" />
+    <None Remove="Bản Sao Lưu\**" />
+  </ItemGroup>
+
 </Project>

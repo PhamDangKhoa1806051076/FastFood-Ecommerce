@@ -217,8 +217,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\ref\FastFoodEcommerce
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\bundleconfig.json
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\8jpv3ukhnl-mux6zp3sza.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\sv3u5ur1uc-5ipweew5fc.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ClosedXML.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ClosedXML.Parser.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
@@ -230,3 +228,5 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\System.IO.Packaging.d
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\appsettings.Production.json
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-lws1dfd8ue.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3xpstqimjb-q8i2kmhrat.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\8jpv3ukhnl-alrvhpdde3.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\sv3u5ur1uc-6gicfrpbcu.gz
