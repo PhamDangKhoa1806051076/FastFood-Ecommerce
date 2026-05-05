@@ -116,8 +116,8 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Thêm tính năng **Xuất báo cáo ra file Excel** (Sử dụng ClosedXML để xuất dữ liệu đơn hàng).
 - [x] Xây dựng **Quản lý Banner & Khuyến mãi** — Admin có thể tạo và quản lý slider trang chủ.
 - [x] Thêm **Hệ thống Thông báo đẩy (Push Notification)** — Gửi thông báo nội bộ cho Admin khi có đơn hàng mới.
-- [ ] Tạo **Nhật ký hoạt động Admin (Audit Log)** — ghi lại ai sửa gì, lúc mấy giờ.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+- [x] Tạo **Nhật ký hoạt động Admin (Audit Log)** — ghi lại thao tác thêm/sửa sản phẩm, kho, banner.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
 ## 🔲 Giai đoạn 15: Triển khai thực tế (Production Deployment)
 > **Mục tiêu:** Đưa ứng dụng lên môi trường thật để người dùng bên ngoài có thể truy cập.

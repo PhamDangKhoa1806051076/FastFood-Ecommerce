@@ -22,6 +22,21 @@ namespace FastFoodEcommerce.Controllers
             return HttpContext.Session.GetString("UserRole") == "Admin";
         }
 
+        private async Task LogAction(string action, string details = "")
+        {
+            var adminEmail = HttpContext.Session.GetString("UserEmail") ?? "Admin";
+            var log = new AuditLog
+            {
+                AdminEmail = adminEmail,
+                Action = action,
+                Details = details,
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                Timestamp = DateTime.Now
+            };
+            _context.AuditLogs.Add(log);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IActionResult> Index()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
@@ -93,6 +108,7 @@ namespace FastFoodEcommerce.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                await LogAction("Thêm sản phẩm", $"Tên: {product.Name}, Giá: {product.Price}, Kho: {product.StockQuantity}");
                 return RedirectToAction(nameof(Products));
             }
             ViewBag.Categories = _context.Categories.ToList();
@@ -123,8 +139,10 @@ namespace FastFoodEcommerce.Controllers
             var product = await _context.Products.FindAsync(productId);
             if (product != null)
             {
+                int oldStock = product.StockQuantity;
                 product.StockQuantity += quantity;
                 await _context.SaveChangesAsync();
+                await LogAction("Cập nhật kho", $"Sản phẩm: {product.Name}, Cũ: {oldStock}, Mới: {product.StockQuantity}");
                 return Json(new { success = true, newStock = product.StockQuantity });
             }
             return Json(new { success = false, message = "Product not found" });
@@ -152,6 +170,7 @@ namespace FastFoodEcommerce.Controllers
             {
                 _context.Banners.Add(banner);
                 await _context.SaveChangesAsync();
+                await LogAction("Thêm Banner", $"Tiêu đề: {banner.Title}, Link: {banner.LinkUrl}");
                 return RedirectToAction(nameof(Banners));
             }
             return View(banner);
@@ -189,7 +208,7 @@ namespace FastFoodEcommerce.Controllers
                     worksheet.Cell(currentRow, 3).Value = order.OrderDate.ToString("dd/MM/yyyy HH:mm");
                     worksheet.Cell(currentRow, 4).Value = order.TotalAmount;
                     worksheet.Cell(currentRow, 5).Value = order.Status;
-                    worksheet.Cell(currentRow, 6).Value = order.ShippingAddress;
+                    worksheet.Cell(currentRow, 6).Value = order.Address;
                 }
 
                 worksheet.Columns().AdjustToContents();
@@ -198,9 +217,17 @@ namespace FastFoodEcommerce.Controllers
                 {
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();
+                    await LogAction("Xuất báo cáo Excel", $"Tài liệu: SalesReport_{DateTime.Now:yyyyMMddHHmm}.xlsx");
                     return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"SalesReport_{DateTime.Now:yyyyMMddHHmm}.xlsx");
                 }
             }
+        }
+
+        public async Task<IActionResult> AuditLogs()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            var logs = await _context.AuditLogs.OrderByDescending(l => l.Timestamp).Take(100).ToListAsync();
+            return View(logs);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace FastFoodEcommerce.Data
         public DbSet<LoyaltyPoint> LoyaltyPoints { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Banner> Banners { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
