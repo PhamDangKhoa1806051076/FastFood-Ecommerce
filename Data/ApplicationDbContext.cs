@@ -16,6 +16,7 @@ namespace FastFoodEcommerce.Data
         public DbSet<Voucher> Vouchers { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<WishlistItem> WishlistItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

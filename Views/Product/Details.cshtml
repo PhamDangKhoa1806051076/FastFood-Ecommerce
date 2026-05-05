@@ -10,11 +10,38 @@
 
 <div class="container py-5">
     <div class="row g-5">
-        <!-- Product Image -->
+        <!-- Product Image Gallery -->
         <div class="col-md-6">
-            <div class="product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm">
-                <img src="@Model.ImageUrl" class="w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name">
-            </div>
+            @if (!string.IsNullOrEmpty(Model.AdditionalImages))
+            {
+                var images = Model.AdditionalImages.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList();
+                images.Insert(0, Model.ImageUrl);
+
+                <div id="productCarousel" class="carousel slide product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < images.Count; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@images[i]" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name">
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm">
+                    <img src="@Model.ImageUrl" class="w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name">
+                </div>
+            }
         </div>
 
         <!-- Product Info -->
@@ -49,15 +76,67 @@
 
             <h2 class="text-danger fw-bold mb-4">@Model.Price.ToString("N0")đ</h2>
             
+            @if (Model.StockQuantity < 10)
+            {
+                <span class="badge bg-danger mb-3 px-3 py-2 fs-6"><i class="fas fa-fire-alt"></i> Sắp hết (Chỉ còn @Model.StockQuantity)</span>
+            }
+
+            <div class="card mb-4 border-0 bg-light rounded-3">
+                <div class="card-body">
+                    <h6 class="fw-bold"><i class="fas fa-info-circle text-primary"></i> Thông tin dinh dưỡng</h6>
+                    <div class="d-flex gap-4 mt-2">
+                        <div><span class="text-muted small">Calo</span><br><span class="fw-bold">@(Model.Calories ?? 0) kcal</span></div>
+                        <div><span class="text-muted small">Protein</span><br><span class="fw-bold">@(Model.Protein ?? 0)g</span></div>
+                        <div><span class="text-muted small">Chất béo</span><br><span class="fw-bold">@(Model.Fat ?? 0)g</span></div>
+                    </div>
+                </div>
+            </div>
+
             <p class="text-muted fs-5 mb-5">@Model.Description</p>
 
-            <div class="d-grid gap-3 d-md-flex">
-                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-danger btn-lg rounded-pill px-5 fw-bold py-3 shadow-sm">
+            <div class="d-grid gap-3 d-md-flex mb-4">
+                <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Id" class="btn btn-danger btn-lg rounded-pill px-5 fw-bold py-3 shadow-sm flex-grow-1">
                     <i class="fas fa-shopping-basket me-2"></i> @T("AddToCart")
                 </a>
+                <button class="btn @(ViewBag.IsInWishlist == true ? "btn-danger" : "btn-outline-danger") btn-lg rounded-circle shadow-sm" id="btnWishlist" data-id="@Model.Id" style="width: 58px; height: 58px;">
+                    <i class="@(ViewBag.IsInWishlist == true ? "fas" : "far") fa-heart"></i>
+                </button>
+            </div>
+            
+            <div class="d-flex align-items-center gap-3">
+                <span class="fw-bold text-muted small">Chia sẻ:</span>
+                <a href="#" class="text-primary fs-4"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-info fs-4"><i class="fab fa-twitter"></i></a>
+                <a href="javascript:void(0)" onclick="copyLink()" class="text-secondary fs-4" title="Copy Link"><i class="fas fa-link"></i></a>
             </div>
         </div>
     </div>
+
+    <!-- Suggested Products -->
+    @if (ViewBag.SuggestedProducts != null && ((IEnumerable<Product>)ViewBag.SuggestedProducts).Any())
+    {
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="fw-bold mb-4 border-start border-warning border-5 ps-3">Combo Gợi Ý / Mua Kèm</h3>
+                <div class="row g-4">
+                    @foreach (var sp in (IEnumerable<Product>)ViewBag.SuggestedProducts)
+                    {
+                        <div class="col-6 col-md-3">
+                            <div class="card h-100 border-0 shadow-sm rounded-4 product-card-hover">
+                                <a asp-controller="Product" asp-action="Details" asp-route-id="@sp.Id" class="text-decoration-none text-dark">
+                                    <img src="@sp.ImageUrl" class="card-img-top rounded-top-4" style="height: 150px; object-fit: cover;" alt="@sp.Name">
+                                    <div class="card-body text-center p-3">
+                                        <h6 class="card-title fw-bold text-truncate mb-2">@sp.Name</h6>
+                                        <p class="text-danger fw-bold mb-0">@sp.Price.ToString("N0")đ</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
 
     <!-- Reviews Section -->
     <div class="row mt-5 pt-5">
@@ -160,6 +239,36 @@
                     $('#lstar'+i).removeClass('far').addClass('fas');
                 }
             });
+
+            $('#btnWishlist').click(function() {
+                var btn = $(this);
+                var productId = btn.data('id');
+                $.post('/Product/ToggleWishlist', { productId: productId }, function(res) {
+                    if (res.success) {
+                        if (res.isAdded) {
+                            btn.removeClass('btn-outline-danger').addClass('btn-danger');
+                            btn.find('i').removeClass('far').addClass('fas');
+                        } else {
+                            btn.removeClass('btn-danger').addClass('btn-outline-danger');
+                            btn.find('i').removeClass('fas').addClass('far');
+                        }
+                    } else {
+                        alert(res.message);
+                        window.location.href = '/Account/Login';
+                    }
+                });
+            });
         });
+
+        function copyLink() {
+            var dummy = document.createElement('input'),
+                text = window.location.href;
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            alert("Đã sao chép đường dẫn!");
+        }
     </script>
 }

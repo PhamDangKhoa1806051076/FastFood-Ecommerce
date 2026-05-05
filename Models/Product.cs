@@ -29,5 +29,15 @@ namespace FastFoodEcommerce.Models
         public Category? Category { get; set; }
 
         public ICollection<Review>? Reviews { get; set; }
+
+        public string? AdditionalImages { get; set; } // Semicolon-separated URLs
+
+        public int? Calories { get; set; }
+
+        public double? Protein { get; set; }
+
+        public double? Fat { get; set; }
+
+        public int StockQuantity { get; set; } = 100;
     }
 }

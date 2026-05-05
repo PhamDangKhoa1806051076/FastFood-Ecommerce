@@ -76,16 +76,16 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 
 ---
 
-## 🔲 Giai đoạn 11: Nâng cấp Trang Chi tiết Sản phẩm & Trải nghiệm Mua hàng
+## ✅ Giai đoạn 11: Nâng cấp Trang Chi tiết Sản phẩm & Trải nghiệm Mua hàng (Hoàn thành)
 > **Mục tiêu:** Làm phong phú trang sản phẩm giống Shopee/Grab Food — phần này hiện đang khá đơn giản so với thị trường.
-- [ ] Thêm **Gallery ảnh nhiều hình** cho từng sản phẩm (carousel slideshow).
-- [ ] Hiển thị **Thông tin dinh dưỡng** (Calo, Protein, Chất béo) dạng bảng trực quan.
-- [ ] Thêm **"Combo gợi ý" / Sản phẩm thường mua kèm** ngay dưới trang chi tiết.
-- [ ] Tích hợp **Số lượng tồn kho thực tế** — hiển thị "Sắp hết" khi còn < 10.
-- [ ] Thêm **nút Yêu thích (Wishlist)** — lưu món ăn vào danh sách để xem lại sau.
-- [ ] Hiển thị **Nhận xét & Đánh giá** ngay tại trang chi tiết theo dạng phân trang.
-- [ ] Thêm tính năng **Chia sẻ lên mạng xã hội** (Facebook, Zalo, Copy link).
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+- [x] Thêm **Gallery ảnh nhiều hình** cho từng sản phẩm (carousel slideshow).
+- [x] Hiển thị **Thông tin dinh dưỡng** (Calo, Protein, Chất béo) dạng bảng trực quan.
+- [x] Thêm **"Combo gợi ý" / Sản phẩm thường mua kèm** ngay dưới trang chi tiết.
+- [x] Tích hợp **Số lượng tồn kho thực tế** — hiển thị "Sắp hết" khi còn < 10.
+- [x] Thêm **nút Yêu thích (Wishlist)** — lưu món ăn vào danh sách để xem lại sau.
+- [x] Hiển thị **Nhận xét & Đánh giá** ngay tại trang chi tiết theo dạng phân trang.
+- [x] Thêm tính năng **Chia sẻ lên mạng xã hội** (Facebook, Zalo, Copy link).
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
 ## 🔲 Giai đoạn 12: Hệ thống Thành viên & Tích điểm (Loyalty Program)
 > **Mục tiêu:** Xây dựng hệ thống giống KFC Rewards / McDonald's App để giữ chân khách hàng quay lại.
