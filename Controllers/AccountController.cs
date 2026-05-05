@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FastFoodEcommerce.Data;
+using FastFoodEcommerce.Models;
 
 namespace FastFoodEcommerce.Controllers
 {
@@ -116,6 +117,83 @@ namespace FastFoodEcommerce.Controllers
                 .ToListAsync();
 
             return View(orders);
+        }
+
+        public async Task<IActionResult> Loyalty()
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email)) return RedirectToAction("Login");
+
+            var pointsHistory = await _context.LoyaltyPoints
+                .Where(l => l.UserId == email)
+                .OrderByDescending(l => l.CreatedAt)
+                .ToListAsync();
+
+            var totalPoints = pointsHistory.Sum(l => l.Points);
+
+            var notifications = await _context.Notifications
+                .Where(n => n.UserId == email)
+                .OrderByDescending(n => n.CreatedAt)
+                .Take(5)
+                .ToListAsync();
+
+            ViewBag.TotalPoints = totalPoints;
+            ViewBag.CurrentRank = totalPoints < 500 ? "Thành viên" :
+                                 totalPoints < 2000 ? "Đồng" :
+                                 totalPoints < 5000 ? "Bạc" :
+                                 totalPoints < 10000 ? "Vàng" : "Kim Cương";
+            
+            ViewBag.Notifications = notifications;
+
+            return View(pointsHistory);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RedeemPoints(int pointsToRedeem)
+        {
+            var email = HttpContext.Session.GetString("UserEmail");
+            if (string.IsNullOrEmpty(email)) return Json(new { success = false, message = "Vui lòng đăng nhập" });
+
+            if (pointsToRedeem < 100) return Json(new { success = false, message = "Cần tối thiểu 100 điểm để đổi" });
+
+            var totalPoints = await _context.LoyaltyPoints.Where(l => l.UserId == email).SumAsync(l => l.Points);
+            if (totalPoints < pointsToRedeem)
+            {
+                return Json(new { success = false, message = "Không đủ điểm" });
+            }
+
+            // Create a unique voucher code
+            var code = $"REDEEM-{DateTime.Now.Ticks.ToString().Substring(10)}";
+            // 100 điểm = giảm 20.000đ => ratio: 1 point = 200đ
+            decimal discountAmount = pointsToRedeem * 200;
+
+            _context.Vouchers.Add(new Voucher
+            {
+                Code = code,
+                DiscountPercentage = 0,
+                DiscountAmount = discountAmount,
+                Description = $"Đổi {pointsToRedeem} điểm thưởng",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(30)
+            });
+
+            _context.LoyaltyPoints.Add(new LoyaltyPoint
+            {
+                UserId = email,
+                Points = -pointsToRedeem,
+                Source = $"Đổi {pointsToRedeem} điểm lấy mã {code}"
+            });
+
+            _context.Notifications.Add(new Notification
+            {
+                UserId = email,
+                Title = "Đổi mã thành công",
+                Message = $"Bạn đã đổi {pointsToRedeem} điểm lấy voucher {code} trị giá {discountAmount.ToString("N0")}đ."
+            });
+
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, message = $"Đổi điểm thành công! Mã Voucher của bạn là: {code}" });
         }
     }
 }

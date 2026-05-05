@@ -1,0 +1,202 @@
+@model IEnumerable<FastFoodEcommerce.Models.LoyaltyPoint>
+@{
+    ViewData["Title"] = "Điểm thưởng của tôi";
+    var totalPoints = (int)ViewBag.TotalPoints;
+    var currentRank = (string)ViewBag.CurrentRank;
+    var notifications = ViewBag.Notifications as IEnumerable<FastFoodEcommerce.Models.Notification>;
+
+    string rankColor = currentRank switch
+    {
+        "Đồng" => "#cd7f32",
+        "Bạc" => "#c0c0c0",
+        "Vàng" => "#ffd700",
+        "Kim Cương" => "#b9f2ff",
+        _ => "#6c757d"
+    };
+    string rankIcon = currentRank switch
+    {
+        "Kim Cương" => "fa-gem text-info",
+        "Vàng" => "fa-crown text-warning",
+        "Bạc" => "fa-medal text-secondary",
+        "Đồng" => "fa-award text-warning",
+        _ => "fa-user text-muted"
+    };
+}
+
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="p-4 bg-light text-center border-bottom">
+                        <div class="display-1 mb-2">
+                            <i class="fas @rankIcon"></i>
+                        </div>
+                        <h4 class="fw-bold mb-0" style="color: @rankColor;">Hạng @currentRank</h4>
+                        <p class="text-muted small mt-2 mb-0">Hệ thống thành viên FastFood</p>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <a asp-action="Orders" class="list-group-item list-group-item-action p-3 fw-bold text-muted border-0"><i class="fas fa-shopping-bag me-2"></i> Đơn hàng của tôi</a>
+                        <a asp-action="Loyalty" class="list-group-item list-group-item-action p-3 fw-bold text-danger border-0"><i class="fas fa-star me-2"></i> Điểm thưởng & Thành viên</a>
+                        <a asp-action="Logout" class="list-group-item list-group-item-action p-3 fw-bold text-muted border-0"><i class="fas fa-sign-out-alt me-2"></i> Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 pt-4 pb-0">
+                    <h6 class="fw-bold"><i class="fas fa-bell text-warning me-2"></i> Thông báo nội bộ</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush rounded-bottom-4">
+                        @if (notifications != null && notifications.Any())
+                        {
+                            foreach (var notif in notifications)
+                            {
+                                <div class="list-group-item p-3 border-bottom @(notif.IsRead ? "" : "bg-light")">
+                                    <h6 class="fw-bold mb-1 fs-6">@notif.Title</h6>
+                                    <p class="mb-1 text-muted small">@notif.Message</p>
+                                    <small class="text-muted" style="font-size: 0.7rem;">@notif.CreatedAt.ToString("dd/MM/yyyy HH:mm")</small>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="p-4 text-center text-muted small">Chưa có thông báo nào.</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+            <h3 class="fw-bold mb-4 border-start border-danger border-5 ps-3">Điểm thưởng của tôi</h3>
+
+            <!-- Point Summary Card -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4 bg-danger text-white overflow-hidden position-relative">
+                <div class="position-absolute" style="right: -20px; top: -20px; opacity: 0.1; font-size: 200px;">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="card-body p-5 position-relative z-1">
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <h5 class="opacity-75 mb-1">Tổng điểm hiện có</h5>
+                            <h1 class="display-3 fw-bold mb-3">@totalPoints <span class="fs-4 fw-normal opacity-75">Pts</span></h1>
+                            <p class="mb-0 opacity-75"><i class="fas fa-info-circle me-1"></i> Tích lũy thêm điểm bằng cách đặt hàng (1.000đ = 1 điểm)</p>
+                        </div>
+                        <div class="col-md-5 text-md-end mt-4 mt-md-0">
+                            <div class="bg-white bg-opacity-10 rounded-4 p-4 text-center backdrop-blur">
+                                <h6 class="mb-3">Đổi điểm lấy Voucher</h6>
+                                <p class="small opacity-75 mb-3">100 điểm = Giảm 20.000đ</p>
+                                <button type="button" class="btn btn-light rounded-pill px-4 fw-bold shadow-sm w-100" data-bs-toggle="modal" data-bs-target="#redeemModal">
+                                    Đổi Điểm Ngay
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point History -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-history text-muted me-2"></i> Lịch sử điểm thưởng</h5>
+                    
+                    @if (Model != null && Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Thời gian</th>
+                                        <th>Nguồn / Hoạt động</th>
+                                        <th class="text-end">Điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-muted small">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <span class="fw-bold">@item.Source</span>
+                                                @if (item.ExpiryDate.HasValue && item.Points > 0)
+                                                {
+                                                    <br/><small class="text-muted">Hết hạn: @item.ExpiryDate.Value.ToString("dd/MM/yyyy")</small>
+                                                }
+                                            </td>
+                                            <td class="text-end fw-bold @(item.Points >= 0 ? "text-success" : "text-danger")">
+                                                @(item.Points >= 0 ? "+" : "")@item.Points
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-receipt fa-3x text-light mb-3"></i>
+                            <p class="text-muted">Bạn chưa có lịch sử tích điểm nào.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Redeem Modal -->
+<div class="modal fade" id="redeemModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow">
+            <div class="modal-header border-0 bg-light rounded-top-4 p-4">
+                <h5 class="modal-title fw-bold">Đổi điểm thưởng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <i class="fas fa-gift text-danger fa-4x mb-4"></i>
+                <h4 class="fw-bold mb-3">Mức đổi: 100 điểm = Giảm 20.000đ</h4>
+                <p class="text-muted mb-4">Bạn đang có <strong>@totalPoints</strong> điểm. Chọn số điểm muốn đổi (bội số của 100).</p>
+                
+                <div class="input-group mb-4 w-75 mx-auto">
+                    <button class="btn btn-outline-secondary" type="button" onclick="adjPoints(-100)">-</button>
+                    <input type="number" class="form-control text-center fw-bold fs-5" id="pointsToRedeem" value="100" step="100" min="100" max="@totalPoints" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="adjPoints(100)">+</button>
+                </div>
+                
+                <button type="button" class="btn btn-danger btn-lg rounded-pill w-100 fw-bold" onclick="redeemPoints()">Xác nhận đổi <span id="lblDiscount">20.000đ</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function adjPoints(val) {
+            let input = document.getElementById('pointsToRedeem');
+            let current = parseInt(input.value);
+            let max = parseInt(input.max) || 0;
+            let newVal = current + val;
+            if (newVal >= 100 && newVal <= max) {
+                input.value = newVal;
+                let discount = newVal * 200; // 1 point = 200đ
+                document.getElementById('lblDiscount').innerText = discount.toLocaleString() + 'đ';
+            }
+        }
+
+        function redeemPoints() {
+            let points = document.getElementById('pointsToRedeem').value;
+            $.post('/Account/RedeemPoints', { pointsToRedeem: points }, function(res) {
+                alert(res.message);
+                if (res.success) {
+                    location.reload();
+                }
+            });
+        }
+    </script>
+}

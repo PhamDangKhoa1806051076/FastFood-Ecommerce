@@ -13,6 +13,8 @@ namespace FastFoodEcommerce.Models
         [Required]
         public int DiscountPercentage { get; set; } // 5, 10, 19, 23, 29, 32
         
+        public decimal? DiscountAmount { get; set; }
+        
         public string Description { get; set; } = string.Empty;
         
         public DateTime StartDate { get; set; }

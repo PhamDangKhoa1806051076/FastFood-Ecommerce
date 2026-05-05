@@ -87,16 +87,16 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Thêm tính năng **Chia sẻ lên mạng xã hội** (Facebook, Zalo, Copy link).
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
-## 🔲 Giai đoạn 12: Hệ thống Thành viên & Tích điểm (Loyalty Program)
+## ✅ Giai đoạn 12: Hệ thống Thành viên & Tích điểm (Loyalty Program)
 > **Mục tiêu:** Xây dựng hệ thống giống KFC Rewards / McDonald's App để giữ chân khách hàng quay lại.
-- [ ] Tạo Model `LoyaltyPoint` với các cột: `UserId`, `Points`, `ExpiryDate`, `Source`.
-- [ ] Tự động cộng điểm sau mỗi đơn hàng thành công (ví dụ: 1 điểm = 1.000đ).
-- [ ] Xây dựng trang **"Điểm thưởng của tôi"** trong tài khoản người dùng.
-- [ ] Tích hợp **đổi điểm lấy Voucher** giảm giá (Ví dụ: 100 điểm = giảm 20.000đ).
-- [ ] Hiển thị **lịch sử cộng/trừ điểm** theo từng đơn hàng.
-- [ ] Thêm **Bảng xếp hạng khách hàng** (Hạng Đồng/Bạc/Vàng/Kim Cương) dựa trên tổng chi tiêu.
-- [ ] Gửi **thông báo nội bộ** (In-App Notification) khi đạt hạng mới.
-- [ ] Đồng bộ toàn bộ mã nguồn lên GitHub.
+- [x] Tạo Model `LoyaltyPoint` với các cột: `UserId`, `Points`, `ExpiryDate`, `Source`.
+- [x] Tự động cộng điểm sau mỗi đơn hàng thành công (ví dụ: 1 điểm = 1.000đ).
+- [x] Xây dựng trang **"Điểm thưởng của tôi"** trong tài khoản người dùng.
+- [x] Tích hợp **đổi điểm lấy Voucher** giảm giá (Ví dụ: 100 điểm = giảm 20.000đ).
+- [x] Hiển thị **lịch sử cộng/trừ điểm** theo từng đơn hàng.
+- [x] Thêm **Bảng xếp hạng khách hàng** (Hạng Đồng/Bạc/Vàng/Kim Cương) dựa trên tổng chi tiêu.
+- [x] Gửi **thông báo nội bộ** (In-App Notification) khi đạt hạng mới.
+- [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
 
 ## 🔲 Giai đoạn 13: Tối ưu hóa Hiệu suất & SEO
 > **Mục tiêu:** Đảm bảo ứng dụng nhanh, nhẹ và thân thiện với công cụ tìm kiếm như Google.

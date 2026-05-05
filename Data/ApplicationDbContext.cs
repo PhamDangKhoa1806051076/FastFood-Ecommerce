@@ -17,6 +17,8 @@ namespace FastFoodEcommerce.Data
         public DbSet<Store> Stores { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<WishlistItem> WishlistItems { get; set; }
+        public DbSet<LoyaltyPoint> LoyaltyPoints { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
