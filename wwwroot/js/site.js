@@ -1,4 +1,29 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+// FastFood Ecommerce - Global Scripts
+$(document).ready(function () {
+    // 1. Scroll to Top Logic
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('#scrollToTopBtn').fadeIn();
+        } else {
+            $('#scrollToTopBtn').fadeOut();
+        }
+    });
 
-// Write your JavaScript code.
+    $('#scrollToTopBtn').hover(function () {
+        $(this).css('transform', 'translateY(-5px)');
+    }, function () {
+        $(this).css('transform', 'translateY(0)');
+    });
+
+    $('#scrollToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 500);
+        return false;
+    });
+
+    // 2. Add subtle animations to cards on hover
+    $('.product-card').hover(function () {
+        $(this).addClass('shadow-lg');
+    }, function () {
+        $(this).removeClass('shadow-lg');
+    });
+});

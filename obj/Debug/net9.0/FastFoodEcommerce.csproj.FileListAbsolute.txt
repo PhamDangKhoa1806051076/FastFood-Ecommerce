@@ -145,7 +145,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\Views\Share
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\bundle\FastFoodEcommerce.styles.css
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\scopedcss\projectbundle\FastFoodEcommerce.bundle.scp.css
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\luzt35r5sl-61n19gt1b8.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3xpstqimjb-xtxxf3hu2r.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\xj91dai7jg-bqjiyaj88i.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\th0ayiiz0f-c2jlpeoesf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3658i0x0d3-erw9l3u2r3.gz
@@ -217,7 +216,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\FastFoodEcommerce.gen
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\ref\FastFoodEcommerce.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\koxcq6ao6u-srwl9jjswf.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\63x5mmnqyb-srwl9jjswf.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-bsbnacr7g6.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\bundleconfig.json
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\8jpv3ukhnl-mux6zp3sza.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\sv3u5ur1uc-5ipweew5fc.gz
@@ -229,3 +227,6 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\ExcelNumberFormat.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\RBush.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\SixLabors.Fonts.dll
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\System.IO.Packaging.dll
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\bin\Debug\net9.0\appsettings.Production.json
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj-lws1dfd8ue.gz
+C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3xpstqimjb-q8i2kmhrat.gz

@@ -86,7 +86,7 @@ namespace FastFoodEcommerce.Controllers
         {
             if (string.IsNullOrEmpty(code)) return Json(new { success = false, message = "Vui lòng nhập mã" });
 
-            var voucher = await _context.Vouchers.FirstOrDefaultAsync(v => v.Code == code);
+            var voucher = await _context.Vouchers.AsNoTracking().FirstOrDefaultAsync(v => v.Code == code);
             if (voucher == null || !voucher.IsActive)
             {
                 return Json(new { success = false, message = "Mã không hợp lệ hoặc đã hết hạn" });
@@ -152,7 +152,7 @@ namespace FastFoodEcommerce.Controllers
                         });
                         
                         // Check if total points reached a new rank
-                        var totalPoints = await _context.LoyaltyPoints.Where(l => l.UserId == userEmail).SumAsync(l => l.Points);
+                        var totalPoints = await _context.LoyaltyPoints.AsNoTracking().Where(l => l.UserId == userEmail).SumAsync(l => l.Points);
                         string currentRank = totalPoints < 500 ? "Thành viên" :
                                            totalPoints < 2000 ? "Đồng" :
                                            totalPoints < 5000 ? "Bạc" :

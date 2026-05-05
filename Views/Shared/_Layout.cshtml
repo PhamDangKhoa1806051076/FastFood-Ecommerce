@@ -173,25 +173,7 @@
         </div>
     </footer>
 
-    <style>
-        .hover-white:hover { color: white !important; }
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #444;
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .social-icon:hover {
-            background: white;
-            color: black;
-        }
-    </style>
+
 
     <!-- Offcanvas Sidebar Menu -->
     <div class="offcanvas offcanvas-end border-0 shadow" tabindex="-1" id="sidebarMenu" style="width: 350px;">
@@ -234,27 +216,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
-    <script>
-        // Scroll to Top Logic
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 300) {
-                $('#scrollToTopBtn').fadeIn();
-            } else {
-                $('#scrollToTopBtn').fadeOut();
-            }
-        });
 
-        $('#scrollToTopBtn').hover(function() {
-            $(this).css('transform', 'translateY(-5px)');
-        }, function() {
-            $(this).css('transform', 'translateY(0)');
-        });
-
-        $('#scrollToTopBtn').click(function() {
-            $('html, body').animate({ scrollTop: 0 }, 500);
-            return false;
-        });
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -19,9 +19,9 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var categories = await _context.Categories.ToListAsync();
-        var products = await _context.Products.Include(p => p.Category).ToListAsync();
-        var banners = await _context.Banners.Where(b => b.IsActive).OrderBy(b => b.DisplayOrder).ToListAsync();
+        var categories = await _context.Categories.AsNoTracking().ToListAsync();
+        var products = await _context.Products.AsNoTracking().Include(p => p.Category).ToListAsync();
+        var banners = await _context.Banners.AsNoTracking().Where(b => b.IsActive).OrderBy(b => b.DisplayOrder).ToListAsync();
         ViewBag.Categories = categories;
         ViewBag.Banners = banners;
         return View(products);
@@ -30,7 +30,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 60, VaryByQueryKeys = new[] { "*" })]
     public async Task<IActionResult> GetProductsByCategory(int? categoryId, decimal? minPrice, decimal? maxPrice, int? minRating, string sort = "newest")
     {
-        var query = _context.Products
+        var query = _context.Products.AsNoTracking()
             .Include(p => p.Category)
             .Include(p => p.Reviews)
             .AsQueryable();

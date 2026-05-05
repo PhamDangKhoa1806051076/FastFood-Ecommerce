@@ -41,25 +41,25 @@ namespace FastFoodEcommerce.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
             
-            ViewBag.OrderCount = await _context.Orders.CountAsync();
-            ViewBag.ProductCount = await _context.Products.CountAsync();
-            ViewBag.VoucherCount = await _context.Vouchers.CountAsync();
+            ViewBag.OrderCount = await _context.Orders.AsNoTracking().CountAsync();
+            ViewBag.ProductCount = await _context.Products.AsNoTracking().CountAsync();
+            ViewBag.VoucherCount = await _context.Vouchers.AsNoTracking().CountAsync();
             
             // Today's Stats
             var today = DateTime.Today;
-            ViewBag.TodayOrders = await _context.Orders.CountAsync(o => o.OrderDate >= today);
-            ViewBag.TodayRevenue = await _context.Orders
+            ViewBag.TodayOrders = await _context.Orders.AsNoTracking().CountAsync(o => o.OrderDate >= today);
+            ViewBag.TodayRevenue = await _context.Orders.AsNoTracking()
                 .Where(o => o.OrderDate >= today && (o.Status == "Completed" || o.Status == "Pending"))
                 .SumAsync(o => o.TotalAmount);
-            ViewBag.PendingOrders = await _context.Orders.CountAsync(o => o.Status == "Pending");
+            ViewBag.PendingOrders = await _context.Orders.AsNoTracking().CountAsync(o => o.Status == "Pending");
 
             // Calculate real total revenue
-            ViewBag.TotalRevenue = await _context.Orders
+            ViewBag.TotalRevenue = await _context.Orders.AsNoTracking()
                 .Where(o => o.Status == "Completed" || o.Status == "Pending")
                 .SumAsync(o => o.TotalAmount);
 
             // Fetch best-selling products (top 5)
-            var topProducts = await _context.OrderDetails
+            var topProducts = await _context.OrderDetails.AsNoTracking()
                 .GroupBy(od => od.Product!.Name)
                 .Select(g => new { Name = g.Key, Count = g.Sum(od => od.Quantity) })
                 .OrderByDescending(x => x.Count)
@@ -73,7 +73,7 @@ namespace FastFoodEcommerce.Controllers
             var chartData = new List<decimal>();
             foreach (var date in last7Days)
             {
-                var dayRevenue = await _context.Orders
+                var dayRevenue = await _context.Orders.AsNoTracking()
                     .Where(o => o.OrderDate.Date == date.Date && (o.Status == "Completed" || o.Status == "Pending"))
                     .SumAsync(o => o.TotalAmount);
                 chartData.Add(dayRevenue);
@@ -81,7 +81,7 @@ namespace FastFoodEcommerce.Controllers
             ViewBag.ChartLabels = chartLabels;
             ViewBag.ChartData = chartData;
             
-            var recentOrders = await _context.Orders.OrderByDescending(o => o.OrderDate).Take(10).ToListAsync();
+            var recentOrders = await _context.Orders.AsNoTracking().OrderByDescending(o => o.OrderDate).Take(10).ToListAsync();
             return View(recentOrders);
         }
 
@@ -89,7 +89,7 @@ namespace FastFoodEcommerce.Controllers
         public async Task<IActionResult> Products()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            var products = await _context.Products.Include(p => p.Category).ToListAsync();
+            var products = await _context.Products.AsNoTracking().Include(p => p.Category).ToListAsync();
             return View(products);
         }
 
@@ -119,7 +119,7 @@ namespace FastFoodEcommerce.Controllers
         public async Task<IActionResult> Orders()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            var orders = await _context.Orders.OrderByDescending(o => o.OrderDate).ToListAsync();
+            var orders = await _context.Orders.AsNoTracking().OrderByDescending(o => o.OrderDate).ToListAsync();
             return View(orders);
         }
 
@@ -127,7 +127,7 @@ namespace FastFoodEcommerce.Controllers
         public async Task<IActionResult> Inventory()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            var products = await _context.Products.Include(p => p.Category).OrderBy(p => p.StockQuantity).ToListAsync();
+            var products = await _context.Products.AsNoTracking().Include(p => p.Category).OrderBy(p => p.StockQuantity).ToListAsync();
             return View(products);
         }
 
@@ -152,7 +152,7 @@ namespace FastFoodEcommerce.Controllers
         public async Task<IActionResult> Banners()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            var banners = await _context.Banners.OrderBy(b => b.DisplayOrder).ToListAsync();
+            var banners = await _context.Banners.AsNoTracking().OrderBy(b => b.DisplayOrder).ToListAsync();
             return View(banners);
         }
 
@@ -181,7 +181,7 @@ namespace FastFoodEcommerce.Controllers
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
 
-            var orders = await _context.Orders.OrderByDescending(o => o.OrderDate).ToListAsync();
+            var orders = await _context.Orders.AsNoTracking().OrderByDescending(o => o.OrderDate).ToListAsync();
 
             using (var workbook = new XLWorkbook())
             {
@@ -226,7 +226,7 @@ namespace FastFoodEcommerce.Controllers
         public async Task<IActionResult> AuditLogs()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            var logs = await _context.AuditLogs.OrderByDescending(l => l.Timestamp).Take(100).ToListAsync();
+            var logs = await _context.AuditLogs.AsNoTracking().OrderByDescending(l => l.Timestamp).Take(100).ToListAsync();
             return View(logs);
         }
     }
