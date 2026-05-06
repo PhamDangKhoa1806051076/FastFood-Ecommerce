@@ -1,144 +1,241 @@
 @{
     ViewData["Title"] = "Tuyển dụng";
+    Layout = "_Layout";
 }
 
-<div class="position-relative overflow-hidden bg-dark text-white py-5 mb-5 rounded-bottom-5">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity: 0.3;">
-        <img src="/recruitment_hero_1778037856869.png" class="w-100 h-100" style="object-fit: cover;">
-    </div>
-    <div class="container position-relative py-5">
-        <div class="row">
-            <div class="col-lg-7 py-5 animate__animated animate__fadeInLeft">
-                <span class="badge bg-danger mb-3 px-3 py-2 rounded-pill">Gia nhập đội ngũ</span>
-                <h1 class="display-3 fw-bold mb-4">Cùng Chúng Tôi <br><span class="text-danger">Lan Tỏa Niềm Vui</span></h1>
-                <p class="lead mb-5 text-white-50">FastFood Store không chỉ là nơi làm việc, mà là nơi bạn bắt đầu hành trình phát triển sự nghiệp trong môi trường năng động và chuyên nghiệp nhất.</p>
-                <a href="#positions" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">Xem các vị trí đang tuyển</a>
-            </div>
+<!-- Hero Banner -->
+<div class="position-relative overflow-hidden text-white" style="min-height: 500px; background: #111;">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1400&auto=format&fit=crop"
+         class="position-absolute top-0 start-0 w-100 h-100"
+         style="object-fit: cover; opacity: 0.4;" alt="Recruitment">
+    <div class="container position-relative py-5 d-flex align-items-center" style="min-height: 500px;">
+        <div class="col-lg-7 py-5">
+            <span class="badge bg-danger mb-4 px-4 py-2 rounded-pill fs-6">Gia nhập đội ngũ</span>
+            <h1 class="display-3 fw-bold mb-4 lh-1">Cùng Chúng Tôi <br><span class="text-danger">Lan Tỏa Niềm Vui</span></h1>
+            <p class="lead mb-5 text-white-50">FastFood Store không chỉ là nơi làm việc, mà là nơi bạn bắt đầu hành trình phát triển sự nghiệp trong môi trường năng động và chuyên nghiệp nhất.</p>
+            <a href="#positions" class="btn btn-danger btn-lg px-5 rounded-pill fw-bold py-3 shadow">Xem vị trí đang tuyển &darr;</a>
         </div>
     </div>
 </div>
 
-<div class="container py-5" id="positions">
-    <div class="row text-center mb-5">
-        <div class="col-lg-8 mx-auto">
-            <h2 class="fw-bold display-6">Vị trí đang <span class="text-danger">Tìm kiếm</span></h2>
-            <p class="text-muted">Hãy chọn vị trí phù hợp nhất với đam mê của bạn.</p>
-        </div>
-    </div>
-
-    <div class="row g-4">
-        <!-- Position 1 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-shadow transition">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-danger-subtle text-danger p-3 rounded-4">
-                        <i class="fas fa-utensils fa-lg"></i>
-                    </div>
-                    <span class="badge bg-success-subtle text-success">Toàn thời gian</span>
-                </div>
-                <h4 class="fw-bold mb-2">Nhân viên Phục vụ</h4>
-                <p class="text-muted small mb-4">Chào đón và phục vụ khách hàng tại quầy và khu vực bàn ăn với tinh thần niềm nở nhất.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                    <span class="fw-bold text-dark">5-7tr / tháng</span>
-                    <a href="#" class="btn btn-outline-danger rounded-pill btn-sm px-3">Ứng tuyển</a>
-                </div>
+<!-- Why Join Us -->
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h6 class="text-danger fw-bold text-uppercase letter-spacing mb-2">Lý do</h6>
+                <h2 class="fw-bold display-6">Tại sao chọn <span class="text-danger">FastFood?</span></h2>
             </div>
         </div>
-
-        <!-- Position 2 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-shadow transition">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-primary-subtle text-primary p-3 rounded-4">
-                        <i class="fas fa-hat-chef fa-lg"></i>
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="p-4">
+                    <div class="icon-circle bg-danger-soft text-danger mx-auto mb-3">
+                        <i class="fas fa-users fa-xl"></i>
                     </div>
-                    <span class="badge bg-success-subtle text-success">Toàn thời gian</span>
-                </div>
-                <h4 class="fw-bold mb-2">Nhân viên Bếp</h4>
-                <p class="text-muted small mb-4">Chế biến các món ăn theo tiêu chuẩn chất lượng cao nhất của hệ thống FastFood Store.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                    <span class="fw-bold text-dark">6-9tr / tháng</span>
-                    <a href="#" class="btn btn-outline-danger rounded-pill btn-sm px-3">Ứng tuyển</a>
+                    <h5 class="fw-bold">Đội nhóm</h5>
+                    <p class="text-muted small">Môi trường trẻ trung, hòa đồng, luôn hỗ trợ nhau.</p>
                 </div>
             </div>
-        </div>
-
-        <!-- Position 3 -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-shadow transition">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div class="bg-warning-subtle text-warning p-3 rounded-4">
-                        <i class="fas fa-shipping-fast fa-lg"></i>
+            <div class="col-6 col-md-3">
+                <div class="p-4">
+                    <div class="icon-circle bg-success-soft text-success mx-auto mb-3">
+                        <i class="fas fa-chart-line fa-xl"></i>
                     </div>
-                    <span class="badge bg-info-subtle text-info">Bán thời gian</span>
+                    <h5 class="fw-bold">Thăng tiến</h5>
+                    <p class="text-muted small">Cơ hội lên quản lý sau 6-12 tháng làm việc.</p>
                 </div>
-                <h4 class="fw-bold mb-2">Nhân viên Giao hàng</h4>
-                <p class="text-muted small mb-4">Giao những bữa ăn nóng hổi đến tận tay khách hàng trong khu vực nội thành.</p>
-                <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top">
-                    <span class="fw-bold text-dark">25k - 40k / giờ</span>
-                    <a href="#" class="btn btn-outline-danger rounded-pill btn-sm px-3">Ứng tuyển</a>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-4">
+                    <div class="icon-circle bg-warning-soft text-warning mx-auto mb-3">
+                        <i class="fas fa-utensils fa-xl"></i>
+                    </div>
+                    <h5 class="fw-bold">Bữa ăn</h5>
+                    <p class="text-muted small">Miễn phí bữa ăn trong ca làm việc mỗi ngày.</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-4">
+                    <div class="icon-circle bg-primary-soft text-primary mx-auto mb-3">
+                        <i class="fas fa-shield-alt fa-xl"></i>
+                    </div>
+                    <h5 class="fw-bold">Bảo hiểm</h5>
+                    <p class="text-muted small">Đầy đủ BHYT, BHXH theo quy định nhà nước.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="bg-light py-5 mt-5">
-    <div class="container py-5">
+<!-- Job Positions -->
+<section class="py-5 bg-white" id="positions">
+    <div class="container py-4">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h6 class="text-danger fw-bold text-uppercase letter-spacing mb-2">Tuyển dụng</h6>
+                <h2 class="fw-bold display-6">Vị trí đang <span class="text-danger">Tìm kiếm</span></h2>
+                <p class="text-muted">Hãy chọn vị trí phù hợp nhất với đam mê của bạn.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden job-card">
+                    <div class="card-header border-0 bg-danger-soft p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon-circle bg-danger text-white">
+                                <i class="fas fa-concierge-bell fa-lg"></i>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Toàn thời gian</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-2">Nhân viên Phục vụ</h4>
+                        <p class="text-muted small mb-3">Chào đón và phục vụ khách hàng tại quầy và khu vực bàn ăn với tinh thần niềm nở nhất.</p>
+                        <ul class="list-unstyled text-muted small">
+                            <li class="mb-1"><i class="fas fa-map-marker-alt text-danger me-2"></i>Toàn quốc</li>
+                            <li class="mb-1"><i class="fas fa-clock text-danger me-2"></i>Ca linh hoạt</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer border-0 bg-white p-4 pt-0 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-danger fs-5">5 - 7 triệu/tháng</span>
+                        <a href="#apply-form" class="btn btn-outline-danger rounded-pill px-4">Ứng tuyển</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden job-card">
+                    <div class="card-header border-0 bg-primary-soft p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon-circle bg-primary text-white">
+                                <i class="fas fa-fire-burner fa-lg"></i>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Toàn thời gian</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-2">Nhân viên Bếp</h4>
+                        <p class="text-muted small mb-3">Chế biến các món ăn theo tiêu chuẩn chất lượng cao nhất của hệ thống FastFood Store.</p>
+                        <ul class="list-unstyled text-muted small">
+                            <li class="mb-1"><i class="fas fa-map-marker-alt text-danger me-2"></i>Toàn quốc</li>
+                            <li class="mb-1"><i class="fas fa-clock text-danger me-2"></i>Ca sáng / tối</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer border-0 bg-white p-4 pt-0 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-danger fs-5">6 - 9 triệu/tháng</span>
+                        <a href="#apply-form" class="btn btn-outline-danger rounded-pill px-4">Ứng tuyển</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden job-card">
+                    <div class="card-header border-0 bg-warning-soft p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="icon-circle bg-warning text-dark">
+                                <i class="fas fa-motorcycle fa-lg"></i>
+                            </div>
+                            <span class="badge bg-info rounded-pill text-dark">Bán thời gian</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-2">Nhân viên Giao hàng</h4>
+                        <p class="text-muted small mb-3">Giao những bữa ăn nóng hổi đến tận tay khách hàng trong khu vực nội thành nhanh nhất.</p>
+                        <ul class="list-unstyled text-muted small">
+                            <li class="mb-1"><i class="fas fa-map-marker-alt text-danger me-2"></i>Nội thành</li>
+                            <li class="mb-1"><i class="fas fa-clock text-danger me-2"></i>Giờ linh hoạt</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer border-0 bg-white p-4 pt-0 d-flex justify-content-between align-items-center">
+                        <span class="fw-bold text-danger fs-5">25k - 40k/giờ</span>
+                        <a href="#apply-form" class="btn btn-outline-danger rounded-pill px-4">Ứng tuyển</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Apply Form -->
+<section class="py-5 bg-light" id="apply-form">
+    <div class="container py-4">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <h2 class="fw-bold display-6 mb-4">Quyền lợi <span class="text-danger">Tuyệt vời</span></h2>
+                <h6 class="text-danger fw-bold text-uppercase letter-spacing mb-2">Ứng tuyển</h6>
+                <h2 class="fw-bold display-6 mb-4">Quyền lợi <span class="text-danger">Nhân viên</span></h2>
                 <ul class="list-unstyled">
-                    <li class="mb-3 d-flex align-items-center">
-                        <i class="fas fa-check-circle text-success me-3 fs-5"></i>
-                        <span>Bảo hiểm sức khỏe và các chế độ theo luật lao động.</span>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="fas fa-check-circle text-success me-3 fs-5 mt-1"></i>
+                        <span>Bảo hiểm sức khỏe và các chế độ đầy đủ theo luật lao động Việt Nam.</span>
                     </li>
-                    <li class="mb-3 d-flex align-items-center">
-                        <i class="fas fa-check-circle text-success me-3 fs-5"></i>
-                        <span>Bữa ăn miễn phí trong ca làm việc.</span>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="fas fa-check-circle text-success me-3 fs-5 mt-1"></i>
+                        <span>Bữa ăn miễn phí trong mỗi ca làm việc, đảm bảo dinh dưỡng.</span>
                     </li>
-                    <li class="mb-3 d-flex align-items-center">
-                        <i class="fas fa-check-circle text-success me-3 fs-5"></i>
-                        <span>Cơ hội thăng tiến lên quản lý sau 6-12 tháng.</span>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="fas fa-check-circle text-success me-3 fs-5 mt-1"></i>
+                        <span>Thưởng hiệu suất, lương tháng 13, và các khoản thưởng lễ Tết.</span>
                     </li>
-                    <li class="mb-3 d-flex align-items-center">
-                        <i class="fas fa-check-circle text-success me-3 fs-5"></i>
-                        <span>Môi trường làm việc trẻ trung, hòa đồng.</span>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="fas fa-check-circle text-success me-3 fs-5 mt-1"></i>
+                        <span>Cơ hội thăng tiến lên Quản lý cửa hàng sau 6-12 tháng làm việc.</span>
+                    </li>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="fas fa-check-circle text-success me-3 fs-5 mt-1"></i>
+                        <span>Đào tạo bài bản, được chứng nhận kỹ năng nghề nghiệp.</span>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-6">
-                <div class="card border-0 shadow rounded-4 p-5">
-                    <h4 class="fw-bold mb-4">Gửi thông tin nhanh</h4>
+                <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
+                    <h4 class="fw-bold mb-4">Gửi thông tin ứng tuyển</h4>
                     <form>
                         <div class="mb-3">
-                            <input type="text" class="form-control py-3" placeholder="Họ và tên">
+                            <label class="form-label fw-bold small text-uppercase">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control py-3 rounded-3" placeholder="Nhập họ và tên của bạn" required>
                         </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control py-3" placeholder="Email liên hệ">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-uppercase">Số điện thoại</label>
+                                <input type="tel" class="form-control py-3 rounded-3" placeholder="0xxx xxx xxx">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-uppercase">Email</label>
+                                <input type="email" class="form-control py-3 rounded-3" placeholder="email@gmail.com">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <select class="form-select py-3">
-                                <option selected>Chọn vị trí ứng tuyển</option>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-uppercase">Vị trí ứng tuyển <span class="text-danger">*</span></label>
+                            <select class="form-select py-3 rounded-3" required>
+                                <option value="" disabled selected>Chọn vị trí...</option>
                                 <option>Nhân viên Phục vụ</option>
                                 <option>Nhân viên Bếp</option>
                                 <option>Nhân viên Giao hàng</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-danger w-100 py-3 rounded-pill fw-bold">Gửi hồ sơ ngay</button>
+                        <button type="submit" class="btn btn-danger w-100 py-3 rounded-pill fw-bold fs-5">
+                            <i class="fas fa-paper-plane me-2"></i>Gửi hồ sơ ngay
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <style>
-    .bg-danger-subtle { background-color: #ffe5e7; }
-    .bg-primary-subtle { background-color: #e7f5ff; }
-    .bg-warning-subtle { background-color: #fff9db; }
-    .bg-success-subtle { background-color: #d3f9d8; }
-    .bg-info-subtle { background-color: #e3fafc; }
-    .hover-shadow:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
-    .transition { transition: all 0.3s; }
+    .letter-spacing { letter-spacing: 2px; }
+    .icon-circle {
+        width: 55px; height: 55px;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%;
+    }
+    .bg-danger-soft { background-color: #fff0f1; }
+    .bg-success-soft { background-color: #f0fff4; }
+    .bg-warning-soft { background-color: #fffbeb; }
+    .bg-primary-soft { background-color: #eff6ff; }
+    .job-card { transition: transform 0.3s, box-shadow 0.3s; }
+    .job-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.12) !important; }
 </style>

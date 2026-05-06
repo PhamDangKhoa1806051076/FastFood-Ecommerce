@@ -1,25 +1,53 @@
 @{
     ViewData["Title"] = "Câu chuyện của chúng tôi";
+    Layout = "_Layout";
 }
 
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <h6 class="text-danger fw-bold text-uppercase mb-3">Về FastFood</h6>
-                <h1 class="display-3 fw-bold mb-4">Câu Chuyện <br><span class="text-danger">Khởi Nguồn</span></h1>
-                <p class="lead text-muted mb-4">Hành trình của FastFood Store không bắt đầu từ những bảng quảng cáo rực rỡ, mà từ căn bếp nhỏ với niềm đam mê mang hương vị tuyệt vời nhất đến cho mọi người.</p>
-                <div class="border-start border-4 border-danger ps-4 mb-4">
-                    <p class="fst-italic text-dark fs-5">"Chúng tôi không chỉ bán thức ăn nhanh, chúng tôi mang đến những khoảnh khắc hạnh phúc trọn vẹn cho gia đình bạn."</p>
+<!-- Hero Section -->
+<section class="py-0 bg-white">
+    <div class="container-fluid px-0">
+        <div class="row g-0 align-items-stretch" style="min-height: 90vh; max-height: 90vh; overflow: hidden;">
+            <!-- Left Content -->
+            <div class="col-lg-6 d-flex align-items-center">
+                <div class="p-5 p-lg-5 ms-lg-5">
+                    <h6 class="text-danger fw-bold text-uppercase mb-3 letter-spacing">Về FastFood Store</h6>
+                    <h1 class="display-3 fw-bold mb-4 lh-1">Câu Chuyện <br><span class="text-danger">Khởi Nguồn</span></h1>
+                    <p class="lead text-muted mb-4" style="font-size: 1.1rem;">Hành trình của FastFood Store không bắt đầu từ những bảng quảng cáo rực rỡ, mà từ căn bếp nhỏ với niềm đam mê mang hương vị tuyệt vời nhất đến cho mọi người.</p>
+                    <div class="border-start border-4 border-danger ps-4 mb-4 py-2">
+                        <p class="fst-italic text-dark fs-5 mb-0">"Chúng tôi không chỉ bán thức ăn nhanh, chúng tôi mang đến những khoảnh khắc hạnh phúc trọn vẹn cho gia đình bạn."</p>
+                    </div>
+                    <p class="text-muted mb-5">Từ năm 2010, chúng tôi đã không ngừng tìm kiếm những nguồn nguyên liệu tươi ngon nhất, những công thức bí truyền để tạo nên những chiếc Burger giòn tan và những lát Pizza đậm đà.</p>
+                    <div class="d-flex gap-4">
+                        <div class="text-center">
+                            <h3 class="fw-bold text-danger mb-0">14+</h3>
+                            <small class="text-muted">Năm kinh nghiệm</small>
+                        </div>
+                        <div class="vr"></div>
+                        <div class="text-center">
+                            <h3 class="fw-bold text-danger mb-0">50+</h3>
+                            <small class="text-muted">Chi nhánh</small>
+                        </div>
+                        <div class="vr"></div>
+                        <div class="text-center">
+                            <h3 class="fw-bold text-danger mb-0">1M+</h3>
+                            <small class="text-muted">Khách hàng</small>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-muted">Từ năm 2010, chúng tôi đã không ngừng tìm kiếm những nguồn nguyên liệu tươi ngon nhất, những công thức bí truyền để tạo nên những chiếc Burger giòn tan và những lát Pizza đậm đà. Mỗi món ăn tại FastFood đều là một lời cam kết về chất lượng và sự tận tâm.</p>
             </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    <img src="/our_story_hero_1778037842037.png" class="img-fluid rounded-5 shadow-lg" alt="Our Story">
-                    <div class="position-absolute bottom-0 start-0 bg-danger text-white p-4 rounded-4 m-4 d-none d-md-block shadow">
+            <!-- Right Image -->
+            <div class="col-lg-6 position-relative" style="min-height: 500px;">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop"
+                     class="position-absolute top-0 start-0 w-100 h-100"
+                     style="object-fit: cover;"
+                     alt="FastFood Kitchen">
+                <div class="position-absolute top-0 start-0 w-100 h-100"
+                     style="background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(0,0,0,0) 100%);"></div>
+                <!-- Badge overlay -->
+                <div class="position-absolute bottom-0 start-0 m-4">
+                    <div class="bg-danger text-white px-4 py-3 rounded-4 shadow-lg">
                         <h4 class="fw-bold mb-0">14+ Năm</h4>
-                        <p class="small mb-0 text-white-50">Phục vụ khách hàng</p>
+                        <p class="small mb-0 opacity-75">Phục vụ khách hàng</p>
                     </div>
                 </div>
             </div>
@@ -27,10 +55,12 @@
     </div>
 </section>
 
-<section class="py-5 bg-light">
+<!-- Core Values Section -->
+<section class="py-6 bg-light">
     <div class="container py-5">
         <div class="row text-center mb-5">
             <div class="col-lg-8 mx-auto">
+                <h6 class="text-danger fw-bold text-uppercase letter-spacing mb-2">Triết lý</h6>
                 <h2 class="fw-bold display-5">Giá trị <span class="text-danger">Cốt lõi</span></h2>
                 <p class="text-muted">Những điều làm nên sự khác biệt của FastFood Store qua nhiều năm.</p>
             </div>
@@ -38,36 +68,70 @@
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center hover-translate">
-                    <div class="icon-circle bg-danger-subtle text-danger mx-auto mb-4">
+                    <div class="icon-circle bg-danger-soft text-danger mx-auto mb-4">
                         <i class="fas fa-leaf fa-2x"></i>
                     </div>
                     <h4 class="fw-bold">Nguyên liệu Tươi</h4>
-                    <p class="text-muted small">Chúng tôi chỉ sử dụng nguyên liệu tươi ngon nhất, được nhập mới mỗi ngày từ các trang trại uy tín.</p>
+                    <p class="text-muted small">Chỉ sử dụng nguyên liệu tươi ngon nhất, được nhập mới mỗi ngày từ các trang trại uy tín.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center hover-translate">
-                    <div class="icon-circle bg-warning-subtle text-warning mx-auto mb-4">
+                    <div class="icon-circle bg-warning-soft text-warning mx-auto mb-4">
                         <i class="fas fa-heart fa-2x"></i>
                     </div>
                     <h4 class="fw-bold">Tận Tâm</h4>
-                    <p class="text-muted small">Mỗi món ăn được chế biến bằng cả trái tim, đảm bảo hương vị và sự hài lòng tuyệt đối của khách hàng.</p>
+                    <p class="text-muted small">Mỗi món ăn được chế biến bằng cả trái tim, đảm bảo hương vị và sự hài lòng tuyệt đối.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center hover-translate">
-                    <div class="icon-circle bg-primary-subtle text-primary mx-auto mb-4">
-                        <i class="fas fa-rocket fa-2x"></i>
+                    <div class="icon-circle bg-primary-soft text-primary mx-auto mb-4">
+                        <i class="fas fa-bolt fa-2x"></i>
                     </div>
-                    <h4 class="fw-bold">Tốc Độ</h4>
-                    <p class="text-muted small">Quy trình chuẩn hóa giúp chúng tôi phục vụ nhanh nhất mà không đánh đổi chất lượng món ăn.</p>
+                    <h4 class="fw-bold">Nhanh Chóng</h4>
+                    <p class="text-muted small">Quy trình chuẩn hóa giúp chúng tôi phục vụ nhanh nhất mà không đánh đổi chất lượng.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Timeline Section -->
+<section class="py-6 bg-white">
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold display-5">Hành trình <span class="text-danger">phát triển</span></h2>
+            </div>
+        </div>
+        <div class="row g-0">
+            <div class="col-md-6 col-lg-3 text-center p-4">
+                <div class="timeline-dot bg-danger text-white mx-auto mb-3">2010</div>
+                <h5 class="fw-bold">Khởi đầu</h5>
+                <p class="text-muted small">Mở cửa hàng đầu tiên tại Hà Nội với 5 nhân viên và 10 món ăn.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center p-4">
+                <div class="timeline-dot bg-danger text-white mx-auto mb-3">2015</div>
+                <h5 class="fw-bold">Mở rộng</h5>
+                <p class="text-muted small">Đạt mốc 10 chi nhánh, có mặt tại 5 tỉnh thành lớn.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center p-4">
+                <div class="timeline-dot bg-danger text-white mx-auto mb-3">2020</div>
+                <h5 class="fw-bold">Chuyển đổi số</h5>
+                <p class="text-muted small">Ra mắt ứng dụng đặt hàng trực tuyến, phục vụ hơn 1 triệu đơn hàng.</p>
+            </div>
+            <div class="col-md-6 col-lg-3 text-center p-4">
+                <div class="timeline-dot bg-danger text-white mx-auto mb-3">2024</div>
+                <h5 class="fw-bold">Hiện tại</h5>
+                <p class="text-muted small">Hơn 50 chi nhánh trên toàn quốc, phục vụ hàng triệu khách hàng mỗi năm.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <style>
+    .letter-spacing { letter-spacing: 2px; }
     .icon-circle {
         width: 80px;
         height: 80px;
@@ -76,9 +140,20 @@
         justify-content: center;
         border-radius: 50%;
     }
-    .bg-danger-subtle { background-color: #ffe5e7; }
-    .bg-warning-subtle { background-color: #fff9db; }
-    .bg-primary-subtle { background-color: #e7f5ff; }
+    .bg-danger-soft { background-color: #ffe5e7; }
+    .bg-warning-soft { background-color: #fff9db; }
+    .bg-primary-soft { background-color: #e7f5ff; }
     .hover-translate { transition: transform 0.3s; }
-    .hover-translate:hover { transform: translateY(-10px); }
+    .hover-translate:hover { transform: translateY(-8px); }
+    .timeline-dot {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+    .py-6 { padding-top: 5rem; padding-bottom: 5rem; }
 </style>
