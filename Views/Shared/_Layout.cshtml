@@ -184,25 +184,23 @@
     <footer class="bg-dark text-white py-5 mt-5 border-top border-secondary">
         <div class="container py-4">
             <div class="row g-4">
-                <!-- Column 1: Categories -->
+                <!-- Column 1: Về FastFood -->
                 <div class="col-6 col-md-3">
-                    <h6 class="fw-bold text-uppercase mb-4">@T("Categories")</h6>
+                    <h6 class="fw-bold text-uppercase mb-4">Về FastFood</h6>
                     <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("Menu")</a></li>
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("Promotion")</a></li>
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">Combo</a></li>
+                        <li class="mb-2"><a asp-controller="Info" asp-action="OurStory" class="text-secondary text-decoration-none hover-white">Câu chuyện của chúng tôi</a></li>
+                        <li class="mb-2"><a asp-controller="Info" asp-action="News" class="text-secondary text-decoration-none hover-white">Tin tức FastFood</a></li>
+                        <li class="mb-2"><a asp-controller="Info" asp-action="Recruitment" class="text-secondary text-decoration-none hover-white">Tuyển dụng</a></li>
                     </ul>
                 </div>
                 
-                <!-- Column 2: About -->
+                <!-- Column 2: System -->
                 <div class="col-6 col-md-3">
-                    <h6 class="fw-bold text-uppercase mb-4">@T("AboutUs")</h6>
+                    <h6 class="fw-bold text-uppercase mb-4">Hệ thống FastFood</h6>
                     <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("OurStory")</a></li>
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("NewsPromotion")</a></li>
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("News")</a></li>
-                        <li class="mb-2"><a href="#" class="text-secondary text-decoration-none hover-white">@T("Recruitment")</a></li>
-                        <li class="mb-2"><a href="#" class="text-decoration-none hover-white">@T("BirthdayParty")</a></li>
+                        <li class="mb-2"><a href="/Home/Index#menu-section" class="text-secondary text-decoration-none hover-white">Thực đơn</a></li>
+                        <li class="mb-2"><a asp-controller="Promotion" asp-action="Index" class="text-secondary text-decoration-none hover-white">Khuyến mãi</a></li>
+                        <li class="mb-2"><a asp-controller="Store" asp-action="Index" class="text-secondary text-decoration-none hover-white">Hệ thống cửa hàng</a></li>
                     </ul>
                 </div>
 
