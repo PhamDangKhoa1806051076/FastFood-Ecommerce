@@ -122,6 +122,18 @@ namespace FastFoodEcommerce.Data
                 context.Stores.AddRange(stores);
                 context.SaveChanges();
             }
+            // Seed Banners
+            if (!context.Banners.Any())
+            {
+                var banners = new Banner[]
+                {
+                    new Banner { Title = "MIỄN PHÍ VẬN CHUYỂN", SubTitle = "Cho đơn hàng từ 200k", ImageUrl = "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200", IsActive = true, DisplayOrder = -1, LinkUrl = "/Promotion" },
+                    new Banner { Title = "THƯỞNG THỨC GÀ GIÒN", SubTitle = "Ưu đãi mua 1 tặng 1 thứ 3 hàng tuần", ImageUrl = "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200", IsActive = true, DisplayOrder = 1, LinkUrl = "/Home/Index#menu-section" },
+                    new Banner { Title = "SIÊU ƯU ĐÃI APP", SubTitle = "Giảm 50% cho đơn hàng đầu tiên trên App", ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200", IsActive = true, DisplayOrder = 100, LinkUrl = "#" }
+                };
+                context.Banners.AddRange(banners);
+                context.SaveChanges();
+            }
         }
     }
 }

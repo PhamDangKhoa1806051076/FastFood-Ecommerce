@@ -21,9 +21,13 @@ public class HomeController : Controller
     {
         var categories = await _context.Categories.AsNoTracking().ToListAsync();
         var products = await _context.Products.AsNoTracking().Include(p => p.Category).ToListAsync();
-        var banners = await _context.Banners.AsNoTracking().Where(b => b.IsActive).OrderBy(b => b.DisplayOrder).ToListAsync();
+        // Chỉ lấy banner có DisplayOrder từ 0 đến 99 cho Carousel trang chủ
+        var carouselBanners = await _context.Banners.AsNoTracking()
+            .Where(b => b.IsActive && b.DisplayOrder >= 0 && b.DisplayOrder < 100)
+            .OrderBy(b => b.DisplayOrder)
+            .ToListAsync();
         ViewBag.Categories = categories;
-        ViewBag.Banners = banners;
+        ViewBag.Banners = carouselBanners;
         return View(products);
     }
 

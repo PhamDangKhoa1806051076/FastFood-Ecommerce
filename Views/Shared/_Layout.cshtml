@@ -1,5 +1,8 @@
 @using FastFoodEcommerce.Helpers
 @using FastFoodEcommerce.Models
+@using FastFoodEcommerce.Data
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext DbContext
 @{
     var cartCount = Context.Session.GetObjectFromJson<List<CartItem>>("FastFoodCart")?.Sum(x => x.Quantity) ?? 0;
     var currentCulture = Context.Request.Cookies["FastFoodLanguage"] ?? "vi";
@@ -7,6 +10,10 @@
 
     var userEmail = Context.Session.GetString("UserEmail");
     var userRole = Context.Session.GetString("UserRole");
+
+    // Fetch Banners for Layout
+    var topBanner = DbContext.Banners.AsNoTracking().Where(b => b.IsActive && b.DisplayOrder < 0).OrderBy(b => b.DisplayOrder).FirstOrDefault();
+    var bottomBanner = DbContext.Banners.AsNoTracking().Where(b => b.IsActive && b.DisplayOrder >= 100).OrderBy(b => b.DisplayOrder).FirstOrDefault();
 }
 <!DOCTYPE html>
 <html lang="@currentCulture">
@@ -18,10 +25,50 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FastFoodEcommerce.styles.css" asp-append-version="true" />
+    <style>
+        .top-promo-bar {
+            background: linear-gradient(90deg, #e63946 0%, #d62828 100%);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .bottom-promo-banner {
+            background: #f8f9fa;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .hover-white:hover { color: white !important; }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            transition: all 0.3s;
+        }
+        .social-icon:hover { background: #e63946; transform: translateY(-3px); }
+    </style>
 </head>
 <body>
+    @if (topBanner != null)
+    {
+        <div class="top-promo-bar animate__animated animate__fadeInDown">
+            <a href="@(topBanner.LinkUrl ?? "#")" class="text-white text-decoration-none">
+                <i class="fas fa-bullhorn me-2"></i> @topBanner.Title: @topBanner.SubTitle
+            </a>
+        </div>
+    }
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-3">
             <div class="container-fluid px-5">
@@ -111,6 +158,28 @@
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
+
+    @if (bottomBanner != null)
+    {
+        <div class="container mt-5">
+            <div class="bottom-promo-banner animate__animated animate__fadeInUp">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-7 p-5">
+                        <span class="badge bg-danger mb-3 px-3 py-2 rounded-pill text-uppercase">Ưu đãi đặc biệt</span>
+                        <h2 class="display-5 fw-bold mb-3">@bottomBanner.Title</h2>
+                        <p class="lead text-muted mb-4">@bottomBanner.SubTitle</p>
+                        @if (!string.IsNullOrEmpty(bottomBanner.LinkUrl))
+                        {
+                            <a href="@bottomBanner.LinkUrl" class="btn btn-dark btn-lg px-5 rounded-pill fw-bold">Khám phá ngay</a>
+                        }
+                    </div>
+                    <div class="col-md-5">
+                        <img src="@bottomBanner.ImageUrl" class="img-fluid w-100" style="height: 350px; object-fit: cover;" alt="@bottomBanner.Title">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
     <footer class="bg-dark text-white py-5 mt-5 border-top border-secondary">
         <div class="container py-4">
