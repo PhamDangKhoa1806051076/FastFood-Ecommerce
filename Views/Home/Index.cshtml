@@ -69,7 +69,7 @@ else
 }
 
 <!-- Menu Category Tabs (KFC Style) -->
-<div id="menu-section" class="bg-white sticky-top shadow-sm py-2" style="top: 85px; z-index: 1020;">
+<div id="menu-section" class="bg-white border-bottom py-2">
     <div class="container-fluid px-5">
         <ul class="nav nav-tabs border-0 flex-nowrap overflow-auto text-uppercase fw-bold" id="categoryTabs" role="tablist" style="scrollbar-width: none;">
             <li class="nav-item me-2" role="presentation">
@@ -227,7 +227,7 @@ else
             $('#menu-link').click(function(e) {
                 e.preventDefault();
                 $('html, body').animate({
-                    scrollTop: $("#menu-section").offset().top - 80
+                    scrollTop: $("#menu-section").offset().top - 70
                 }, 800);
             });
 
