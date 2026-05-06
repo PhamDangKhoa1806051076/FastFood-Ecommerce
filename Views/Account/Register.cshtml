@@ -22,7 +22,7 @@
             <div class="w-100" style="max-width: 450px;">
                 <h2 class="fw-bold mb-4 text-uppercase">@T("Register")</h2>
                 
-                <form asp-action="Register" method="post">
+                <form id="registerForm" asp-action="Register" method="post">
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-muted text-uppercase">@T("FullName") *</label>
                         <input type="text" name="name" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
@@ -35,15 +35,19 @@
                     
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-muted text-uppercase">@T("Password") *</label>
-                        <input type="password" name="password" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
+                        <input type="password" name="password" id="regPass" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
                     </div>
 
                     <div class="mb-4">
                         <label class="form-label small fw-bold text-muted text-uppercase">@T("ConfirmPassword") *</label>
-                        <input type="password" name="confirmPassword" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
+                        <input type="password" name="confirmPassword" id="regConfirm" class="form-control border-0 border-bottom rounded-0 px-0 focus-none" required>
+                        <div id="passError" class="text-danger small mt-1 d-none">Mật khẩu không khớp!</div>
                     </div>
                     
-                    <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase mb-4 shadow-sm">@T("CreateAccount")</button>
+                    <button type="submit" id="regBtn" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase mb-4 shadow-sm">
+                        <span class="btn-text">@T("CreateAccount")</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                     
                     <div class="text-center">
                         <p class="small text-muted">@T("Login")? <a asp-action="Login" class="text-dark fw-bold text-decoration-none underline">@T("Login")</a></p>
@@ -53,6 +57,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        const pass = document.getElementById('regPass').value;
+        const confirm = document.getElementById('regConfirm').value;
+        const errorDiv = document.getElementById('passError');
+
+        if (pass !== confirm) {
+            e.preventDefault();
+            errorDiv.classList.remove('d-none');
+            return;
+        }
+
+        errorDiv.classList.add('d-none');
+        const btn = document.getElementById('regBtn');
+        btn.disabled = true;
+        btn.querySelector('.btn-text').innerText = 'Đang xử lý...';
+        btn.querySelector('.spinner-border').classList.remove('d-none');
+    });
+</script>
 
 <style>
     .focus-none:focus { box-shadow: none; border-color: #000; }

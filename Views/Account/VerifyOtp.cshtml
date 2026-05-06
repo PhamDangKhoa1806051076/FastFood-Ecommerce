@@ -4,26 +4,60 @@
     string T(string key) => FastFoodEcommerce.Helpers.LanguageHelper.Get(key, currentCulture);
 }
 
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var phone = HttpContextAccessor.HttpContext.Session.GetString("PendingPhone") ?? "0*********";
+}
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-5 text-center">
             <h2 class="fw-bold mb-4 text-uppercase">@T("EnterOTP")</h2>
-            <p class="text-muted mb-5">@T("OTPDescription")</p>
+            <p class="text-muted mb-3">Mã OTP đã được gửi đến số <span class="text-dark fw-bold">@phone</span>.</p>
             
-            <form asp-action="VerifyOtp" method="post">
+            @if (TempData["MockOTP"] != null)
+            {
+                <div class="alert alert-info py-2 small shadow-sm animate__animated animate__pulse animate__infinite" style="border-radius: 15px; background-color: #e3f2fd; border: 1px dashed #2196f3;">
+                    <i class="fas fa-info-circle me-2 text-primary"></i>Mã xác thực giả lập của bạn là: <strong class="fs-5">@TempData["MockOTP"]</strong>
+                </div>
+            }
+            
+            <form id="otpForm" asp-action="VerifyOtp" method="post">
                 <div class="mb-4 d-flex justify-content-center gap-2">
-                    <input type="text" name="otp" class="form-control text-center fs-2 fw-bold border-0 border-bottom rounded-0 focus-none" maxlength="6" style="letter-spacing: 10px;" placeholder="000000" required>
+                    <input type="text" name="otp" id="otpInput" class="form-control text-center fs-2 fw-bold border-0 border-bottom rounded-0 focus-none" maxlength="6" style="letter-spacing: 10px;" placeholder="000000" required autofocus>
                 </div>
                 
-                <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase shadow">@T("ConfirmLogin")</button>
+                <button type="submit" id="confirmBtn" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-uppercase shadow">
+                    <span class="btn-text">@T("ConfirmLogin")</span>
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                </button>
             </form>
             
             <div class="mt-4">
-                <p class="small text-muted">@T("ResendOTP")? <a href="#" class="text-dark fw-bold text-decoration-none">@T("ResendOTP")</a></p>
+                <p class="small text-muted">@T("ResendOTP")? <a href="javascript:void(0)" onclick="location.reload()" class="text-dark fw-bold text-decoration-none">Gửi lại ngay</a></p>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('confirmBtn');
+        const btnText = btn.querySelector('.btn-text');
+        const spinner = btn.querySelector('.spinner-border');
+
+        btn.disabled = true;
+        btnText.innerText = 'Đang xác thực...';
+        spinner.classList.remove('d-none');
+
+        // Simulate verification processing
+        setTimeout(() => {
+            this.submit();
+        }, 1000);
+    });
+</script>
 
 <style>
     .focus-none:focus { box-shadow: none; border-color: #28a745; }

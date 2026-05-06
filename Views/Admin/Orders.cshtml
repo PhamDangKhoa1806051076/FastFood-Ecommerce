@@ -1,0 +1,109 @@
+@model IEnumerable<FastFoodEcommerce.Models.Order>
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid px-4 py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-uppercase m-0"><i class="fas fa-shopping-cart me-2 text-danger"></i>Quản lý đơn hàng</h2>
+        <div class="d-flex gap-2">
+            <a asp-action="ExportSalesToExcel" class="btn btn-outline-success rounded-pill shadow-sm">
+                <i class="fas fa-file-excel me-1"></i> Xuất Excel
+            </a>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light text-muted small text-uppercase">
+                        <tr>
+                            <th class="ps-4 py-3">Mã Đơn</th>
+                            <th class="py-3">Khách Hàng</th>
+                            <th class="py-3">Ngày Đặt</th>
+                            <th class="py-3">Tổng Tiền</th>
+                            <th class="py-3">Trạng Thái</th>
+                            <th class="py-3 text-end pe-4">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr id="order-row-@order.Id">
+                                <td class="ps-4"><span class="fw-bold">#@order.Id</span></td>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-bold">@order.CustomerName</span>
+                                        <small class="text-muted">@order.CustomerEmail</small>
+                                    </div>
+                                </td>
+                                <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><span class="text-danger fw-bold">@order.TotalAmount.ToString("N0")đ</span></td>
+                                <td>
+                                    <select class="form-select form-select-sm rounded-pill status-select" 
+                                            data-order-id="@order.Id"
+                                            style="width: 150px; @(order.Status == "Completed" ? "border-color: #28a745; color: #28a745;" : order.Status == "Cancelled" ? "border-color: #dc3545; color: #dc3545;" : "border-color: #ffc107; color: #856404;")">
+                                        <option value="Pending" selected="@(order.Status == "Pending")">Chờ xử lý</option>
+                                        <option value="Processing" selected="@(order.Status == "Processing")">Đang chuẩn bị</option>
+                                        <option value="Shipping" selected="@(order.Status == "Shipping")">Đang giao</option>
+                                        <option value="Completed" selected="@(order.Status == "Completed")">Đã hoàn thành</option>
+                                        <option value="Cancelled" selected="@(order.Status == "Cancelled")">Đã hủy</option>
+                                    </select>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <button class="btn btn-sm btn-light rounded-circle shadow-sm text-danger delete-order" data-order-id="@order.Id">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Update Status
+            $('.status-select').change(function() {
+                const orderId = $(this).data('order-id');
+                const newStatus = $(this).val();
+                const select = $(this);
+
+                $.post('/Admin/UpdateOrderStatus', { orderId: orderId, status: newStatus }, function(response) {
+                    if (response.success) {
+                        // Toast notification or visual feedback
+                        select.addClass('is-valid');
+                        setTimeout(() => select.removeClass('is-valid'), 2000);
+                        
+                        // Update color based on status
+                        if (newStatus === 'Completed') select.css({'border-color': '#28a745', 'color': '#28a745'});
+                        else if (newStatus === 'Cancelled') select.css({'border-color': '#dc3545', 'color': '#dc3545'});
+                        else select.css({'border-color': '#ffc107', 'color': '#856404'});
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                });
+            });
+
+            // Delete Order
+            $('.delete-order').click(function() {
+                if (confirm('Bạn có chắc chắn muốn xóa đơn hàng này?')) {
+                    const orderId = $(this).data('order-id');
+                    $.post('/Admin/DeleteOrder', { orderId: orderId }, function(response) {
+                        if (response.success) {
+                            $(`#order-row-${orderId}`).fadeOut(300, function() { $(this).remove(); });
+                        } else {
+                            alert('Lỗi: ' + response.message);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

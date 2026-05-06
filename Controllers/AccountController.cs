@@ -44,18 +44,33 @@ namespace FastFoodEcommerce.Controllers
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            // Dummy authentication logic
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 ModelState.AddModelError("", "Vui lòng nhập đầy đủ thông tin.");
                 return View();
             }
 
-            // Store email in session to pass to next step
-            HttpContext.Session.SetString("PendingEmail", email);
-            HttpContext.Session.SetString("PendingPassword", password);
+            // ── Tài khoản Admin cố định ──
+            if (email.ToLower() == "admin@fastfood.com" && password == "123")
+            {
+                HttpContext.Session.SetString("UserEmail", email);
+                HttpContext.Session.SetString("UserRole", "Admin");
+                HttpContext.Session.SetString("UserName", "Administrator");
+                return RedirectToAction("Index", "Admin");
+            }
 
-            return RedirectToAction("VerifyPhone");
+            // ── Tài khoản User thường cố định ──
+            if (email.ToLower() == "user@fastfood.com" && password == "123")
+            {
+                HttpContext.Session.SetString("UserEmail", email);
+                HttpContext.Session.SetString("UserRole", "Customer");
+                HttpContext.Session.SetString("UserName", "Nguyễn Văn A");
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Sai thông tin
+            ModelState.AddModelError("", "Email hoặc mật khẩu không đúng.");
+            return View();
         }
 
         [HttpGet]
@@ -69,6 +84,10 @@ namespace FastFoodEcommerce.Controllers
         {
             if (string.IsNullOrEmpty(phone)) return View();
             HttpContext.Session.SetString("PendingPhone", phone);
+            
+            // Tạo mã OTP giả lập để người dùng thấy
+            TempData["MockOTP"] = "123456";
+            
             return RedirectToAction("VerifyOtp");
         }
 
@@ -81,21 +100,17 @@ namespace FastFoodEcommerce.Controllers
         [HttpPost]
         public IActionResult VerifyOtp(string otp)
         {
-            // Simulate OTP success
+            // Simulate OTP success (dùng cho luồng đăng ký)
             var email = HttpContext.Session.GetString("PendingEmail") ?? "";
-            
-            // Set User Session
+            var name  = HttpContext.Session.GetString("PendingName") ?? "Khách hàng";
+
             HttpContext.Session.SetString("UserEmail", email);
-            
-            // Basic Role assignment
+            HttpContext.Session.SetString("UserName", name);
+
             if (email.ToLower() == "admin@fastfood.com")
-            {
                 HttpContext.Session.SetString("UserRole", "Admin");
-            }
             else
-            {
                 HttpContext.Session.SetString("UserRole", "Customer");
-            }
 
             return RedirectToAction("Index", "Home");
         }

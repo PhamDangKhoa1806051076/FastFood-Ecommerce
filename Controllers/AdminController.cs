@@ -123,6 +123,39 @@ namespace FastFoodEcommerce.Controllers
             return View(orders);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, string status)
+        {
+            if (!IsAdmin()) return Json(new { success = false, message = "Unauthorized" });
+
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order != null)
+            {
+                string oldStatus = order.Status;
+                order.Status = status;
+                await _context.SaveChangesAsync();
+                await LogAction("Cập nhật trạng thái đơn hàng", $"Đơn hàng #{orderId}: {oldStatus} -> {status}");
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Order not found" });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteOrder(int orderId)
+        {
+            if (!IsAdmin()) return Json(new { success = false, message = "Unauthorized" });
+
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+                await LogAction("Xóa đơn hàng", $"Đơn hàng #{orderId} của {order.CustomerName}");
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Order not found" });
+        }
+
         // Inventory Management
         public async Task<IActionResult> Inventory()
         {

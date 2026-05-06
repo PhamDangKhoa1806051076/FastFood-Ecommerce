@@ -7,22 +7,47 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-md-5 text-center">
-            <h2 class="fw-bold mb-4 text-uppercase">@T("VerifyPhone")</h2>
-            <p class="text-muted mb-5">@T("OTPDescription")</p>
-            
-            <form asp-action="VerifyPhone" method="post">
-                <div class="mb-4">
-                    <div class="input-group input-group-lg border-bottom">
-                        <span class="input-group-text bg-transparent border-0 text-muted">+84</span>
-                        <input type="tel" name="phone" class="form-control border-0 rounded-0 focus-none" placeholder="09xxxxxxx" required>
-                    </div>
-                </div>
+            <div id="verify-form-container">
+                <h2 class="fw-bold mb-4 text-uppercase">@T("VerifyPhone")</h2>
+                <p class="text-muted mb-5">Vui lòng nhập số điện thoại để nhận mã xác thực OTP.</p>
                 
-                <button type="submit" class="btn btn-dark w-100 py-3 rounded-pill fw-bold text-uppercase shadow">@T("ResendOTP")</button>
-            </form>
+                <form id="phoneForm" asp-action="VerifyPhone" method="post">
+                    <div class="mb-4">
+                        <div class="input-group input-group-lg border-bottom">
+                            <span class="input-group-text bg-transparent border-0 text-muted">+84</span>
+                            <input type="tel" name="phone" id="phoneInput" class="form-control border-0 rounded-0 focus-none" placeholder="09xxxxxxx" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="btn btn-dark w-100 py-3 rounded-pill fw-bold text-uppercase shadow">
+                        <span class="btn-text">Gửi mã xác thực</span>
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('phoneForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const btnText = btn.querySelector('.btn-text');
+        const spinner = btn.querySelector('.spinner-border');
+        const phone = document.getElementById('phoneInput').value;
+
+        // Visual feedback
+        btn.disabled = true;
+        btnText.innerText = 'Đang gửi...';
+        spinner.classList.remove('d-none');
+
+        // Simulate network delay for "sending" SMS
+        setTimeout(() => {
+            this.submit();
+        }, 1500);
+    });
+</script>
 
 <style>
     .focus-none:focus { box-shadow: none; }
