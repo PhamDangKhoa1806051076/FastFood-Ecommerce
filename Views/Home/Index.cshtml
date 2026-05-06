@@ -228,6 +228,15 @@ else
                     scrollTop: $("#menu-section").offset().top - 80
                 }, 800);
             });
+
+            // Force Carousel Auto-play
+            var homeCarousel = document.querySelector('#homeCarousel');
+            if (homeCarousel) {
+                new bootstrap.Carousel(homeCarousel, {
+                    interval: 3000,
+                    ride: 'carousel'
+                });
+            }
         });
     </script>
 }
