@@ -209,6 +209,44 @@ namespace FastFoodEcommerce.Controllers
             return View(banner);
         }
 
+        public async Task<IActionResult> EditBanner(int id)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            var banner = await _context.Banners.FindAsync(id);
+            if (banner == null) return NotFound();
+            return View(banner);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBanner(Banner banner)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            if (ModelState.IsValid)
+            {
+                _context.Update(banner);
+                await _context.SaveChangesAsync();
+                await LogAction("Cập nhật Banner", $"ID: {banner.Id}, Tiêu đề: {banner.Title}");
+                return RedirectToAction(nameof(Banners));
+            }
+            return View(banner);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBanner(int id)
+        {
+            if (!IsAdmin()) return Json(new { success = false, message = "Unauthorized" });
+
+            var banner = await _context.Banners.FindAsync(id);
+            if (banner != null)
+            {
+                _context.Banners.Remove(banner);
+                await _context.SaveChangesAsync();
+                await LogAction("Xóa Banner", $"Tiêu đề: {banner.Title}");
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Banner not found" });
+        }
+
         // Excel Export
         public async Task<IActionResult> ExportSalesToExcel()
         {
