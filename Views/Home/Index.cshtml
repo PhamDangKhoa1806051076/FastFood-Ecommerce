@@ -9,12 +9,12 @@
 <!-- Dynamic Banner Carousel -->
 @if (ViewBag.Banners != null && ((IEnumerable<FastFoodEcommerce.Models.Banner>)ViewBag.Banners).Any())
 {
-    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="3000">
+    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
         <div class="carousel-indicators">
             @{ var bi = 0; }
             @foreach (var banner in ViewBag.Banners)
             {
-                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="@bi" class="@(bi == 0 ? "active" : "")"></button>
+                <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="@bi" class="@(bi == 0 ? "active" : "")" aria-current="@(bi == 0 ? "true" : "false")" aria-label="Slide @(bi + 1)"></button>
                 bi++;
             }
         </div>
@@ -22,14 +22,14 @@
             @{ var first = true; }
             @foreach (var banner in ViewBag.Banners)
             {
-                <div class="carousel-item @(first ? "active" : "")">
+                <div class="carousel-item @(first ? "active" : "")" data-bs-interval="3000">
                     <img src="@banner.ImageUrl" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="@banner.Title">
                     <div class="carousel-caption d-none d-md-block text-start bg-dark bg-opacity-25 p-4 rounded-4" style="bottom: 10%; left: 10%;">
-                        <h2 class="display-4 fw-bold">@banner.Title</h2>
-                        <p class="fs-4">@banner.SubTitle</p>
+                        <h2 class="display-4 fw-bold animate__animated animate__fadeInDown">@banner.Title</h2>
+                        <p class="fs-4 animate__animated animate__fadeInUp">@banner.SubTitle</p>
                         @if (!string.IsNullOrEmpty(banner.LinkUrl))
                         {
-                            <a href="@banner.LinkUrl" class="btn btn-danger btn-lg rounded-pill px-5">Xem ngay</a>
+                            <a href="@banner.LinkUrl" class="btn btn-danger btn-lg rounded-pill px-5 animate__animated animate__zoomIn">Xem ngay</a>
                         }
                     </div>
                 </div>
@@ -38,9 +38,11 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
         </button>
     </div>
 }
@@ -229,14 +231,21 @@ else
                 }, 800);
             });
 
-            // Force Carousel Auto-play
-            var homeCarousel = document.querySelector('#homeCarousel');
-            if (homeCarousel) {
-                new bootstrap.Carousel(homeCarousel, {
-                    interval: 3000,
-                    ride: 'carousel'
-                });
-            }
+            // Force Carousel Auto-play with a small delay to ensure Bootstrap is ready
+            setTimeout(function() {
+                var homeCarousel = document.getElementById('homeCarousel');
+                if (homeCarousel && typeof bootstrap !== 'undefined') {
+                    var carousel = new bootstrap.Carousel(homeCarousel, {
+                        interval: 3000,
+                        ride: 'carousel',
+                        pause: false
+                    });
+                    
+                    // Manual trigger for buttons if data-bs-slide fails
+                    $('.carousel-control-prev').click(function() { carousel.prev(); });
+                    $('.carousel-control-next').click(function() { carousel.next(); });
+                }
+            }, 500);
         });
     </script>
 }
@@ -266,5 +275,22 @@ else
     }
     #categoryTabs::-webkit-scrollbar {
         display: none;
+    }
+    /* Carousel Fixes */
+    .carousel-control-prev, .carousel-control-next {
+        width: 5%;
+        z-index: 1021;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        width: 3rem;
+        height: 3rem;
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 50%;
+        background-size: 50%;
+        transition: background-color 0.3s;
+    }
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        background-color: rgba(230, 57, 70, 0.8);
     }
 </style>
