@@ -127,9 +127,17 @@ namespace FastFoodEcommerce.Data
             {
                 var banners = new Banner[]
                 {
-                    new Banner { Title = "MIỄN PHÍ VẬN CHUYỂN", SubTitle = "Cho đơn hàng từ 200k", ImageUrl = "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200", IsActive = true, DisplayOrder = -1, LinkUrl = "/Promotion" },
+                    // Top Bar (DisplayOrder < 0)
+                    new Banner { Title = "MIỄN PHÍ VẬN CHUYỂN", SubTitle = "Cho đơn hàng từ 200k toàn quốc", ImageUrl = "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200", IsActive = true, DisplayOrder = -1, LinkUrl = "/Promotion" },
+                    
+                    // Main Carousel (DisplayOrder 0-99)
                     new Banner { Title = "THƯỞNG THỨC GÀ GIÒN", SubTitle = "Ưu đãi mua 1 tặng 1 thứ 3 hàng tuần", ImageUrl = "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200", IsActive = true, DisplayOrder = 1, LinkUrl = "/Home/Index#menu-section" },
-                    new Banner { Title = "SIÊU ƯU ĐÃI APP", SubTitle = "Giảm 50% cho đơn hàng đầu tiên trên App", ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200", IsActive = true, DisplayOrder = 100, LinkUrl = "#" }
+                    new Banner { Title = "BURGER BÒ PHÔ MAI", SubTitle = "Vị ngon khó cưỡng, ưu đãi chỉ 49k", ImageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200", IsActive = true, DisplayOrder = 2, LinkUrl = "/Home/Index#menu-section" },
+                    new Banner { Title = "PIZZA HẢI SẢN MỚI", SubTitle = "Đế dày, ngập tràn hải sản tươi ngon", ImageUrl = "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1200", IsActive = true, DisplayOrder = 3, LinkUrl = "/Home/Index#menu-section" },
+                    
+                    // Bottom Banner (DisplayOrder >= 100)
+                    new Banner { Title = "SIÊU ƯU ĐÃI APP", SubTitle = "Giảm 50% cho đơn hàng đầu tiên trên App Mobile", ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200", IsActive = true, DisplayOrder = 100, LinkUrl = "#" },
+                    new Banner { Title = "TÍCH ĐIỂM ĐỔI QUÀ", SubTitle = "Mỗi 10k tích 1 điểm, đổi ngay Voucher hấp dẫn", ImageUrl = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=1200", IsActive = true, DisplayOrder = 101, LinkUrl = "/Account/Loyalty" }
                 };
                 context.Banners.AddRange(banners);
                 context.SaveChanges();

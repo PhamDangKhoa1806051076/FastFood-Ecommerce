@@ -9,7 +9,7 @@
 <!-- Dynamic Banner Carousel -->
 @if (ViewBag.Banners != null && ((IEnumerable<FastFoodEcommerce.Models.Banner>)ViewBag.Banners).Any())
 {
-    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
             @{ var bi = 0; }
             @foreach (var banner in ViewBag.Banners)
