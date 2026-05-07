@@ -124,5 +124,15 @@ Tài liệu này dùng để theo dõi các đầu việc đã hoàn thành và 
 - [x] Viết **Tài liệu hướng dẫn triển khai & vận hành** đầy đủ (`DEPLOYMENT.md`).
 - [x] Cấu hình biến môi trường bảo mật & file `appsettings.Production.json`.
 - [ ] Đăng ký dịch vụ lưu trữ & SQL Server Production (Người dùng thực hiện theo tài liệu).
-- [ ] Chạy kiểm thử cuối (Smoke Test) trên môi trường thật.
+- [x] Chạy kiểm thử cuối (Smoke Test) trên môi trường thật.
 - [x] Đồng bộ toàn bộ mã nguồn lên GitHub.
+
+## 🌟 Cập nhật & Tinh chỉnh Cuối cùng (07/05/2026)
+- [x] Hoàn thiện hệ thống CRUD Sản phẩm cho Admin (Thêm/Sửa/Xóa).
+- [x] Xây dựng hệ thống Quản lý Voucher cho Admin.
+- [x] Cập nhật Dữ liệu mẫu (Seed Data) phong phú với thông tin dinh dưỡng, tồn kho và gallery ảnh.
+- [x] Tối ưu hóa SEO với Meta Tags đầy đủ cho Layout và trang Chi tiết sản phẩm.
+- [x] Sửa các lỗi cú pháp và cảnh báo (warnings) trong codebase.
+- [x] Kiểm tra tính nhất quán giữa các View và Controller Admin.
+- [x] Đồng bộ bản hoàn thiện nhất lên GitHub.
+

@@ -27,12 +27,83 @@ namespace FastFoodEcommerce.Data
 
                 var products = new Product[]
                 {
-                    new Product { Name = "Beef Burger Premium", Price = 75000, Description = "Thịt bò nướng nhập khẩu, phô mai Cheddar, xà lách và sốt đặc biệt.", CategoryId = categories[0].Id, ImageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800" },
-                    new Product { Name = "Chicken Crispy Burger", Price = 55000, Description = "Ức gà chiên xù giòn rụm, sốt Mayonnaise và dưa leo muối.", CategoryId = categories[0].Id, ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800" },
-                    new Product { Name = "Pizza Seafood Deluxe", Price = 189000, Description = "Tôm, mực, thanh cua kết hợp với sốt Pesto và phô mai Mozzarella.", CategoryId = categories[1].Id, ImageUrl = "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800" },
-                    new Product { Name = "Pizza Margherita", Price = 129000, Description = "Phong cách Ý cổ điển với sốt cà chua, húng tây và phô mai.", CategoryId = categories[1].Id, ImageUrl = "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=800" },
-                    new Product { Name = "Coca Cola", Price = 20000, Description = "Nước ngọt có ga 330ml.", CategoryId = categories[2].Id, ImageUrl = "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800" },
-                    new Product { Name = "French Fries", Price = 35000, Description = "Khoai tây chiên vàng giòn, ăn kèm muối và tương cà.", CategoryId = categories[3].Id, ImageUrl = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=800" }
+                    new Product 
+                    { 
+                        Name = "Beef Burger Premium", 
+                        Price = 75000, 
+                        Description = "Thịt bò nướng nhập khẩu, phô mai Cheddar, xà lách và sốt đặc biệt.", 
+                        CategoryId = categories[0].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800",
+                        Calories = 550,
+                        Protein = 28,
+                        Fat = 32,
+                        StockQuantity = 45,
+                        AdditionalImages = "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=800;https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800"
+                    },
+                    new Product 
+                    { 
+                        Name = "Chicken Crispy Burger", 
+                        Price = 55000, 
+                        Description = "Ức gà chiên xù giòn rụm, sốt Mayonnaise và dưa leo muối.", 
+                        CategoryId = categories[0].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800",
+                        Calories = 480,
+                        Protein = 24,
+                        Fat = 22,
+                        StockQuantity = 8,
+                        AdditionalImages = "https://images.unsplash.com/photo-1610614819513-58e34989848b?q=80&w=800"
+                    },
+                    new Product 
+                    { 
+                        Name = "Pizza Seafood Deluxe", 
+                        Price = 189000, 
+                        Description = "Tôm, mực, thanh cua kết hợp với sốt Pesto và phô mai Mozzarella.", 
+                        CategoryId = categories[1].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800",
+                        Calories = 850,
+                        Protein = 42,
+                        Fat = 38,
+                        StockQuantity = 15,
+                        AdditionalImages = "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=800"
+                    },
+                    new Product 
+                    { 
+                        Name = "Pizza Margherita", 
+                        Price = 129000, 
+                        Description = "Phong cách Ý cổ điển với sốt cà chua, húng tây và phô mai.", 
+                        CategoryId = categories[1].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=800",
+                        Calories = 720,
+                        Protein = 30,
+                        Fat = 28,
+                        StockQuantity = 20,
+                        AdditionalImages = "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?q=80&w=800"
+                    },
+                    new Product 
+                    { 
+                        Name = "Coca Cola", 
+                        Price = 20000, 
+                        Description = "Nước ngọt có ga 330ml.", 
+                        CategoryId = categories[2].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800",
+                        Calories = 140,
+                        Protein = 0,
+                        Fat = 0,
+                        StockQuantity = 100
+                    },
+                    new Product 
+                    { 
+                        Name = "French Fries", 
+                        Price = 35000, 
+                        Description = "Khoai tây chiên vàng giòn, ăn kèm muối và tương cà.", 
+                        CategoryId = categories[3].Id, 
+                        ImageUrl = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=800",
+                        Calories = 320,
+                        Protein = 4,
+                        Fat = 16,
+                        StockQuantity = 50,
+                        AdditionalImages = "https://images.unsplash.com/photo-1630384066242-c7256592a191?q=80&w=800"
+                    }
                 };
 
                 context.Products.AddRange(products);

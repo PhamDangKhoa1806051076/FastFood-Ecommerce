@@ -115,6 +115,45 @@ namespace FastFoodEcommerce.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            var product = await _context.Products.FindAsync(id);
+            if (product == null) return NotFound();
+            ViewBag.Categories = _context.Categories.ToList();
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(Product product)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            if (ModelState.IsValid)
+            {
+                _context.Update(product);
+                await _context.SaveChangesAsync();
+                await LogAction("Cập nhật sản phẩm", $"ID: {product.Id}, Tên: {product.Name}");
+                return RedirectToAction(nameof(Products));
+            }
+            ViewBag.Categories = _context.Categories.ToList();
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            if (!IsAdmin()) return Json(new { success = false, message = "Unauthorized" });
+            var product = await _context.Products.FindAsync(id);
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+                await LogAction("Xóa sản phẩm", $"Tên: {product.Name}");
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Product not found" });
+        }
+
         // Order Management
         public async Task<IActionResult> Orders()
         {
@@ -292,6 +331,71 @@ namespace FastFoodEcommerce.Controllers
                     return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"SalesReport_{DateTime.Now:yyyyMMddHHmm}.xlsx");
                 }
             }
+        }
+
+        // Voucher Management
+        public async Task<IActionResult> Vouchers()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            var vouchers = await _context.Vouchers.AsNoTracking().OrderByDescending(v => v.EndDate).ToListAsync();
+            return View(vouchers);
+        }
+
+        public IActionResult CreateVoucher()
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVoucher(Voucher voucher)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            if (ModelState.IsValid)
+            {
+                _context.Vouchers.Add(voucher);
+                await _context.SaveChangesAsync();
+                await LogAction("Thêm Voucher", $"Mã: {voucher.Code}, Giảm: {voucher.DiscountPercentage}%");
+                return RedirectToAction(nameof(Vouchers));
+            }
+            return View(voucher);
+        }
+
+        public async Task<IActionResult> EditVoucher(int id)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            var voucher = await _context.Vouchers.FindAsync(id);
+            if (voucher == null) return NotFound();
+            return View(voucher);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditVoucher(Voucher voucher)
+        {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+            if (ModelState.IsValid)
+            {
+                _context.Update(voucher);
+                await _context.SaveChangesAsync();
+                await LogAction("Cập nhật Voucher", $"ID: {voucher.Id}, Mã: {voucher.Code}");
+                return RedirectToAction(nameof(Vouchers));
+            }
+            return View(voucher);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteVoucher(int id)
+        {
+            if (!IsAdmin()) return Json(new { success = false, message = "Unauthorized" });
+            var voucher = await _context.Vouchers.FindAsync(id);
+            if (voucher != null)
+            {
+                _context.Vouchers.Remove(voucher);
+                await _context.SaveChangesAsync();
+                await LogAction("Xóa Voucher", $"Mã: {voucher.Code}");
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Voucher not found" });
         }
 
         public async Task<IActionResult> AuditLogs()

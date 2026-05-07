@@ -230,4 +230,3 @@ C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\bmbvw90tsj
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\3xpstqimjb-q8i2kmhrat.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\8jpv3ukhnl-alrvhpdde3.gz
 C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\compressed\sv3u5ur1uc-6gicfrpbcu.gz
-C:\Users\ADMIN\Downloads\LẬP TRÌNH WEB\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
