@@ -52,3 +52,8 @@ Dự án Thương mại điện tử FastFood (Bài tập báo cáo chuyên môn
 *   ✅ **Giai đoạn 8**: Dashboard Admin & Biểu đồ Chart.js.
 *   ✅ **Giai đoạn 9**: Hoàn thiện Bộ lọc nâng cao & Tối ưu hóa UI/UX.
 
+## 6. NHẬT KÝ CẬP NHẬT GẦN ĐÂY (CHANGELOG)
+**Tháng 5/2026:**
+*   **Tinh chỉnh UI/UX Trang chủ**: Xóa bỏ tab "Tất cả sản phẩm" để tập trung hiển thị danh mục đầu tiên, tối ưu thời gian cuộn slide của Banner (5 giây/lượt) giúp giao diện gọn gàng và chuyên nghiệp.
+*   **Hoàn thiện Chế độ Tối (Dark Mode)**: Thêm nút chuyển đổi giao diện Sáng/Tối trực quan trên thanh công cụ. Tối ưu hóa triệt để độ tương phản của mã màu CSS (`site.css`) đảm bảo toàn bộ menu, chữ, nội dung đều rõ nét và tự động đảo màu nền khi sử dụng ban đêm.
+*   **Sửa lỗi & Cập nhật Dữ liệu (Database)**: Xử lý dứt điểm tình trạng lỗi bộ mã UTF-8 tiếng Việt. Cấu hình lại bộ dữ liệu mẫu (Seed Data) với hệ thống hình ảnh sản phẩm (Burger, Cơm, Mì Ý, Tráng miệng,...) chất lượng cao từ Unsplash, khắc phục tình trạng hiển thị sai hình ảnh.
