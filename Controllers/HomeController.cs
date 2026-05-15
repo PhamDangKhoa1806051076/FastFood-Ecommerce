@@ -20,7 +20,10 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var categories = await _context.Categories.AsNoTracking().ToListAsync();
-        var products = await _context.Products.AsNoTracking().Include(p => p.Category).ToListAsync();
+        var firstCategory = categories.FirstOrDefault();
+        var products = firstCategory != null 
+            ? await _context.Products.AsNoTracking().Include(p => p.Category).Where(p => p.CategoryId == firstCategory.Id).ToListAsync()
+            : new List<Product>();
         // Chỉ lấy banner có DisplayOrder từ 0 đến 99 cho Carousel trang chủ
         var carouselBanners = await _context.Banners.AsNoTracking()
             .Where(b => b.IsActive && b.DisplayOrder >= 0 && b.DisplayOrder < 100)

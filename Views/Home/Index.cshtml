@@ -9,7 +9,7 @@
 <!-- Dynamic Banner Carousel -->
 @if (ViewBag.Banners != null && ((IEnumerable<FastFoodEcommerce.Models.Banner>)ViewBag.Banners).Any())
 {
-    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
+    <div id="homeCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="hover">
         <div class="carousel-indicators">
             @{ var bi = 0; }
             @foreach (var banner in ViewBag.Banners)
@@ -22,7 +22,7 @@
             @{ var first = true; }
             @foreach (var banner in ViewBag.Banners)
             {
-                <div class="carousel-item @(first ? "active" : "")" data-bs-interval="3000">
+                <div class="carousel-item @(first ? "active" : "")" data-bs-interval="5000">
                     <img src="@banner.ImageUrl" class="d-block w-100" style="height: 450px; object-fit: cover;" alt="@banner.Title">
                     <div class="carousel-caption d-none d-md-block text-start bg-dark bg-opacity-25 p-4 rounded-4" style="bottom: 10%; left: 10%;">
                         <h2 class="display-4 fw-bold animate__animated animate__fadeInDown">@banner.Title</h2>
@@ -72,16 +72,15 @@ else
 <div id="menu-section" class="bg-white border-bottom py-2">
     <div class="container-fluid px-5">
         <ul class="nav nav-tabs border-0 flex-nowrap overflow-auto text-uppercase fw-bold" id="categoryTabs" role="tablist" style="scrollbar-width: none;">
-            <li class="nav-item me-2" role="presentation">
-                <button class="nav-link active border-0 py-3 px-4 text-dark category-btn" data-category-id="0">@T("AllProducts")</button>
-            </li>
             @if (categories != null)
             {
+                var isFirst = true;
                 foreach (var cat in categories)
                 {
                     <li class="nav-item me-2" role="presentation">
-                        <button class="nav-link border-0 py-3 px-4 text-dark category-btn" data-category-id="@cat.Id">@cat.Name</button>
+                        <button class="nav-link @(isFirst ? "active" : "") border-0 py-3 px-4 text-dark category-btn" data-category-id="@cat.Id">@cat.Name</button>
                     </li>
+                    isFirst = false;
                 }
             }
         </ul>
@@ -91,7 +90,7 @@ else
 <!-- Product List Area -->
 <div class="container-fluid px-5 py-5">
     <div class="mb-4 d-flex justify-content-between align-items-center">
-        <h2 class="fw-bold fs-1" id="current-category-name">@T("AllProducts")</h2>
+        <h2 class="fw-bold fs-1" id="current-category-name">@(categories?.FirstOrDefault()?.Name ?? T("AllProducts"))</h2>
         <div class="d-flex gap-2">
             <button class="btn btn-outline-dark rounded-pill px-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterSidebar">
                 <i class="fas fa-filter me-2"></i>Bộ lọc
@@ -165,7 +164,7 @@ else
 @section Scripts {
     <script>
         $(document).ready(function () {
-            let currentCategoryId = 0;
+            let currentCategoryId = @(categories?.FirstOrDefault()?.Id ?? 0);
             let currentSort = "newest";
 
             function loadProducts() {
@@ -236,9 +235,9 @@ else
                 var homeCarousel = document.getElementById('homeCarousel');
                 if (homeCarousel && typeof bootstrap !== 'undefined') {
                     var carousel = new bootstrap.Carousel(homeCarousel, {
-                        interval: 3000,
+                        interval: 5000,
                         ride: 'carousel',
-                        pause: false
+                        pause: 'hover'
                     });
                     
                     // Manual trigger for buttons if data-bs-slide fails
