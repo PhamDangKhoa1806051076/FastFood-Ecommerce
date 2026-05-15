@@ -61,7 +61,7 @@ namespace FastFoodEcommerce.Controllers
             // Fetch best-selling products (top 5)
             var topProducts = await _context.OrderDetails.AsNoTracking()
                 .GroupBy(od => od.Product!.Name)
-                .Select(g => new { Name = g.Key, Count = g.Sum(od => od.Quantity) })
+                .Select(g => new TopProductViewModel { Name = g.Key, Count = g.Sum(od => od.Quantity) })
                 .OrderByDescending(x => x.Count)
                 .Take(5)
                 .ToListAsync();

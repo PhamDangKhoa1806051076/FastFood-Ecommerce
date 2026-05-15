@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddResponseCaching();
 
 // Session configuration
 builder.Services.AddDistributedMemoryCache();
@@ -47,6 +48,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseResponseCaching();
 app.UseRouting();
 app.UseSession();
 app.UseAuthorization();

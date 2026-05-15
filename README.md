@@ -52,5 +52,3 @@ Dự án Thương mại điện tử FastFood (Bài tập báo cáo chuyên môn
 *   ✅ **Giai đoạn 8**: Dashboard Admin & Biểu đồ Chart.js.
 *   ✅ **Giai đoạn 9**: Hoàn thiện Bộ lọc nâng cao & Tối ưu hóa UI/UX.
 
----
-*Dự án được thực hiện bởi Antigravity AI Assistant.*
