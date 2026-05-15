@@ -345,6 +345,15 @@ footer .list-unstyled a {
     border-color: #333 !important;
 }
 
+[data-bs-theme="dark"] .nav-link,
+[data-bs-theme="dark"] .navbar-brand span {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
 [data-bs-theme="dark"] .hero-section,
 [data-bs-theme="dark"] .bottom-promo-banner {
     background: #1a1a1a !important;
