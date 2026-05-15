@@ -297,3 +297,117 @@ footer .list-unstyled a {
     background: white;
     color: black;
 }
+
+/* ========================================= */
+/* DARK MODE OVERRIDES */
+/* ========================================= */
+[data-bs-theme="dark"] body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .bg-white,
+[data-bs-theme="dark"] .bg-light,
+[data-bs-theme="dark"] #menu-section {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+}
+
+[data-bs-theme="dark"] .text-dark {
+    color: #f8f9fa !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+    color: #adb5bd !important;
+}
+
+[data-bs-theme="dark"] .product-card,
+[data-bs-theme="dark"] .card {
+    background: #242424 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    border-color: #333 !important;
+}
+
+[data-bs-theme="dark"] .product-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-bs-theme="dark"] .product-title,
+[data-bs-theme="dark"] .section-title,
+[data-bs-theme="dark"] h1, [data-bs-theme="dark"] h2, 
+[data-bs-theme="dark"] h3, [data-bs-theme="dark"] h4, 
+[data-bs-theme="dark"] h5, [data-bs-theme="dark"] h6 {
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .navbar {
+    background: rgba(30, 30, 30, 0.95) !important;
+    border-color: #333 !important;
+}
+
+[data-bs-theme="dark"] .hero-section,
+[data-bs-theme="dark"] .bottom-promo-banner {
+    background: #1a1a1a !important;
+}
+
+[data-bs-theme="dark"] .offcanvas {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .offcanvas-header,
+[data-bs-theme="dark"] .border-bottom {
+    border-color: #333 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link:not(.active) {
+    color: #e0e0e0 !important;
+}
+
+[data-bs-theme="dark"] .nav-tabs .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+[data-bs-theme="dark"] .dropdown-menu {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+[data-bs-theme="dark"] .dropdown-item {
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .dropdown-item:hover {
+    background-color: #3d3d3d;
+    color: white;
+}
+
+[data-bs-theme="dark"] .btn-outline-dark {
+    color: #e0e0e0;
+    border-color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .btn-outline-dark:hover {
+    background-color: #e0e0e0;
+    color: #121212;
+}
+
+[data-bs-theme="dark"] .form-control {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .form-control:focus {
+    background-color: #333;
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .table {
+    color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .table th,
+[data-bs-theme="dark"] .table td {
+    border-color: #444;
+}

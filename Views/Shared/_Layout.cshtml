@@ -16,7 +16,7 @@
     var bottomBanner = DbContext.Banners.AsNoTracking().Where(b => b.IsActive && b.DisplayOrder >= 100).OrderBy(b => b.DisplayOrder).FirstOrDefault();
 }
 <!DOCTYPE html>
-<html lang="@currentCulture">
+<html lang="@currentCulture" data-bs-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -115,6 +115,11 @@
                     </ul>
                     
                     <div class="d-flex align-items-center gap-4">
+                        <!-- Theme Toggle Button -->
+                        <button id="themeToggleBtn" class="btn btn-link text-dark p-0 fs-5 text-decoration-none me-3" title="Chế độ Sáng/Tối">
+                            <i class="fas fa-sun" id="themeIcon"></i>
+                        </button>
+
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle fw-bold small text-dark p-0 d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
                                 @(currentCulture == "vi" ? "🇻🇳" : currentCulture == "ko" ? "🇰🇷" : "🇺🇸") @T("Language")
@@ -291,6 +296,37 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
+
+    <script>
+        // Dark Mode Logic
+        $(document).ready(function() {
+            var currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                $('html').attr('data-bs-theme', 'dark');
+                $('#themeIcon').removeClass('fa-sun').addClass('fa-moon');
+                $('#themeToggleBtn').removeClass('text-dark').addClass('text-light');
+            } else {
+                $('html').attr('data-bs-theme', 'light');
+                $('#themeIcon').removeClass('fa-moon').addClass('fa-sun');
+                $('#themeToggleBtn').removeClass('text-light').addClass('text-dark');
+            }
+
+            $('#themeToggleBtn').click(function() {
+                var theme = $('html').attr('data-bs-theme');
+                if (theme === 'dark') {
+                    $('html').attr('data-bs-theme', 'light');
+                    $('#themeIcon').removeClass('fa-moon').addClass('fa-sun');
+                    $(this).removeClass('text-light').addClass('text-dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    $('html').attr('data-bs-theme', 'dark');
+                    $('#themeIcon').removeClass('fa-sun').addClass('fa-moon');
+                    $(this).removeClass('text-dark').addClass('text-light');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
