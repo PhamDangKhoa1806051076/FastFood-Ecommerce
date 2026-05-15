@@ -66,7 +66,7 @@
                         @for (int i = 0; i < images.Count; i++)
                         {
                             <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <img src="@images[i]" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name" loading="lazy">
+                                <img src="@images[i]" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800';">
                             </div>
                         }
                     </div>
@@ -83,7 +83,7 @@
             else
             {
                 <div class="product-img-detail-wrapper rounded-4 overflow-hidden shadow-sm">
-                    <img src="@Model.ImageUrl" class="w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name" loading="lazy">
+                    <img src="@Model.ImageUrl" class="w-100" style="max-height: 500px; object-fit: cover;" alt="@Model.Name" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800';">
                 </div>
             }
         </div>
@@ -168,7 +168,7 @@
                         <div class="col-6 col-md-3">
                             <div class="card h-100 border-0 shadow-sm rounded-4 product-card-hover">
                                 <a asp-controller="Product" asp-action="Details" asp-route-id="@sp.Id" class="text-decoration-none text-dark">
-                                    <img src="@sp.ImageUrl" class="card-img-top rounded-top-4" style="height: 150px; object-fit: cover;" alt="@sp.Name" loading="lazy">
+                                    <img src="@sp.ImageUrl" class="card-img-top rounded-top-4" style="height: 150px; object-fit: cover;" alt="@sp.Name" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800';">
                                     <div class="card-body text-center p-3">
                                         <h6 class="card-title fw-bold text-truncate mb-2">@sp.Name</h6>
                                         <p class="text-danger fw-bold mb-0">@sp.Price.ToString("N0")đ</p>
