@@ -148,20 +148,41 @@ namespace FastFoodEcommerce.Data
                 context.SaveChanges();
             }
 
-            // Seed Vouchers
+            // Seed Vouchers — Tự động nạp dữ liệu lần đầu và gia hạn mã hết hạn khi khởi động
             if (!context.Vouchers.Any())
             {
+                // Lần đầu tiên: nạp toàn bộ bộ mã khuyến mãi mặc định
                 var vouchers = new Voucher[]
                 {
-                    new Voucher { Code = "HELLO5", DiscountPercentage = 5, Description = "Chào mừng bạn mới", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(7) },
-                    new Voucher { Code = "LUCKY10", DiscountPercentage = 10, Description = "Ưu đãi may mắn", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(3) },
-                    new Voucher { Code = "EVENT19", DiscountPercentage = 19, Description = "Sự kiện đặc biệt", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14) },
-                    new Voucher { Code = "SUPER23", DiscountPercentage = 23, Description = "Siêu khuyến mãi", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14) },
-                    new Voucher { Code = "SALE29", DiscountPercentage = 29, Description = "Giảm giá sốc", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(5) },
-                    new Voucher { Code = "GOLD32", DiscountPercentage = 32, Description = "Ưu đãi hạng vàng", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(14) }
+                    new Voucher { Code = "HELLO5",  DiscountPercentage = 5,  Description = "Chào mừng bạn mới",  StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "LUCKY10", DiscountPercentage = 10, Description = "Ưu đãi may mắn",     StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "EVENT19", DiscountPercentage = 19, Description = "Sự kiện đặc biệt",   StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "SUPER23", DiscountPercentage = 23, Description = "Siêu khuyến mãi",    StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "SALE29",  DiscountPercentage = 29, Description = "Giảm giá sốc",       StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "GOLD32",  DiscountPercentage = 32, Description = "Ưu đãi hạng vàng",   StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "NEWUSER", DiscountPercentage = 15, Description = "Tân thủ may mắn",    StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(30) },
+                    new Voucher { Code = "FLASH50", DiscountPercentage = 50, Description = "Flash Sale đặc biệt", StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(7)  }
                 };
                 context.Vouchers.AddRange(vouchers);
                 context.SaveChanges();
+            }
+            else
+            {
+                // Những lần tiếp theo: kiểm tra và tự động gia hạn những mã đã hết hạn
+                var expiredVouchers = context.Vouchers
+                    .Where(v => v.EndDate < DateTime.Now)
+                    .ToList();
+
+                if (expiredVouchers.Any())
+                {
+                    foreach (var v in expiredVouchers)
+                    {
+                        // Gia hạn: bắt đầu từ hôm nay, thêm 30 ngày
+                        v.StartDate = DateTime.Now;
+                        v.EndDate   = DateTime.Now.AddDays(30);
+                    }
+                    context.SaveChanges();
+                }
             }
 
             // Seed Stores
