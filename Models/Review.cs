@@ -1,33 +1,32 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FastFoodEcommerce.Models
+namespace FastFoodEcommerce.Models;
+
+public class Review
 {
-    public class Review
-    {
-        [Key]
-        public int Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Required]
-        [Range(1, 5, ErrorMessage = "Đánh giá phải từ 1 đến 5 sao")]
-        public int Rating { get; set; }
+    [Required]
+    [Range(1, 5, ErrorMessage = "Đánh giá phải từ 1 đến 5 sao")]
+    public int Rating { get; set; }
 
-        [StringLength(1000)]
-        public string? Comment { get; set; }
+    [StringLength(1000)]
+    public string? Comment { get; set; }
 
-        // Who wrote the review (email-based since we use session auth)
-        public string? UserEmail { get; set; }
+    // Who wrote the review (email-based since we use session auth)
+    public string? UserEmail { get; set; }
 
-        public string? UserName { get; set; }
+    public string? UserName { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        // Foreign Key
-        [Required]
-        public int ProductId { get; set; }
+    // Foreign Key
+    [Required]
+    public int ProductId { get; set; }
 
-        // Navigation property
-        [ForeignKey("ProductId")]
-        public Product? Product { get; set; }
-    }
+    // Navigation property
+    [ForeignKey("ProductId")]
+    public Product? Product { get; set; }
 }

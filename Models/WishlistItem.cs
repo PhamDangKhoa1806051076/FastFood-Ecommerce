@@ -1,22 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FastFoodEcommerce.Models
+namespace FastFoodEcommerce.Models;
+
+public class WishlistItem
 {
-    public class WishlistItem
-    {
-        [Key]
-        public int Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Required]
-        public string UserEmail { get; set; } = string.Empty;
+    [Required]
+    public string UserEmail { get; set; } = string.Empty;
 
-        [Required]
-        public int ProductId { get; set; }
+    [Required]
+    public int ProductId { get; set; }
 
-        [ForeignKey("ProductId")]
-        public Product? Product { get; set; }
+    [ForeignKey("ProductId")]
+    public Product? Product { get; set; }
 
-        public DateTime AddedAt { get; set; } = DateTime.Now;
-    }
+    public DateTime AddedAt { get; set; } = DateTime.Now;
 }

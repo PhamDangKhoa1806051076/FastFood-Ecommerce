@@ -1,22 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace FastFoodEcommerce.Controllers
+namespace FastFoodEcommerce.Controllers;
+
+public class InfoController : Controller
 {
-    public class InfoController : Controller
+    public IActionResult OurStory()
     {
-        public IActionResult OurStory()
-        {
-            return View();
-        }
+        return View();
+    }
 
-        public IActionResult News()
-        {
-            return View();
-        }
+    public IActionResult News()
+    {
+        return View();
+    }
 
-        public IActionResult Recruitment()
-        {
-            return View();
-        }
+    public IActionResult Recruitment()
+    {
+        return View();
     }
 }

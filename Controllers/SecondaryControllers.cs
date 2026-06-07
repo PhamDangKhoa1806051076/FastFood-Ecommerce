@@ -2,37 +2,36 @@ using FastFoodEcommerce.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace FastFoodEcommerce.Controllers
+namespace FastFoodEcommerce.Controllers;
+
+public class PromotionController : Controller
 {
-    public class PromotionController : Controller
+    private readonly ApplicationDbContext _context;
+
+    public PromotionController(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
-
-        public PromotionController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var vouchers = await _context.Vouchers.OrderByDescending(v => v.EndDate).ToListAsync();
-            return View(vouchers);
-        }
+        _context = context;
     }
 
-    public class StoreController : Controller
+    public async Task<IActionResult> Index()
     {
-        private readonly ApplicationDbContext _context;
+        var vouchers = await _context.Vouchers.OrderByDescending(v => v.EndDate).ToListAsync();
+        return View(vouchers);
+    }
+}
 
-        public StoreController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+public class StoreController : Controller
+{
+    private readonly ApplicationDbContext _context;
 
-        public async Task<IActionResult> Index()
-        {
-            var stores = await _context.Stores.ToListAsync();
-            return View(stores);
-        }
+    public StoreController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var stores = await _context.Stores.ToListAsync();
+        return View(stores);
     }
 }

@@ -1,21 +1,20 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FastFoodEcommerce.Models
+namespace FastFoodEcommerce.Models;
+
+public class LoyaltyPoint
 {
-    public class LoyaltyPoint
-    {
-        [Key]
-        public int Id { get; set; }
+    [Key]
+    public int Id { get; set; }
 
-        [Required]
-        public string UserId { get; set; } = string.Empty;
+    [Required]
+    public string UserId { get; set; } = string.Empty;
 
-        public int Points { get; set; }
+    public int Points { get; set; }
 
-        public DateTime? ExpiryDate { get; set; }
+    public DateTime? ExpiryDate { get; set; }
 
-        public string Source { get; set; } = string.Empty;
+    public string Source { get; set; } = string.Empty;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-    }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 }
