@@ -62,4 +62,4 @@ INSERT INTO [Products] ([Id], [Name], [Price], [Description], [CategoryId], [Ima
 (29, N'Bánh Trứng Nướng (1 Cái)', 18000, N'Bánh tart trứng vàng ươm, vỏ giòn.', 11, 'https://static.kfcvietnam.com.vn/images/items/lg/1-Egg-Tart.jpg?v=L7pxv3', 220, 0, 0, 150);
 SET IDENTITY_INSERT [Products] OFF;
 -- Lưu ý: Đây là file SQL minh họa một phần nhỏ dữ liệu.
--- Cách chính xác và an toàn nhất để đưa toàn bộ 80+ sản phẩm vào SQL Server là chạy dự án C# của bạn.
+
